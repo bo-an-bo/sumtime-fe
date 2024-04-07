@@ -6,4 +6,4 @@
 
      npm install styled-components
 
-<h3> npm start </h3>
+<h3> 3. npm start </h3>
