@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=waving&color=auto&theme=tokyonight&height=300&section=header&text=BoAnBo-Frontend&fontSize=90)
+![header](https://capsule-render.vercel.app/api?type=waving&color=auto&theme=onedark&height=300&section=header&text=BoAnBo-Frontend&fontSize=90)
 
 ### How to make react project with pwa(Progresive Web App)
 <code>npx create-react-app boanbo -template cra-template-pwa</code>
