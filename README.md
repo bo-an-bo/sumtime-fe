@@ -1,4 +1,4 @@
-<p>How to make react project with pwa(Progresive Web App)</p>
+### How to make react project with pwa(Progresive Web App)
 <code>npx create-react-app boanbo -template cra-template-pwa</code>
 
 
