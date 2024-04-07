@@ -1,3 +1,6 @@
+<p>How to make react project with pwa(Progresive Web App)</p>
+<code>npx create-react-app boanbo -template cra-template-pwa</code>
+
 
 <h3> 1. 깃 클론 </h3>
 <code>git clone https://github.com/bo-an-bo/sometime-fe.git</code> 
