@@ -14,6 +14,7 @@ assignees: ''
 작업 브랜치 명 작성
 
 **Docs Type**
+
 - [ ] API Request/Response
 - [ ] Common
 - [ ] Usage
