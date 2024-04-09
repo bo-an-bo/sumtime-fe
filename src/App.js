@@ -9,16 +9,16 @@ import NavBar from './Components/NavBar/NavBar'
 
 function App() {
     return (
-        <div className="App">
-            <BrowserRouter>
+        <BrowserRouter>
+            <div className="App">
                 <NavBar />
                 <Routes>
                     <Route path="/createGroup" element={<CreateGroup />} />
                     <Route path="/showGroupList" element={<ShowGroupList />} />
                     <Route path="/showGroupDetails" element={<ShowGroupDetails />} />
                 </Routes>
-            </BrowserRouter>
-        </div>
+            </div>
+        </BrowserRouter>
     )
 }
 
