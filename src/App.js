@@ -15,7 +15,7 @@ function App() {
                 <Routes>
                     <Route path="/createGroup" element={<CreateGroup />} />
                     <Route path="/showGroupList" element={<ShowGroupList />} />
-                    <Route path="/showGroupDetails" element={<ShowGroupDetails />} />
+                    <Route path="/group/:id/showGroupDetails" element={<ShowGroupDetails />} />
                 </Routes>
             </div>
         </BrowserRouter>

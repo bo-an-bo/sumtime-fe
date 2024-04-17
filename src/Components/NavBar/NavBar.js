@@ -3,6 +3,24 @@ import { Link } from 'react-router-dom'
 import React from 'react'
 import styled from 'styled-components'
 
+const NavBar = () => {
+    return <StyledMenu mode="horizontal" items={items}></StyledMenu>
+}
+
+const items = [
+    {
+        key: 'myGroups',
+        label: <Link to="/showGroupList">나의 그룹</Link>,
+    },
+    {
+        key: 'myEvents',
+        label: <Link to="/showEventList">나의 이벤트</Link>,
+    },
+    {
+        key: 'myProfile',
+        label: <Link to="/showProfile">김보안</Link>,
+    },
+]
 const StyledMenu = styled(Menu)`
     height: 200px;
     width: 100%;
@@ -20,24 +38,5 @@ const StyledMenu = styled(Menu)`
         margin-right: 50px;
     }
 `
-
-const items = [
-    {
-        key: 'myGroups',
-        label: <Link to="/showGroupList">나의 모임</Link>,
-    },
-    {
-        key: 'myEvents',
-        label: <Link to="/showEventList">나의 이벤트</Link>,
-    },
-    {
-        key: 'myProfile',
-        label: <Link to="/showProfile">김보안</Link>,
-    },
-]
-
-const NavBar = () => {
-    return <StyledMenu mode="horizontal" items={items}></StyledMenu>
-}
 
 export default NavBar
