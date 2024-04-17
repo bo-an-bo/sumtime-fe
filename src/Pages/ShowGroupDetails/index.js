@@ -28,9 +28,12 @@ const items = [
 console.log(dummy)
 const ShowGroupDetails = () => {
     return (
-        <Wrapper>
-            <Tabs defaultActiveKey="1" items={items} onChange={onChange}></Tabs>
-        </Wrapper>
+        <>
+            <h1>안녕</h1>
+            <Wrapper>
+                <Tabs defaultActiveKey="1" items={items} onChange={onChange}></Tabs>
+            </Wrapper>
+        </>
     )
 }
 

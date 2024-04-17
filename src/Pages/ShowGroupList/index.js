@@ -14,7 +14,6 @@ const ShowGroupList = () => {
 
     return (
         <div>
-            <div>나의 모임</div>
             <Row gutter={16}>
                 <Col span={8}>
                     {groups.map((group) => (
@@ -37,7 +36,7 @@ const GroupCard = ({ group }) => {
 }
 GroupCard.propTypes = {
     group: PropTypes.shape({
-        _id: PropTypes.number.isRequired,
+        _id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
     }).isRequired,
