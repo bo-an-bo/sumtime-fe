@@ -9,12 +9,12 @@ const NavBar = () => {
 
 const items = [
     {
-        key: 'myGroups',
-        label: <Link to="/showGroupList">나의 그룹</Link>,
+        key: 'home',
+        label: <Link to="/">썸타임 로고 자리</Link>,
     },
     {
-        key: 'myEvents',
-        label: <Link to="/showEventList">나의 이벤트</Link>,
+        key: 'myGroups',
+        label: <Link to="/showGroupList">나의 모임</Link>,
     },
     {
         key: 'myProfile',
