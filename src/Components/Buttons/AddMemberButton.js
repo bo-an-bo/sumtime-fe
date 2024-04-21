@@ -12,12 +12,19 @@ const AddMember = ({ groupId }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [name, setName] = useState('')
     const [studentId, setStudentId] = useState('')
+    const [email, setEmail] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
     const [loading, setLoading] = useState(false)
+    const memberInfo = {
+        studentId,
+        email,
+        phoneNumber,
+    }
 
     const handleAddMember = async () => {
         setLoading(true)
-        await addMember(groupId, name, phoneNumber)
+        await addMember(groupId, name, memberInfo)
+
         setLoading(false)
         setIsModalOpen(false)
         window.location.reload()
@@ -37,6 +44,7 @@ const AddMember = ({ groupId }) => {
             >
                 <StyledInput placeholder="이름" value={name} onChange={(e) => setName(e.target.value)} />
                 <StyledInput placeholder="학번" value={studentId} onChange={(e) => setStudentId(e.target.value)} />
+                <StyledInput placeholder="이메일" value={email} onChange={(e) => setEmail(e.target.value)} />
                 <StyledInput
                     placeholder="전화번호"
                     value={phoneNumber}

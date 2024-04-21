@@ -5,13 +5,10 @@ export const getMember = async (groupId) => {
     return response.data
 }
 
-export const addMember = async (groupId, name, phoneNumber, studentId) => {
+export const addMember = async (groupId, name, memberInfo) => {
     const response = await api.post(`group/${groupId}/member`, {
         name,
-        phoneNumber,
-        memberInfo: {
-            studentId,
-        },
+        memberInfo,
     })
     return response.data
 }

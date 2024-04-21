@@ -15,8 +15,9 @@ const ShowGroupDetails = () => {
     const [members, setMembers] = useState([])
     const groupId = window.location.href.split('/')[4]
     useEffect(() => {
-        getMember(groupId).then((res) => {
-            setMembers(res.data)
+        getMember(groupId).then((data) => {
+            setMembers(data)
+
         })
     }, [groupId])
 

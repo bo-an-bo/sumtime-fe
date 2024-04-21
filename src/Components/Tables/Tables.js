@@ -36,11 +36,10 @@ const Tables = ({ members, groupId }) => {
             key: i,
             index: i + 1,
             name: members[i].name,
-            /*
             studentId: members[i].memberInfo.studentId,
-            phoneNumber: members[i].memberInfo.phone,
+            phoneNumber: members[i].memberInfo.phoneNumber,
             remark: members[i].memberInfo.remark,
-            */
+
         })
     }
 
@@ -109,8 +108,9 @@ Tables.propTypes = {
             name: PropTypes.string.isRequired,
             memberInfo: PropTypes.shape({
                 studentId: PropTypes.string.isRequired,
-                phone: PropTypes.string.isRequired,
-                remark: PropTypes.string.isRequired,
+                phoneNumber: PropTypes.string.isRequired,
+                remark: PropTypes.string,
+
             }),
         }),
     ).isRequired,
