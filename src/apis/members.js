@@ -8,11 +8,7 @@ export const getMember = async (groupId) => {
 export const addMember = async (groupId, name, memberInfo) => {
     const response = await api.post(`group/${groupId}/member`, {
         name,
-        memberInfo: {
-            studentId: memberInfo.studentId,
-            email: memberInfo.email,
-            phoneNumber: memberInfo.phoneNumber,
-        },
+        memberInfo,
     })
     return response.data
 }
