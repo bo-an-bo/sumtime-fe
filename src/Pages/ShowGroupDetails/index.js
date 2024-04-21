@@ -15,15 +15,15 @@ const ShowGroupDetails = () => {
     const [members, setMembers] = useState([])
     const groupId = window.location.href.split('/')[4]
     useEffect(() => {
-        getMember().then((data) => {
-            setMembers(data)
-            console.log(getMember)
+        getMember(groupId).then((res) => {
+            setMembers(res.data)
         })
-    }, [])
+    }, [groupId])
 
+    console.log(members)
     return (
         <Wrapper>
-            <Tables members={members} groupId={groupId} />
+            <Tables members={members || []} groupId={groupId} />
         </Wrapper>
     )
 }
