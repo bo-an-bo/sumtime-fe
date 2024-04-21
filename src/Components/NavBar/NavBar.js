@@ -26,7 +26,7 @@ const StyledMenu = styled(Menu)`
     width: 100%;
     background-color: #003f98;
     display: flex;
-    justify-content: right;
+    justify-content: flex-end;
     padding: 40px;
     .ant-menu-item {
         height: 40px;
