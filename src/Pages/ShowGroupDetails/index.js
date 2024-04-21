@@ -17,6 +17,7 @@ const ShowGroupDetails = () => {
     useEffect(() => {
         getMember(groupId).then((data) => {
             setMembers(data)
+
         })
     }, [groupId])
 

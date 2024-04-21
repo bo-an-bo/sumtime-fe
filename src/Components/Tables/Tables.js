@@ -39,6 +39,7 @@ const Tables = ({ members, groupId }) => {
             studentId: members[i].memberInfo.studentId,
             phoneNumber: members[i].memberInfo.phoneNumber,
             remark: members[i].memberInfo.remark,
+
         })
     }
 
@@ -109,6 +110,7 @@ Tables.propTypes = {
                 studentId: PropTypes.string.isRequired,
                 phoneNumber: PropTypes.string.isRequired,
                 remark: PropTypes.string,
+
             }),
         }),
     ).isRequired,
