@@ -1,0 +1,54 @@
+import React, { useState } from 'react'
+import { addMember } from '../../apis/members'
+import { Button, Modal, Input } from 'antd'
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
+
+const StyledInput = styled(Input)`
+    margin-bottom: 5px;
+`
+
+const AddMember = ({ groupId }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [name, setName] = useState('')
+    const [studentId, setStudentId] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    const handleAddMember = async () => {
+        setLoading(true)
+        await addMember(groupId, name, phoneNumber)
+        setLoading(false)
+        setIsModalOpen(false)
+        window.location.reload()
+    }
+
+    return (
+        <>
+            <Button type="primary" onClick={() => setIsModalOpen(true)}>
+                회원 추가
+            </Button>
+            <Modal
+                title="회원 추가"
+                open={isModalOpen}
+                onOk={handleAddMember}
+                onCancel={() => setIsModalOpen(false)}
+                confirmLoading={loading}
+            >
+                <StyledInput placeholder="이름" value={name} onChange={(e) => setName(e.target.value)} />
+                <StyledInput placeholder="학번" value={studentId} onChange={(e) => setStudentId(e.target.value)} />
+                <StyledInput
+                    placeholder="전화번호"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                />
+            </Modal>
+        </>
+    )
+}
+
+AddMember.propTypes = {
+    groupId: PropTypes.string.isRequired,
+}
+
+export default AddMember

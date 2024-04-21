@@ -13,6 +13,7 @@ function App() {
             <div className="App">
                 <NavBar />
                 <Routes>
+                    <Route path="/" element={<div>Home</div>} />
                     <Route path="/createGroup" element={<CreateGroup />} />
                     <Route path="/showGroupList" element={<ShowGroupList />} />
                     <Route path="/group/:id/showGroupDetails" element={<ShowGroupDetails />} />
