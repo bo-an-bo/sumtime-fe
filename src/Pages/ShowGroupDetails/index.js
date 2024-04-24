@@ -20,7 +20,6 @@ const ShowGroupDetails = () => {
         })
     }, [groupId])
 
-    console.log(members)
     return (
         <Wrapper>
             <Tables members={members || []} groupId={groupId} />
