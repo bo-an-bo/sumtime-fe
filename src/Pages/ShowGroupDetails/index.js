@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Tabs } from 'antd'
-import dummy from '../../db/data.json'
+// import dummy from '../../db/data.json'
 const Wrapper = styled.div`
     padding: 10px;
     border-radius: 10px;
@@ -25,7 +25,7 @@ const items = [
         children: '그룹 멤버',
     },
 ]
-console.log(dummy)
+// console.log(dummy)
 const ShowGroupDetails = () => {
     return (
         <Wrapper>
