@@ -24,7 +24,6 @@ const AddMember = ({ groupId }) => {
     const handleAddMember = async () => {
         setLoading(true)
         await addMember(groupId, name, memberInfo)
-
         setLoading(false)
         setIsModalOpen(false)
         window.location.reload()

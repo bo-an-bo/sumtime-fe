@@ -17,11 +17,9 @@ const ShowGroupDetails = () => {
     useEffect(() => {
         getMember(groupId).then((data) => {
             setMembers(data)
-
         })
     }, [groupId])
 
-    console.log(members)
     return (
         <Wrapper>
             <Tables members={members || []} groupId={groupId} />
