@@ -67,6 +67,7 @@ const Tables = ({ members, groupId }) => {
                 <AddMemberButton groupId={groupId} />
                 <DeleteMemberButton groupId={groupId} memberIds={deleteMemberIds} />
             </ButtonWrapper>
+
             <StyledTable
                 rowSelection={rowSelection}
                 columns={columns}
@@ -84,6 +85,7 @@ const ButtonWrapper = styled.div`
     gap: 10px;
     margin-bottom: 10px;
 `
+
 
 const StyledTable = styled(Table)`
     .ant-table-row {
