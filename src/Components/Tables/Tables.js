@@ -86,7 +86,6 @@ const ButtonWrapper = styled.div`
     margin-bottom: 10px;
 `
 
-
 const StyledTable = styled(Table)`
     .ant-table-row {
         background-color: ${(props) =>
