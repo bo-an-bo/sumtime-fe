@@ -39,7 +39,6 @@ const Tables = ({ members, groupId }) => {
             studentId: members[i].memberInfo.studentId,
             phoneNumber: members[i].memberInfo.phoneNumber,
             remark: members[i].memberInfo.remark,
-
         })
     }
 
@@ -64,8 +63,10 @@ const Tables = ({ members, groupId }) => {
 
     return (
         <>
-            <AddMemberButton groupId={groupId} />
-            <DeleteMemberButton groupId={groupId} memberIds={deleteMemberIds} />
+            <ButtonWrapper>
+                <AddMemberButton groupId={groupId} />
+                <DeleteMemberButton groupId={groupId} memberIds={deleteMemberIds} />
+            </ButtonWrapper>
 
             <StyledTable
                 rowSelection={rowSelection}
@@ -77,6 +78,13 @@ const Tables = ({ members, groupId }) => {
         </>
     )
 }
+
+const ButtonWrapper = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 10px;
+`
 
 const StyledTable = styled(Table)`
     .ant-table-row {
@@ -110,7 +118,6 @@ Tables.propTypes = {
                 studentId: PropTypes.string.isRequired,
                 phoneNumber: PropTypes.string.isRequired,
                 remark: PropTypes.string,
-
             }),
         }),
     ).isRequired,
