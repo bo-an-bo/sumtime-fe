@@ -1,38 +1,7 @@
-import React from 'react'
-import { PlusOutlined } from '@ant-design/icons'
-import { Form, Input, Button, Upload } from 'antd'
+import React, { useState } from 'react'
+import { Form, Input, Button } from 'antd'
+import { createGroup } from '../../apis/groups'
 import styled from 'styled-components'
-
-// 폼 전송 성공 시 실행되는 함수
-/* Create 구현 필요 */
-const onFinish = async (values) => {
-    try {
-        const formData = new FormData()
-        formData.append('groupname', values.groupname)
-        formData.append('groupdescription', values.groupdescription)
-        if (values.fileList && values.fileList.length > 0) {
-            formData.append('file', values.fileList[0].originFileObj)
-        }
-
-        const response = await fetch('http://localhost:3001/groups', {
-            method: 'POST',
-            body: formData,
-        })
-
-        if (!response.ok) {
-            throw new Error('서버 응답이 실패하였습니다.')
-        }
-
-        console.log('폼 데이터 전송 성공:', values.groupname)
-    } catch (error) {
-        console.error('폼 데이터 전송 실패:', error)
-    }
-}
-
-// 폼 전송 실패 시 실행되는 함수
-const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo)
-}
 
 // 파일 업로드 시 실행되는 함수
 const normFile = (e) => {
@@ -42,6 +11,69 @@ const normFile = (e) => {
     }
     return e && e.fileList
 }
+
+const CreateForm = () => {
+    const [name, setName] = useState('')
+    const [description, setDescription] = useState('')
+    const [file, setFile] = useState(null)
+
+    const handleCreateGroup = async () => {
+        const formData = new FormData()
+        formData.append('name', name)
+        formData.append('description', description)
+        formData.append('memberExcel', file)
+        await createGroup(formData).then((res) => {
+            console.log(res)
+        })
+        alert('모임이 생성되었습니다.')
+        window.location.reload()
+    }
+
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0])
+        console.log(e.target.files[0])
+    }
+
+    return (
+        <StyledForm
+            name="basic"
+            labelCol={{
+                span: 3,
+            }}
+            wrapperCol={{
+                span: 16,
+            }}
+            initialValues={{
+                remember: true,
+            }}
+            autoComplete="off"
+            onFinish={handleCreateGroup}
+        >
+            <StyledFormWrapper>
+                <Title>모임 기본 정보 등록</Title>
+                <StyledFormItems label="모임 이름" name="groupname">
+                    <Input placeholder="ex) 열정 모임" onChange={(e) => setName(e.target.value)} />
+                </StyledFormItems>
+                <StyledFormItems label="모임 설명" name="groupdescription">
+                    <Input placeholder="ex) 열정 있는 사람들의 모임" onChange={(e) => setDescription(e.target.value)} />
+                </StyledFormItems>
+            </StyledFormWrapper>
+            <StyledFormWrapper>
+                <Title>모임 회원 등록</Title>
+                <StyledFormItems label="파일 업로드" valuePropName="fileList" getValueFromEvent={normFile}>
+                    <input type="file" onChange={handleFileChange} accept=".xlsx, .csv" max={1} />
+                </StyledFormItems>
+            </StyledFormWrapper>
+            <StyledFormItems wrapperCol={{}}>
+                <Button type="primary" htmlType="submit">
+                    완료
+                </Button>
+            </StyledFormItems>
+        </StyledForm>
+    )
+}
+
+export default CreateForm
 
 // 전체 폼을 감싸는 스타일드 컴포넌트
 const StyledForm = styled(Form)`
@@ -86,59 +118,3 @@ const StyledFormItems = styled(Form.Item)`
         font-size: 24px;
     }
 `
-const CreateForm = () => (
-    <StyledForm
-        name="basic"
-        labelCol={{
-            span: 3,
-        }}
-        wrapperCol={{
-            span: 16,
-        }}
-        initialValues={{
-            remember: true,
-        }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-    >
-        <StyledFormWrapper>
-            <Title>모임 기본 정보 등록</Title>
-            <StyledFormItems label="모임 이름" name="groupname">
-                <Input placeholder="ex) 한사랑산악회, 숭실대 IT대 학생회" />
-            </StyledFormItems>
-            <StyledFormItems label="모임 설명" name="groupdescription">
-                <Input placeholder="ex) 열정 있는 사람들의 모임" />
-            </StyledFormItems>
-        </StyledFormWrapper>
-        <StyledFormWrapper>
-            <Title>모임 회원 등록</Title>
-            <StyledFormItems label="파일 업로드" valuePropName="fileList" getValueFromEvent={normFile}>
-                <Upload action="/upload.do" accept=".csv, .xlsx" listType="picture-card" maxCount={1}>
-                    <button
-                        style={{
-                            border: 0,
-                            background: 'none',
-                        }}
-                        type="button"
-                    >
-                        <PlusOutlined />
-                        <div
-                            style={{
-                                marginTop: 8,
-                            }}
-                        >
-                            업로드하기
-                        </div>
-                    </button>
-                </Upload>
-            </StyledFormItems>
-        </StyledFormWrapper>
-        <StyledFormItems wrapperCol={{}}>
-            <Button type="primary" htmlType="submit">
-                완료
-            </Button>
-        </StyledFormItems>
-    </StyledForm>
-)
-export default CreateForm
