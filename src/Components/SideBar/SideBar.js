@@ -4,6 +4,7 @@ import styled from 'styled-components' // eslint-disable-line no-unused-vars
 import { NavLink } from 'react-router-dom'
 import { useEffect } from 'react'
 import { getMember } from '../../apis/members'
+import propTypes from 'prop-types'
 
 const StyledSideBarBox = styled.div`
     width: 30%;
@@ -157,6 +158,10 @@ const SideBar = ({ group_id }) => {
             </ul>
         </StyledSideBarBox>
     )
+}
+
+SideBar.propTypes = {
+    group_id: propTypes.string,
 }
 
 export default SideBar
