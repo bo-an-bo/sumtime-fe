@@ -5,7 +5,7 @@ import { Card, Col, Row } from 'antd'
 import { Link } from 'react-router-dom'
 import { getGroups } from '../../apis/groups'
 import styled from 'styled-components'
-
+import SideBar from '../SideBar/SideBar'
 const StyledBox = styled.div`
     display: flex;
     width: 100%;
@@ -46,7 +46,8 @@ const GroupCard = () => {
             <StyledRow gutter={16}>
                 <StyledCol span={8}>
                     {groups.map((group) => (
-                        <Link to={`/group/${group._id}/member`} key={group._id}>
+                        <Link to={`/group/${group._id}`} key={group._id}>
+                            <SideBar group_id={group._id} />
                             <StyledCard title={group.name} bordered={false}>
                                 {group.description}
                             </StyledCard>

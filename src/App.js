@@ -9,6 +9,7 @@ import ShowGroupDetails from './Pages/ShowGroupDetails'
 import NavBar from './Components/NavBar/NavBar'
 import MainPage from './Pages/MainPage'
 import SideBar from './Components/SideBar/SideBar'
+import GroupMainPage from './Pages/GroupMainPage'
 
 const StyledLayout = styled.div`
     // background-color: gray;
@@ -32,6 +33,7 @@ function App() {
                         <Route path="/group" element={<ShowGroupList />} />
                         <Route path="/group/:id/ShowGroupDetails" element={<ShowGroupDetails />} />
                         <Route path="/group/:id/createEvent" element={<CreateEventPage />} />
+                        <Route path="/group/:id" element={<GroupMainPage />} />
                     </Routes>
                 </StyledLayout>
             </div>
