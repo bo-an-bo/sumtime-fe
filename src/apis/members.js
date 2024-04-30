@@ -1,8 +1,12 @@
 import api from './index'
 
 export const getMember = async (groupId) => {
-    const response = await api.get(`group/${groupId}/member`)
-    return response.data
+    try {
+        const response = await api.get(`group/${groupId}/member`)
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 export const addMember = async (groupId, name, memberInfo) => {
