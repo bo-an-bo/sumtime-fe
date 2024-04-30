@@ -2,28 +2,14 @@ import { Link } from 'react-router-dom' // eslint-disable-line no-unused-vars
 import React, { useState } from 'react' // eslint-disable-line no-unused-vars
 import styled from 'styled-components' // eslint-disable-line no-unused-vars
 import { NavLink } from 'react-router-dom'
+import { useEffect } from 'react'
+import { getMember } from '../../apis/members'
 
 const StyledSideBarBox = styled.div`
-    width: 20%;
-    height: 300px;
+    width: 30%;
+    height: 500px;
+    // background-color: #b9b9b9;
 `
-// const StyledSubTitle = styled.div`
-//     padding: 6px 15px;
-//     cursor: pointer;
-//     border-left: 2px solid #fff;
-
-//     &:hover {
-//         background-color: rgb(0, 63, 150, 0.1);
-//         //border-radius: 5px;
-//         border-left: 2px solid rgb(0, 63, 150);
-//     }
-// `
-
-// const StyledActive = styled.div`
-//     background-color: rgb(0, 63, 150, 0.1);
-//     //border-radius: 5px;
-//     border-left: 2px solid rgb(0, 63, 150);
-// `
 
 const StyledLI = styled.li`
     list-style-type: none;
@@ -31,93 +17,148 @@ const StyledLI = styled.li`
 `
 
 const StyledItem = styled.div`
-    margin: 10px;
+    margin: 10px 10px 0 10px;
     text-decoration: none;
 `
 
-const SideBar = () => {
-    const contents = [
+const StyledTitle = styled.div`
+    display: flex;
+    margin: 30px 0 0 0;
+`
+
+const StyledNavLink = styled(NavLink)`
+    color: black;
+    border-left: 2px solid #fff;
+    text-decoration: none;
+    transition-duration: 0.1s, 0.1s;
+    &:hover {
+        background-color: rgb(0, 63, 150, 0.1);
+        border-left: 4px solid rgb(0, 63, 150);
+    }
+
+    &.active {
+        background-color: rgb(0, 63, 150, 0.1);
+        border-left: 4px solid rgb(0, 63, 150);
+    }
+`
+const SideBar = ({ group_id }) => {
+    const memberData = [
         {
             index: 1,
             name: '회원명단업로드',
-            path: '/member',
+            path: `group/${group_id}/uploadMember`,
         },
         {
             index: 2,
             name: '회원 목록',
-            path: '/group/{groupId}/member',
+            path: `group/${group_id}/showGroupDetails`,
         },
+    ]
+
+    const eventData = [
         {
-            index: 3,
+            index: 1,
             name: '이벤트 생성',
-            path: '/event',
+            path: `/group/${group_id}/createEvent`,
         },
         {
-            index: 4,
+            index: 2,
             name: '이벤트 목록',
-            path: '/group/{groupId}/event',
+            path: `/group/${group_id}/showEvent`,
         },
+    ]
+
+    const settingData = [
         {
-            index: 5,
+            index: 1,
             name: '모임 정보 변경',
-            path: '/eventedit',
+            path: `/group/${group_id}/editInfo`,
         },
         {
-            index: 6,
+            index: 2,
             name: '부매니저 설정',
-            path: '/sub',
+            path: `group/${group_id}/setSubMng`,
         },
+    ]
+
+    const transactionData = [
         {
-            index: 7,
+            index: 1,
             name: '거래내역 업로드',
             path: '/uploadfile',
         },
         {
-            index: 8,
+            index: 2,
             name: '이벤트별 조회',
             path: '/eventcount',
         },
         {
-            index: 9,
+            index: 3,
             name: '거래내역분석',
             path: '/result',
         },
     ]
 
+    //const [groupIdSet, setGroupIdSet] = useState([])
+    // const [refresh, setRefresh] = useState(1)
+    const [members, setMembers] = useState([])
+    const groupId = window.location.href.split('/')[4]
+    useEffect(() => {
+        getMember(groupId).then((data) => {
+            setMembers(data)
+        })
+    }, [groupId])
+    console.log(members)
+    //console.log(groupIdSet)
+    console.log(group_id)
+    if (window.location.pathname === '/group') return null
+    if (window.location.pathname === '/createGroup') return null
     return (
         <StyledSideBarBox>
             <ul>
                 <StyledLI>
-                    {contents.map((data) => (
+                    <StyledTitle>회원</StyledTitle>
+                    {memberData.map((data) => (
                         <StyledItem key={data.index}>
-                            <NavLink
-                                to={data.path}
-                                style={({ isActive }) => {
-                                    return isActive
-                                        ? {
-                                              backgroundColor: 'rgb(0, 63, 150, 0.1)',
-                                              borderleft: '2px solid rgb(0, 63, 150)',
-                                          }
-                                        : { color: 'black', textdecoration: 'none' }
-                                }}
-                            >
-                                {data.name}
-                            </NavLink>
+                            <StyledNavLink to={data.path} activeClassName="active" className="nav-link">
+                                &nbsp;{data.name}
+                            </StyledNavLink>
+                        </StyledItem>
+                    ))}
+                </StyledLI>
+                <StyledLI>
+                    <StyledTitle>이벤트</StyledTitle>
+                    {eventData.map((data) => (
+                        <StyledItem key={data.index}>
+                            <StyledNavLink to={data.path} activeClassName="active" className="nav-link">
+                                &nbsp;{data.name}
+                            </StyledNavLink>
+                        </StyledItem>
+                    ))}
+                </StyledLI>
+                <StyledLI>
+                    <StyledTitle>설정</StyledTitle>
+
+                    {settingData.map((data) => (
+                        <StyledItem key={data.index}>
+                            <StyledNavLink to={data.path} activeClassName="active" className="nav-link">
+                                &nbsp;{data.name}
+                            </StyledNavLink>
+                        </StyledItem>
+                    ))}
+                </StyledLI>
+                <StyledLI>
+                    <StyledTitle>거래내역</StyledTitle>
+
+                    {transactionData.map((data) => (
+                        <StyledItem key={data.index}>
+                            <StyledNavLink to={data.path} activeClassName="active" className="nav-link">
+                                &nbsp;{data.name}
+                            </StyledNavLink>
                         </StyledItem>
                     ))}
                 </StyledLI>
             </ul>
-            {contents.map((data) => (
-                <NavLink
-                    style={{ color: 'black', textDecoration: 'none' }}
-                    to={data.path}
-                    key={data.index}
-                    // activeStyle={{ fontWeight: 'bold' }}
-                    //style={StyledActive}
-                >
-                    {/* <StyledSubTitle>{data.name}</StyledSubTitle> */}
-                </NavLink>
-            ))}
         </StyledSideBarBox>
     )
 }

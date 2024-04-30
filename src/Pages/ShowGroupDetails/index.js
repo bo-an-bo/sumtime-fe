@@ -21,9 +21,11 @@ const ShowGroupDetails = () => {
     }, [groupId])
 
     return (
-        <Wrapper>
-            <Tables members={members || []} groupId={groupId} />
-        </Wrapper>
+        <div>
+            <Wrapper>
+                <Tables members={members || []} groupId={groupId} />
+            </Wrapper>
+        </div>
     )
 }
 

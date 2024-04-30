@@ -1,9 +1,17 @@
 import React from 'react'
 import CreateEvent from '../../Components/Forms/CreateEvent'
-const CreateEventPage = () => {
-    const groupId = window.location.href.split('/')[4]
+import { useEffect, useState } from 'react'
+import { getMember } from '../../apis/members'
 
-    return <CreateEvent groupId={groupId} />
+const CreateEventPage = () => {
+    const [members, setMembers] = useState([])
+    const groupId = window.location.href.split('/')[4]
+    useEffect(() => {
+        getMember(groupId).then((data) => {
+            setMembers(data)
+        })
+    }, [groupId])
+    return <CreateEvent members={members || []} groupId={groupId} />
 }
 
 export default CreateEventPage

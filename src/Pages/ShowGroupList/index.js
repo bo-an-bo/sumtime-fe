@@ -1,12 +1,19 @@
 import React from 'react'
 import GroupCard from '../../Components/GroupCard/GroupCard'
+import styled from 'styled-components'
 
+const StyledGroupListLayout = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+`
 const ShowGroupList = () => {
-    return (
-        <div>
-            <GroupCard />
-        </div>
-    )
+    
+        return (
+            <StyledGroupListLayout>
+                <GroupCard />
+            </StyledGroupListLayout>
+        )
 }
 
 export default ShowGroupList
