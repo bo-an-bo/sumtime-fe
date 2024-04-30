@@ -85,34 +85,30 @@ const SideBar = ({ group_id }) => {
         {
             index: 1,
             name: '거래내역 업로드',
-            path: '/uploadfile',
+            path: `group/${group_id}/uploadResult`,
         },
         {
             index: 2,
             name: '이벤트별 조회',
-            path: '/eventcount',
+            path: `group/${group_id}/showResult`,
         },
         {
             index: 3,
             name: '거래내역분석',
-            path: '/result',
+            path: `group/${group_id}/showResult`,
         },
     ]
 
-    //const [groupIdSet, setGroupIdSet] = useState([])
-    // const [refresh, setRefresh] = useState(1)
     const [members, setMembers] = useState([])
     const groupId = window.location.href.split('/')[4]
     useEffect(() => {
         getMember(groupId).then((data) => {
             setMembers(data)
         })
-    }, [groupId])
+    }, [])
     console.log(members)
-    //console.log(groupIdSet)
-    console.log(group_id)
-    if (window.location.pathname === '/group') return null
-    if (window.location.pathname === '/createGroup') return null
+
+    if (window.location.pathname === '/group' || window.location.pathname === '/') return null
     return (
         <StyledSideBarBox>
             <ul>
