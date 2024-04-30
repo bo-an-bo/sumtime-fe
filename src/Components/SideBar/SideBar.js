@@ -105,7 +105,7 @@ const SideBar = ({ group_id }) => {
         getMember(groupId).then((data) => {
             setMembers(data)
         })
-    }, [])
+    }, [groupId])
     console.log(members)
 
     if (window.location.pathname === '/group' || window.location.pathname === '/') return null
