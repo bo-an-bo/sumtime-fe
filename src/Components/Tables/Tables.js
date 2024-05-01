@@ -4,29 +4,39 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import AddMemberButton from '../Buttons/AddMemberButton'
 import DeleteMemberButton from '../Buttons/DeleteMemberButton'
+//getGroupDetail로 변경
+import { getMember } from '../../apis/members'
 
-const Tables = ({ members, groupId }) => {
+const Tables = ({ groupId }) => {
+    const [members, setMembers] = useState([])
+    const [memberKeys, setMemberKeys] = useState([])
+
+    useEffect(() => {
+        getMember(groupId).then((data) => {
+            setMembers(data)
+        })
+    }, [groupId])
+
+    useEffect(() => {
+        const keys = Object.keys(members[0]?.memberInfo || {})
+        setMemberKeys(keys)
+    }, [members])
+
+    console.log(memberKeys)
+
     const columns = [
         {
-            title: '순',
+            title: 'No.',
             dataIndex: 'index',
         },
         {
-            title: '이름',
+            title: 'Name',
             dataIndex: 'name',
         },
-        {
-            title: '학번',
-            dataIndex: 'studentId',
-        },
-        {
-            title: '전화번호',
-            dataIndex: 'phoneNumber',
-        },
-        {
-            title: '비고',
-            dataIndex: 'remark',
-        },
+        ...memberKeys.map((key) => ({
+            title: key,
+            dataIndex: key,
+        })),
     ]
 
     const data = []
@@ -36,9 +46,7 @@ const Tables = ({ members, groupId }) => {
             key: i,
             index: i + 1,
             name: members[i].name,
-            studentId: members[i].memberInfo.studentId,
-            phoneNumber: members[i].memberInfo.phoneNumber,
-            remark: members[i].memberInfo.remark,
+            ...members[i].memberInfo,
         })
     }
 
@@ -110,17 +118,6 @@ const StyledTable = styled(Table)`
     }
 `
 Tables.propTypes = {
-    members: PropTypes.arrayOf(
-        PropTypes.shape({
-            _id: PropTypes.string.isRequired,
-            name: PropTypes.string.isRequired,
-            memberInfo: PropTypes.shape({
-                studentId: PropTypes.string.isRequired,
-                phoneNumber: PropTypes.string.isRequired,
-                remark: PropTypes.string,
-            }),
-        }),
-    ).isRequired,
     groupId: PropTypes.string.isRequired,
 }
 export default Tables
