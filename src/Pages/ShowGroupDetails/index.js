@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { getMember } from '../../apis/members'
 import Tables from '../../Components/Tables/Tables'
 
 const Wrapper = styled.div`
@@ -12,18 +11,12 @@ const Wrapper = styled.div`
 `
 
 const ShowGroupDetails = () => {
-    const [members, setMembers] = useState([])
     const groupId = window.location.href.split('/')[4]
-    useEffect(() => {
-        getMember(groupId).then((data) => {
-            setMembers(data)
-        })
-    }, [groupId])
 
     return (
         <div>
             <Wrapper>
-                <Tables members={members || []} groupId={groupId} />
+                <Tables groupId={groupId} />
             </Wrapper>
         </div>
     )
