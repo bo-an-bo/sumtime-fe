@@ -13,20 +13,20 @@ const StyledBox = styled.div`
 
 const StyledRow = styled(Row)`
     width: 100%;
-    margin: 10px;
+    margin: 0 10px 10px 10px;
     padding: 10px;
 `
 
 const StyledCol = styled(Col)`
     width: 100%;
-    margin: 10px;
+    margin: 0 10px 10px 10px;
     padding: 10px;
 `
 
 const StyledCard = styled(Card)`
     width: 100%;
     background-color: #f9fbff;
-    margin: 20px;
+    margin: 0 20px 20px 20px;
     transition-duration: 0.3s, 0.3s;
     border: 2px solid #f0f0f0;
     &:hover {
