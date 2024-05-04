@@ -12,6 +12,7 @@ export const getGroupDetail = async (groupId) => {
 }
 
 export const createGroup = async (groupInfo) => {
+    console.log(groupInfo)
     const response = await formApi.post('/group', groupInfo)
     return response.data
 }

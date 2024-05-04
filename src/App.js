@@ -11,6 +11,7 @@ import MainPage from './Pages/MainPage'
 import SideBar from './Components/SideBar/SideBar'
 import GroupMainPage from './Pages/GroupMainPage'
 import ShowEventList from './Pages/ShowEventList'
+import UploadMember from './Pages/UploadMember'
 
 const StyledLayout = styled.div`
     // background-color: gray;
@@ -36,6 +37,7 @@ function App() {
                         <Route path="/group/:id/createEvent" element={<CreateEventPage />} />
                         <Route path="/group/:id" element={<GroupMainPage />} />
                         <Route path="/group/:id/showEvent" element={<ShowEventList />} />
+                        <Route path="/group/:id/uploadMember" element={<UploadMember />} />
                     </Routes>
                 </StyledLayout>
             </div>
