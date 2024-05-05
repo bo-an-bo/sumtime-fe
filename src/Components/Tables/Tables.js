@@ -26,11 +26,11 @@ const Tables = ({ groupId }) => {
 
     const columns = [
         {
-            title: 'No.',
+            title: '순',
             dataIndex: 'index',
         },
         {
-            title: 'Name',
+            title: '이름',
             dataIndex: 'name',
         },
         ...memberKeys.map((key) => ({
@@ -56,6 +56,7 @@ const Tables = ({ groupId }) => {
 
     useEffect(() => {
         const ids = selectedRows.map((row) => row._id)
+
         setDeleteMemberIds(ids)
     }, [selectedRows])
 

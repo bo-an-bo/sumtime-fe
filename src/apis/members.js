@@ -11,15 +11,18 @@ export const getMember = async (groupId) => {
 }
 
 export const addMember = async (groupId, name, memberInfo) => {
-    const response = await api.post(`group/${groupId}/member`, {
-        name,
-        memberInfo,
-    })
+    console.log(name, memberInfo)
+    const response = await api.post(`group/${groupId}/member`, [
+        {
+            name,
+            memberInfo,
+        },
+    ])
     return response.data
 }
 
 export const deleteMember = async (groupId, memberId) => {
-    const response = await api.delete(`group/${groupId}/member/${memberId}`)
+    const response = await api.delete(`group/${groupId}/member`, memberId)
     return response.data
 }
 
