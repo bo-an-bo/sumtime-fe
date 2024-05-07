@@ -21,27 +21,44 @@ const StyledLayout = styled.div`
 `
 
 function App() {
-    const group_id = '662a83742c217fe65efaeab6'
     return (
         <BrowserRouter>
             <div className="App">
                 <NavBar />
 
-                <StyledLayout>
-                    <SideBar group_id={group_id} />
-                    <Routes>
-                        <Route path="/" element={<MainPage />} />
-                        <Route path="/createGroup" element={<CreateGroup />} />
-                        <Route path="/group" element={<ShowGroupList />} />
-                        <Route path="/group/:id/ShowGroupDetails" element={<ShowGroupDetails />} />
-                        <Route path="/group/:id/createEvent" element={<CreateEventPage />} />
-                        <Route path="/group/:id" element={<GroupMainPage />} />
-                        <Route path="/group/:id/showEvent" element={<ShowEventList />} />
-                        <Route path="/group/:id/uploadMember" element={<UploadMember />} />
-                    </Routes>
-                </StyledLayout>
+                <Routes>
+                    <Route path="/" element={<MainPage />} />
+                    <Route path="/createGroup" element={<CreateGroup />} />
+                    <Route path="/group/*" element={<GroupRoutes />} />
+                </Routes>
             </div>
         </BrowserRouter>
+    )
+}
+
+function GroupRoutes() {
+    return (
+        <StyledLayout>
+            <Routes>
+                <Route path="/" element={<ShowGroupList />} />
+                <Route path="/:id/*" element={<GroupRoutesWithSidebar />} />
+            </Routes>
+        </StyledLayout>
+    )
+}
+
+function GroupRoutesWithSidebar() {
+    return (
+        <StyledLayout>
+            <SideBar />
+            <Routes>
+                <Route path="/" element={<GroupMainPage />} />
+                <Route path="/showGroupDetails" element={<ShowGroupDetails />} />
+                <Route path="/createEvent" element={<CreateEventPage />} />
+                <Route path="/showEventList" element={<ShowEventList />} />
+                <Route path="/uploadMember" element={<UploadMember />} />
+            </Routes>
+        </StyledLayout>
     )
 }
 

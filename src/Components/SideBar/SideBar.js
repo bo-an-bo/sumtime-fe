@@ -2,12 +2,10 @@ import { Link } from 'react-router-dom' // eslint-disable-line no-unused-vars
 import React, { useState } from 'react' // eslint-disable-line no-unused-vars
 import styled from 'styled-components' // eslint-disable-line no-unused-vars
 import { NavLink } from 'react-router-dom'
-import { useEffect } from 'react'
-import { getMember } from '../../apis/members'
 import propTypes from 'prop-types'
 
 const StyledSideBarBox = styled.div`
-    width: 30%;
+    width: 20%;
     height: 500px;
     // background-color: #b9b9b9;
 `
@@ -42,17 +40,17 @@ const StyledNavLink = styled(NavLink)`
         border-left: 4px solid rgb(0, 63, 150);
     }
 `
-const SideBar = ({ group_id }) => {
+const SideBar = () => {
     const memberData = [
         {
             index: 1,
             name: '회원명단업로드',
-            path: `group/${group_id}/uploadMember`,
+            path: `uploadMember`,
         },
         {
             index: 2,
             name: '회원 목록',
-            path: `group/${group_id}/showGroupDetails`,
+            path: `showGroupDetails`,
         },
     ]
 
@@ -60,12 +58,12 @@ const SideBar = ({ group_id }) => {
         {
             index: 1,
             name: '이벤트 생성',
-            path: `/group/${group_id}/createEvent`,
+            path: `createEvent`,
         },
         {
             index: 2,
             name: '이벤트 목록',
-            path: `/group/${group_id}/showEvent`,
+            path: `showEventList`,
         },
     ]
 
@@ -73,12 +71,12 @@ const SideBar = ({ group_id }) => {
         {
             index: 1,
             name: '모임 정보 변경',
-            path: `/group/${group_id}/editInfo`,
+            path: `editInfo`,
         },
         {
             index: 2,
             name: '부매니저 설정',
-            path: `group/${group_id}/setSubMng`,
+            path: `setSubMng`,
         },
     ]
 
@@ -86,28 +84,19 @@ const SideBar = ({ group_id }) => {
         {
             index: 1,
             name: '거래내역 업로드',
-            path: `group/${group_id}/uploadResult`,
+            path: `uploadResult`,
         },
         {
             index: 2,
             name: '이벤트별 조회',
-            path: `group/${group_id}/showResult`,
+            path: `showResult`,
         },
         {
             index: 3,
             name: '거래내역분석',
-            path: `group/${group_id}/showResult`,
+            path: `showResult`,
         },
     ]
-
-    const [members, setMembers] = useState([])
-    const groupId = window.location.href.split('/')[4]
-    useEffect(() => {
-        getMember(groupId).then((data) => {
-            setMembers(data)
-        })
-    }, [groupId])
-    console.log(members)
 
     if (window.location.pathname === '/group' || window.location.pathname === '/') return null
     return (
@@ -117,7 +106,7 @@ const SideBar = ({ group_id }) => {
                     <StyledTitle>회원</StyledTitle>
                     {memberData.map((data) => (
                         <StyledItem key={data.index}>
-                            <StyledNavLink to={data.path} activeClassName="active" className="nav-link">
+                            <StyledNavLink to={data.path} className="nav-link">
                                 &nbsp;{data.name}
                             </StyledNavLink>
                         </StyledItem>
@@ -127,7 +116,7 @@ const SideBar = ({ group_id }) => {
                     <StyledTitle>이벤트</StyledTitle>
                     {eventData.map((data) => (
                         <StyledItem key={data.index}>
-                            <StyledNavLink to={data.path} activeClassName="active" className="nav-link">
+                            <StyledNavLink to={data.path} className="nav-link">
                                 &nbsp;{data.name}
                             </StyledNavLink>
                         </StyledItem>
@@ -138,7 +127,7 @@ const SideBar = ({ group_id }) => {
 
                     {settingData.map((data) => (
                         <StyledItem key={data.index}>
-                            <StyledNavLink to={data.path} activeClassName="active" className="nav-link">
+                            <StyledNavLink to={data.path} className="nav-link">
                                 &nbsp;{data.name}
                             </StyledNavLink>
                         </StyledItem>
@@ -149,7 +138,7 @@ const SideBar = ({ group_id }) => {
 
                     {transactionData.map((data) => (
                         <StyledItem key={data.index}>
-                            <StyledNavLink to={data.path} activeClassName="active" className="nav-link">
+                            <StyledNavLink to={data.path} className="nav-link">
                                 &nbsp;{data.name}
                             </StyledNavLink>
                         </StyledItem>

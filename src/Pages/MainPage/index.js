@@ -9,14 +9,12 @@ const MainPage = () => {
         navigate('/group')
     }
 
-
     return (
         <div>
             환영합니다... 로그인하기...<br></br>
             <button type="button" onClick={onClickHandler}>
                 일단 로그인없이 테스트
             </button>
-
         </div>
     )
 }

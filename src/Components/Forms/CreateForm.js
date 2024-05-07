@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import { Form, Input, Button } from 'antd'
 import { createGroup } from '../../apis/groups'
 import styled from 'styled-components'
-
+import { useNavigate } from 'react-router-dom'
 // 파일 업로드 시 실행되는 함수
 const normFile = (e) => {
-    console.log('Upload event:', e)
     if (Array.isArray(e)) {
         return e
     }
@@ -16,17 +15,20 @@ const CreateForm = () => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [file, setFile] = useState(null)
+    const navigate = useNavigate()
+
+    const isAnyFieldEmpty = () => {
+        return !name || !description
+    }
 
     const handleCreateGroup = async () => {
         const formData = new FormData()
         formData.append('name', name)
         formData.append('description', description)
         formData.append('memberExcel', file)
-        await createGroup(formData).then((res) => {
-            console.log(res)
-        })
+        await createGroup(formData)
         alert('모임이 생성되었습니다.')
-        window.location.reload()
+        navigate('/group')
     }
 
     const handleFileChange = (e) => {
@@ -64,8 +66,13 @@ const CreateForm = () => {
                     <input type="file" onChange={handleFileChange} accept=".xlsx, .csv" max={1} />
                 </StyledFormItems>
             </StyledFormWrapper>
-            <StyledFormItems wrapperCol={{}}>
-                <Button type="primary" htmlType="submit">
+            <StyledFormItems
+                wrapperCol={{
+                    offset: 11,
+                    span: 13,
+                }}
+            >
+                <Button type="primary" htmlType="submit" disabled={isAnyFieldEmpty()}>
                     완료
                 </Button>
             </StyledFormItems>
@@ -77,7 +84,6 @@ export default CreateForm
 
 // 전체 폼을 감싸는 스타일드 컴포넌트
 const StyledForm = styled(Form)`
-    margin: 30px;
     width: 100%;
 `
 // 폼을 감싸는 스타일드 컴포넌트
@@ -86,7 +92,7 @@ const StyledFormWrapper = styled.div`
     border-radius: 10px;
     background-color: rgba(0, 62.67, 151.94, 0.08);
     max-width: 800px;
-    margin: 10px auto;
+    margin: 40px auto;
 `
 
 // 타이틀을 감싸는 스타일드 컴포넌트
@@ -117,6 +123,5 @@ const StyledFormItems = styled(Form.Item)`
         height: 50px;
         width: 100px;
         font-size: 24px;
-        margin: 5% 0 0 40%;
     }
 `

@@ -9,18 +9,27 @@ const CreateEvent = ({ groupId }) => {
     const [description, setDescription] = useState('')
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
-    const [fee, setFee] = useState('')
+    const [transactionStartDate, setTransactionStartDate] = useState('')
+    const [transactionEndDate, setTransactionEndDate] = useState('')
+    const [fee, setFee] = useState(0)
     const [value, setValue] = useState(1)
     const eventInfo = {
         name,
         description,
         startDate,
         endDate,
+        transactionStartDate,
+        transactionEndDate,
         fee,
+    }
+
+    const isAnyFieldEmpty = () => {
+        return !name || !description || !startDate || !endDate || !transactionStartDate || !transactionEndDate || !fee
     }
 
     const handleCreateEvent = async () => {
         await postEvent(groupId, eventInfo)
+        alert('이벤트가 생성되었습니다.')
         window.location.reload()
     }
 
@@ -32,7 +41,7 @@ const CreateEvent = ({ groupId }) => {
         <StyledForm
             name="basic"
             labelCol={{
-                span: 3,
+                span: 4,
             }}
             wrapperCol={{
                 span: 16,
@@ -90,6 +99,24 @@ const CreateEvent = ({ groupId }) => {
                     />
                 </StyledFormItems>
                 <StyledFormItems
+                    label="회비 납부 기한"
+                    name="payDate"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your pay date!',
+                        },
+                    ]}
+                >
+                    <DatePicker.RangePicker
+                        onChange={(date, dateString) => {
+                            setTransactionStartDate(dateString[0])
+                            setTransactionEndDate(dateString[1])
+                        }}
+                        style={{ width: '100%' }}
+                    />
+                </StyledFormItems>
+                <StyledFormItems
                     label="이벤트 회비"
                     name="fee"
                     rules={[
@@ -99,7 +126,7 @@ const CreateEvent = ({ groupId }) => {
                         },
                     ]}
                 >
-                    <Input placeholder="ex) 10000" onChange={(e) => setFee(e.target.value)} />
+                    <Input placeholder="ex) 10000" type="text" onChange={(e) => setFee(e.target.value)} />
                 </StyledFormItems>
             </StyledFormWrapper>
             <StyledFormWrapper>
@@ -111,8 +138,13 @@ const CreateEvent = ({ groupId }) => {
                     </Space>
                 </StyledRadio.Group>
             </StyledFormWrapper>
-            <StyledFormItems wrapperCol={{}}>
-                <StyledButton type="primary" onClick={handleCreateEvent}>
+            <StyledFormItems
+                wrapperCol={{
+                    offset: 11,
+                    span: 13,
+                }}
+            >
+                <StyledButton type="primary" htmlType="submit" onClick={handleCreateEvent} disabled={isAnyFieldEmpty()}>
                     완료
                 </StyledButton>
             </StyledFormItems>
@@ -126,7 +158,7 @@ CreateEvent.propTypes = {
 export default CreateEvent
 
 const StyledForm = styled(Form)`
-    margin: 30px;
+    width: 100%;
 `
 // 폼을 감싸는 스타일드 컴포넌트
 const StyledFormWrapper = styled.div`
@@ -139,7 +171,7 @@ const StyledFormWrapper = styled.div`
 
 // 타이틀을 감싸는 스타일드 컴포넌트
 const Title = styled.h1`
-    margin: 10px 40px;
+    margin: 10px 10px 0 20px;
     text-align: left;
     font-size: 32px;
     font-family: 'KoPubWorld Dotum';
@@ -149,24 +181,28 @@ const Title = styled.h1`
 // 폼 아이템을 감싸는 스타일드 컴포넌트
 const StyledFormItems = styled(Form.Item)`
     .ant-form-item-label {
-        text-align: left;
-        margin-left: 40px;
         font-size: 24px;
         font-family: 'KoPubWorld Dotum';
         font-weight: 700;
         word-wrap: break-word;
     }
-    .ant-input {
-        text-align: left;
+
+    .ant-input,
+    .ant-picker {
+        width: 100%;
         font-size: 14px;
-        margin-top: 6px;
+        margin-top: 5px;
+        margin-left: 10px;
     }
+
     .ant-btn {
         height: 50px;
         width: 100px;
         font-size: 24px;
+        margin-top: 10px;
     }
 `
+
 const StyledButton = styled(Button)`
     font-family: 'KoPubWorld Dotum';
     font-weight: 700;
@@ -176,6 +212,8 @@ const StyledRadio = styled(Radio)`
     display: flex;
     justify-content: left;
     margin-right: 400px;
+    margin-left: 20px;
+    margin-top: 5px;
     font-size: 16px;
     font-weight: 600;
     font-family: 'KoPubWorld Dotum';

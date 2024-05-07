@@ -14,7 +14,7 @@ const items = [
     },
     {
         key: 'myGroups',
-        label: <Link to="/showGroupList">나의 모임</Link>,
+        label: <Link to="/group">나의 모임</Link>,
     },
     {
         key: 'myProfile',

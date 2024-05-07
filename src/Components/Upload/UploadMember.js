@@ -3,12 +3,14 @@ import { uploadMember } from '../../apis/members'
 import { InboxOutlined } from '@ant-design/icons'
 import { Upload, Button } from 'antd'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 
 const { Dragger } = Upload
 
 const UploadMember = ({ groupId }) => {
     const [file, setFile] = useState(null)
     const [isFileUploaded, setIsFileUploaded] = useState(false)
+    const navigate = useNavigate()
 
     const props = {
         name: 'file',
@@ -23,11 +25,9 @@ const UploadMember = ({ groupId }) => {
     }
 
     const handleUpload = async () => {
-        await uploadMember(groupId, file).then((res) => {
-            console.log(res)
-        })
+        await uploadMember(groupId, file)
         alert('파일이 업로드되었습니다.')
-        window.location.reload()
+        navigate(`/group/${groupId}/showGroupDetails`)
     }
 
     return (
@@ -68,7 +68,6 @@ export const StyledButton = styled(Button)`
     font-size: 20px;
     font-weight: 500;
 
-    //글씨 수직 맞추기
     display: flex;
     justify-content: center;
     align-items: center;
@@ -85,8 +84,9 @@ export const StyledDragger = styled(Dragger)`
 export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: end;
+    align-items: flex-end;
     width: 50%;
+    margin-left: 12%;
 `
 const FileIconWrapper = styled.div`
     width: 100%;

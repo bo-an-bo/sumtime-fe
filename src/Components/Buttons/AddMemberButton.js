@@ -15,17 +15,17 @@ const AddMember = ({ groupId }) => {
     const [email, setEmail] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
     const [loading, setLoading] = useState(false)
-    const memberInfo = {
-        studentId,
-        email,
-        phoneNumber,
+
+    const isAnyFieldEmpty = () => {
+        return !name || !studentId || !email || !phoneNumber
     }
 
     const handleAddMember = async () => {
         setLoading(true)
-        await addMember(groupId, name, memberInfo)
+        await addMember(groupId, name, { studentId, email, phoneNumber })
         setLoading(false)
         setIsModalOpen(false)
+        alert('회원 추가가 완료되었습니다.')
         window.location.reload()
     }
 
@@ -40,6 +40,7 @@ const AddMember = ({ groupId }) => {
                 onOk={handleAddMember}
                 onCancel={() => setIsModalOpen(false)}
                 confirmLoading={loading}
+                okButtonProps={{ disabled: isAnyFieldEmpty() }}
             >
                 <StyledInput placeholder="이름" value={name} onChange={(e) => setName(e.target.value)} />
                 <StyledInput placeholder="학번" value={studentId} onChange={(e) => setStudentId(e.target.value)} />

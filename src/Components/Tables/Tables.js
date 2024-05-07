@@ -22,8 +22,6 @@ const Tables = ({ groupId }) => {
         setMemberKeys(keys)
     }, [members])
 
-    console.log(memberKeys)
-
     const columns = [
         {
             title: '순',
@@ -71,7 +69,7 @@ const Tables = ({ groupId }) => {
     }
 
     return (
-        <>
+        <Wrapper>
             <ButtonWrapper>
                 <AddMemberButton groupId={groupId} />
                 <DeleteMemberButton groupId={groupId} memberIds={deleteMemberIds} />
@@ -84,15 +82,23 @@ const Tables = ({ groupId }) => {
                 pagination={false}
                 scroll={{ y: 450 }}
             />
-        </>
+        </Wrapper>
     )
 }
 
+const Wrapper = styled.div`
+    width: 100%;
+    border-radius: 20px;
+    background-color: rgba(0, 62.67, 151.94, 0.04);
+    max-width: 750px;
+    margin-left: 170px;
+    margin-top: 20px;
+`
 const ButtonWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
-    gap: 10px;
-    margin-bottom: 10px;
+    gap: 5px;
+    padding: 10px;
 `
 
 const StyledTable = styled(Table)`
