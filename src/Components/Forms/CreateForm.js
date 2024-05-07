@@ -78,6 +78,7 @@ export default CreateForm
 // 전체 폼을 감싸는 스타일드 컴포넌트
 const StyledForm = styled(Form)`
     margin: 30px;
+    width: 100%;
 `
 // 폼을 감싸는 스타일드 컴포넌트
 const StyledFormWrapper = styled.div`
@@ -116,5 +117,6 @@ const StyledFormItems = styled(Form.Item)`
         height: 50px;
         width: 100px;
         font-size: 24px;
+        margin: 5% 0 0 40%;
     }
 `

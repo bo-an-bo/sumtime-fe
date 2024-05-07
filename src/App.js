@@ -10,6 +10,8 @@ import NavBar from './Components/NavBar/NavBar'
 import MainPage from './Pages/MainPage'
 import SideBar from './Components/SideBar/SideBar'
 import GroupMainPage from './Pages/GroupMainPage'
+import ShowEventList from './Pages/ShowEventList'
+import UploadMember from './Pages/UploadMember'
 
 const StyledLayout = styled.div`
     // background-color: gray;
@@ -19,14 +21,14 @@ const StyledLayout = styled.div`
 `
 
 function App() {
-    const group_id = "662a83742c217fe65efaeab6";
+    const group_id = '662a83742c217fe65efaeab6'
     return (
         <BrowserRouter>
             <div className="App">
                 <NavBar />
 
                 <StyledLayout>
-                    <SideBar group_id={group_id}/>
+                    <SideBar group_id={group_id} />
                     <Routes>
                         <Route path="/" element={<MainPage />} />
                         <Route path="/createGroup" element={<CreateGroup />} />
@@ -34,6 +36,8 @@ function App() {
                         <Route path="/group/:id/ShowGroupDetails" element={<ShowGroupDetails />} />
                         <Route path="/group/:id/createEvent" element={<CreateEventPage />} />
                         <Route path="/group/:id" element={<GroupMainPage />} />
+                        <Route path="/group/:id/showEvent" element={<ShowEventList />} />
+                        <Route path="/group/:id/uploadMember" element={<UploadMember />} />
                     </Routes>
                 </StyledLayout>
             </div>
