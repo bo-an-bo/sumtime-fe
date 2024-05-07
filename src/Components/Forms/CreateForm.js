@@ -123,5 +123,6 @@ const StyledFormItems = styled(Form.Item)`
         height: 50px;
         width: 100px;
         font-size: 24px;
+        margin: 5% 0 0 40%;
     }
 `
