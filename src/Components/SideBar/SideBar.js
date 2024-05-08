@@ -84,7 +84,7 @@ const SideBar = () => {
         {
             index: 1,
             name: '거래내역 업로드',
-            path: `uploadResult`,
+            path: `uploadTransaction`,
         },
         {
             index: 2,
