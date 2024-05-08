@@ -13,6 +13,7 @@ const CreateEvent = ({ groupId }) => {
     const [transactionEndDate, setTransactionEndDate] = useState('')
     const [fee, setFee] = useState(0)
     const [value, setValue] = useState(1)
+    const [isProcessing, setIsProcessing] = useState(false)
     const eventInfo = {
         name,
         description,
@@ -28,9 +29,19 @@ const CreateEvent = ({ groupId }) => {
     }
 
     const handleCreateEvent = async () => {
-        await postEvent(groupId, eventInfo)
-        alert('이벤트가 생성되었습니다.')
-        window.location.reload()
+        if (isProcessing) {
+            return
+        }
+        setIsProcessing(true)
+        try {
+            await postEvent(groupId, eventInfo)
+            alert('이벤트가 생성되었습니다.')
+            window.location.reload()
+        } catch (error) {
+            alert('이벤트 생성에 실패했습니다.')
+        } finally {
+            setIsProcessing(false)
+        }
     }
 
     const onChange = (e) => {

@@ -15,6 +15,7 @@ const CreateForm = () => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [file, setFile] = useState(null)
+    const [isProcessing, setIsProcessing] = useState(false)
     const navigate = useNavigate()
 
     const isAnyFieldEmpty = () => {
@@ -22,13 +23,23 @@ const CreateForm = () => {
     }
 
     const handleCreateGroup = async () => {
-        const formData = new FormData()
-        formData.append('name', name)
-        formData.append('description', description)
-        formData.append('memberExcel', file)
-        await createGroup(formData)
-        alert('모임이 생성되었습니다.')
-        navigate('/group')
+        if (isProcessing) {
+            return
+        }
+        setIsProcessing(true)
+        try {
+            const formData = new FormData()
+            formData.append('name', name)
+            formData.append('description', description)
+            formData.append('memberExcel', file)
+            await createGroup(formData)
+            alert('모임이 생성되었습니다.')
+            navigate('/group')
+        } catch (error) {
+            alert('모임 생성에 실패했습니다.')
+        } finally {
+            setIsProcessing(false)
+        }
     }
 
     const handleFileChange = (e) => {
