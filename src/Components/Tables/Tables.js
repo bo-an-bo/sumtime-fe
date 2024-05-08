@@ -69,36 +69,47 @@ const Tables = ({ groupId }) => {
     }
 
     return (
-        <Wrapper>
+        <StyledLayout>
             <ButtonWrapper>
                 <AddMemberButton groupId={groupId} />
                 <DeleteMemberButton groupId={groupId} memberIds={deleteMemberIds} />
             </ButtonWrapper>
-
-            <StyledTable
-                rowSelection={rowSelection}
-                columns={columns}
-                dataSource={data}
-                pagination={false}
-                scroll={{ y: 450 }}
-            />
-        </Wrapper>
+            <Wrapper>
+                <StyledTable
+                    rowSelection={rowSelection}
+                    columns={columns}
+                    dataSource={data}
+                    pagination={false}
+                    scroll={{ y: 450 }}
+                />
+            </Wrapper>
+        </StyledLayout>
     )
 }
 
-const Wrapper = styled.div`
+const StyledLayout = styled.div`
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 8%;
+    margin-top: 2%;
+`
+const Wrapper = styled.div`
+    width: 1000px;
     border-radius: 20px;
     background-color: rgba(0, 62.67, 151.94, 0.04);
-    max-width: 750px;
-    margin-left: 170px;
-    margin-top: 20px;
+    // max-width: 750px;
+    // margin-left: 100px;
+    // margin-top: 20px;
+    // margin: 0 15%;
 `
 const ButtonWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
     gap: 5px;
-    padding: 10px;
+    // padding: 10px;
+    font-family: 'Dotum Light';
+    margin-bottom: 2%;
 `
 
 const StyledTable = styled(Table)`
@@ -108,10 +119,11 @@ const StyledTable = styled(Table)`
     }
     .ant-table-thead > tr > th {
         border-bottom: 2px solid #d9d9d9;
-        font-size: 15px;
-        font-weight: 700;
+        font-size: 16px;
+        // font-weight: 700;
         text-align: center;
         background-color: rgba(0, 62.67, 151.94, 0.04);
+        font-family: 'Dotum Bold';
     }
     .ant-table-tbody > tr > td {
         border-bottom: 1px solid #d9d9d9;
@@ -119,6 +131,7 @@ const StyledTable = styled(Table)`
         text-align: center;
         padding: 10px;
         background-color: rgba(0, 62.67, 151.94, 0.04);
+        font-family: 'Dotum Medium';
     }
     .ant-table-tbody > tr:last-child > td {
         border-bottom: none;

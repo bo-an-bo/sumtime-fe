@@ -2,6 +2,15 @@ import React from 'react'
 import { Button, Popconfirm, message } from 'antd'
 import PropTypes from 'prop-types'
 import { deleteMember } from '../../apis/members'
+import styled from 'styled-components'
+const StyledAddButton = styled(Button)`
+    font-family: 'Dotum Light';
+    font-size: 18px;
+    width: 100px;
+    height: 40px;
+    margin: 10px 10px 0 0;
+    background-color: #003f98;
+`
 
 const DeleteMember = ({ groupId, memberIds }) => {
     const handleDelete = async () => {
@@ -23,7 +32,7 @@ const DeleteMember = ({ groupId, memberIds }) => {
             cancelText="아니요"
             disabled={memberIds.length === 0}
         >
-            <Button type="primary">회원 삭제</Button>
+            <StyledAddButton type="primary">회원 삭제</StyledAddButton>
         </Popconfirm>
     )
 }

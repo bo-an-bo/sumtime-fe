@@ -51,4 +51,6 @@ const StyledCard = styled(Card)`
     &:hover {
         background-color: #ecf4ff;
     }
+    font-family: 'Dotum Bold';
+    font-size: 18px;
 `

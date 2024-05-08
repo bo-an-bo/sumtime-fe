@@ -26,7 +26,6 @@ function App() {
         <BrowserRouter>
             <div className="App">
                 <NavBar />
-
                 <Routes>
                     <Route path="/" element={<MainPage />} />
                     <Route path="/createGroup" element={<CreateGroup />} />
