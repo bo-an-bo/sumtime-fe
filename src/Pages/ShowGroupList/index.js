@@ -50,11 +50,12 @@ const StyledButton = styled(Button)`
     margin-bottom: 10px;
     width: 120px;
     height: 40px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
 
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #003e97;
+    font-family: 'Dotum Light';
 `

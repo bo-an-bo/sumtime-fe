@@ -63,15 +63,22 @@ const UploadMember = ({ groupId }) => {
 export const StyledButton = styled(Button)`
     margin-top: 20px;
     margin-bottom: 10px;
-    width: 100px;
-    height: 50px;
-    font-size: 20px;
+    width: 90px;
+    height: 40px;
+    font-size: 18px;
     font-weight: 500;
+    font-family: 'Dotum Medium';
 
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #003e97;
+
+    &:disabled {
+        width: 90px;
+        height: 40px;
+        font-family: 'Dotum Medium';
+    }
 `
 export const StyledDragger = styled(Dragger)`
     width: 100%;
@@ -79,6 +86,7 @@ export const StyledDragger = styled(Dragger)`
     padding: 10px;
     background-color: rgba(0, 62.67, 151.94, 0.08);
     border-radius: 10px;
+    font-family: 'Dotum Bold';
 `
 
 export const Wrapper = styled.div`
