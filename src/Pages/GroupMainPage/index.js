@@ -1,28 +1,22 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { getGroups } from '../../apis/groups'
+import { getGroupDetail } from '../../apis/groups'
 
 // import styled from 'styled-components'
 
 const GroupMainPage = () => {
     const [groups, setGroups] = React.useState([])
+    const groupId = window.location.href.split('/')[4]
     useEffect(() => {
-        getGroups().then((data) => {
+        getGroupDetail(groupId).then((data) => {
             setGroups(data)
         })
-    }, [])
-
+    }, [groupId])
     return (
         <div>
             <StyledImg src={process.env.PUBLIC_URL + '/img/main.jpg'} alt="groupMainPage" />
-            <div>
-                {groups.map((group) => (
-                    <div key={group._id}>
-                        <h2>{group.name}</h2>
-                        <p>모임소개: {group.description}</p>
-                    </div>
-                ))}
-            </div>
+            <h1>{groups.name}</h1>
+            <h2>{groups.description}</h2>
         </div>
     )
 }
