@@ -30,7 +30,7 @@ const DeleteMember = ({ groupId, memberIds }) => {
 
 DeleteMember.propTypes = {
     groupId: PropTypes.string.isRequired,
-    memberIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+    memberIds: PropTypes.array.isRequired,
 }
 
 export default DeleteMember

@@ -10,6 +10,9 @@ import { getMember } from '../../apis/members'
 const Tables = ({ groupId }) => {
     const [members, setMembers] = useState([])
     const [memberKeys, setMemberKeys] = useState([])
+    const [selectedRows, setSelectedRows] = useState([])
+    const [selectedRowKeys, setSelectedRowKeys] = useState([])
+    const [deleteMemberIds, setDeleteMemberIds] = useState([])
 
     useEffect(() => {
         getMember(groupId).then((data) => {
@@ -21,6 +24,12 @@ const Tables = ({ groupId }) => {
         const keys = Object.keys(members[0]?.memberInfo || {})
         setMemberKeys(keys)
     }, [members])
+
+    useEffect(() => {
+        const ids = selectedRows.map((row) => row._id)
+
+        setDeleteMemberIds(ids)
+    }, [selectedRows])
 
     const columns = [
         {
@@ -47,16 +56,6 @@ const Tables = ({ groupId }) => {
             ...members[i].memberInfo,
         })
     }
-
-    const [selectedRowKeys, setSelectedRowKeys] = useState([])
-    const [selectedRows, setSelectedRows] = useState([])
-    const [deleteMemberIds, setDeleteMemberIds] = useState([])
-
-    useEffect(() => {
-        const ids = selectedRows.map((row) => row._id)
-
-        setDeleteMemberIds(ids)
-    }, [selectedRows])
 
     const onSelectChange = (selectedRowKeys, selectedRows) => {
         setSelectedRowKeys(selectedRowKeys)
