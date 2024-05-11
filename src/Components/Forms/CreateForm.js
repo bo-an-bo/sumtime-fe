@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, Upload } from 'antd'
+import { UploadOutlined } from '@ant-design/icons'
 import { createGroup } from '../../apis/groups'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
@@ -42,16 +43,19 @@ const CreateForm = () => {
         }
     }
 
-    const handleFileChange = (e) => {
-        setFile(e.target.files[0])
-        console.log(e.target.files[0])
+    const props = {
+        name: 'file',
+        accept: '.xlsx, .xls, .csv',
+        multiple: false,
+        showUploadList: false,
+        beforeUpload: (file) => {
+            setFile(file)
+            return false
+        },
     }
 
     return (
         <StyledLayout>
-            <StyledButton type="primary" htmlType="submit" disabled={isAnyFieldEmpty()}>
-                완료
-            </StyledButton>
             <StyledForm
                 name="basic"
                 labelCol={{
@@ -81,7 +85,10 @@ const CreateForm = () => {
                 <StyledFormWrapper>
                     <Title>모임 회원 등록</Title>
                     <StyledFormItems label="파일 업로드" valuePropName="fileList" getValueFromEvent={normFile}>
-                        <input type="file" onChange={handleFileChange} accept=".xlsx, .csv" max={1} />
+                        <Upload {...props}>
+                            <Button icon={<UploadOutlined />}>파일 업로드</Button>
+                            {file && file.name}
+                        </Upload>
                     </StyledFormItems>
                 </StyledFormWrapper>
                 <StyledFormItems
@@ -89,7 +96,11 @@ const CreateForm = () => {
                         offset: 11,
                         span: 13,
                     }}
-                ></StyledFormItems>
+                >
+                    <StyledButton type="primary" htmlType="submit" disabled={isAnyFieldEmpty()}>
+                        완료
+                    </StyledButton>
+                </StyledFormItems>
             </StyledForm>
         </StyledLayout>
     )
@@ -99,23 +110,22 @@ export default CreateForm
 
 const StyledLayout = styled.div`
     width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
 `
 
 const StyledButton = styled(Button)`
     width: 100px;
     height: 40px;
-    margin-left: 70%;
-    margin-top: 2%;
     font-family: 'Dotum Light';
     font-size: 18px;
     background-color: #003e97;
 `
 // 전체 폼을 감싸는 스타일드 컴포넌트
 const StyledForm = styled(Form)`
-    width: 100%;
-    margin: 3% 30%;
+    width: 800px;
+    margin-top: 100px;
 `
 // 폼을 감싸는 스타일드 컴포넌트
 const StyledFormWrapper = styled.div`
@@ -150,10 +160,7 @@ const StyledFormItems = styled(Form.Item)`
         font-size: 14px;
         margin-top: 6px;
     }
-    .ant-btn {
-        height: 50px;
-        width: 100px;
-        font-size: 24px;
-        margin: 5% 0 0 40%;
+    .ant-upload {
+        margin-top: 6px;
     }
 `

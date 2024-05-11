@@ -7,7 +7,7 @@ import { Button } from 'antd'
 const ShowGroupList = () => {
     const navigate = useNavigate()
     const onClickCreateGroup = () => {
-        navigate('/createGroup')
+        navigate('/group/createGroup')
     }
     return (
         <StyledGroupPageLayout>
