@@ -16,3 +16,13 @@ export const createGroup = async (groupInfo) => {
     const response = await formApi.post('/group', groupInfo)
     return response.data
 }
+
+export const patchGroup = async (groupInfo) => {
+    console.log('patchGroup에서')
+    console.log(groupInfo)
+    const response = await api.patch(`/group/${groupInfo.groupId}`, {
+        name: groupInfo.name,
+        description: groupInfo.description,
+    })
+    return response.data
+}
