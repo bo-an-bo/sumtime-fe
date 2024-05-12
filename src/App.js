@@ -26,11 +26,8 @@ function App() {
     return (
         <BrowserRouter>
             <div className="App">
-                <NavBar />
-
                 <Routes>
                     <Route path="/" element={<MainPage />} />
-                    <Route path="/createGroup" element={<CreateGroup />} />
                     <Route path="/group/*" element={<GroupRoutes />} />
                 </Routes>
             </div>
@@ -40,12 +37,16 @@ function App() {
 
 function GroupRoutes() {
     return (
-        <StyledLayout>
-            <Routes>
-                <Route path="/" element={<ShowGroupList />} />
-                <Route path="/:id/*" element={<GroupRoutesWithSidebar />} />
-            </Routes>
-        </StyledLayout>
+        <>
+            <NavBar />
+            <StyledLayout>
+                <Routes>
+                    <Route path="/" element={<ShowGroupList />} />
+                    <Route path="/createGroup" element={<CreateGroup />} />
+                    <Route path="/:id/*" element={<GroupRoutesWithSidebar />} />
+                </Routes>
+            </StyledLayout>
+        </>
     )
 }
 

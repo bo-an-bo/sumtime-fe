@@ -40,11 +40,11 @@ const UploadMember = ({ groupId }) => {
                 {file ? (
                     <FileIconWrapper>
                         <img
-                            src="https://img.icons8.com/ios/452/file.png"
-                            style={{ width: '64px', height: '64px' }}
+                            src={process.env.PUBLIC_URL + '/img/excel.png'}
+                            style={{ width: '128px', height: '128px' }}
                             alt="file"
                         />
-                        <p>{file.name}</p>
+                        <p style={{ fontSize: '24px', fontWeight: 'bold' }}>{file.name}</p>
                     </FileIconWrapper>
                 ) : (
                     <div>
@@ -63,15 +63,22 @@ const UploadMember = ({ groupId }) => {
 export const StyledButton = styled(Button)`
     margin-top: 20px;
     margin-bottom: 10px;
-    width: 100px;
-    height: 50px;
-    font-size: 20px;
+    width: 90px;
+    height: 40px;
+    font-size: 18px;
     font-weight: 500;
+    font-family: 'Dotum Medium';
 
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #003e97;
+
+    &:disabled {
+        width: 90px;
+        height: 40px;
+        font-family: 'Dotum Medium';
+    }
 `
 export const StyledDragger = styled(Dragger)`
     width: 100%;
@@ -79,6 +86,7 @@ export const StyledDragger = styled(Dragger)`
     padding: 10px;
     background-color: rgba(0, 62.67, 151.94, 0.08);
     border-radius: 10px;
+    font-family: 'Dotum Bold';
 `
 
 export const Wrapper = styled.div`

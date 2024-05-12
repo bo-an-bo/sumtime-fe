@@ -18,11 +18,14 @@ const StyledLI = styled.li`
 const StyledItem = styled.div`
     margin: 10px 10px 0 10px;
     text-decoration: none;
+    font-family: 'Dotum Medium';
 `
 
 const StyledTitle = styled.div`
     display: flex;
     margin: 30px 0 0 0;
+    font-family: 'Dotum Bold';
+    font-size: 18px;
 `
 
 const StyledNavLink = styled(NavLink)`
@@ -38,13 +41,14 @@ const StyledNavLink = styled(NavLink)`
     &.active {
         background-color: rgb(0, 63, 150, 0.1);
         border-left: 4px solid rgb(0, 63, 150);
+        font-family: 'Dotum Bold'
     }
 `
 const SideBar = () => {
     const memberData = [
         {
             index: 1,
-            name: '회원명단업로드',
+            name: '회원 명단 업로드',
             path: `uploadMember`,
         },
         {
@@ -93,7 +97,7 @@ const SideBar = () => {
         },
         {
             index: 3,
-            name: '거래내역분석',
+            name: '거래내역 분석',
             path: `showResult`,
         },
     ]

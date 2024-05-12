@@ -49,6 +49,11 @@ const StyledCollapse = styled(Collapse)`
     background-color: rgba(0, 62.67, 151.94, 0.08);
     overflow: auto;
     max-height: 450px;
+    font-family: 'Dotum Bold';
+
+    .itmes {
+        background-color: red;
+    }
 `
 
 export default EventCard

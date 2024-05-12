@@ -39,11 +39,11 @@ const UploadTransaction = ({ groupId }) => {
                 {file ? (
                     <FileIconWrapper>
                         <img
-                            src="https://img.icons8.com/ios/452/file.png"
-                            style={{ width: '64px', height: '64px' }}
+                            src={process.env.PUBLIC_URL + '/img/excel.png'}
+                            style={{ width: '128px', height: '128px' }}
                             alt="file"
                         />
-                        <p>{file.name}</p>
+                        <p style={{ fontSize: '24px', fontWeight: 'bold' }}>{file.name}</p>
                     </FileIconWrapper>
                 ) : (
                     <div>

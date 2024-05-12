@@ -2,6 +2,16 @@ import { Menu } from 'antd'
 import { Link } from 'react-router-dom'
 import React from 'react'
 import styled from 'styled-components'
+import whiteLogo from '../../IMG/logo_white.svg'
+
+const StyledImg = styled.img`
+    width: 100px;
+    height: 40px;
+    display: flex;
+`
+const StyledLinkBox = styled(Link)`
+    width: 100px;
+`
 
 const NavBar = () => {
     return <StyledMenu mode="horizontal" items={items}></StyledMenu>
@@ -10,7 +20,11 @@ const NavBar = () => {
 const items = [
     {
         key: 'home',
-        label: <Link to="/">썸타임 로고 자리</Link>,
+        label: (
+            <StyledLinkBox to="/">
+                <StyledImg src={whiteLogo} alt="white_logo_img" />
+            </StyledLinkBox>
+        ),
     },
     {
         key: 'myGroups',
@@ -22,7 +36,7 @@ const items = [
     },
 ]
 const StyledMenu = styled(Menu)`
-    height: 200px;
+    height: 120px;
     width: 100%;
     background-color: #003f98;
     display: flex;
@@ -33,7 +47,7 @@ const StyledMenu = styled(Menu)`
         color: white;
         font-size: 22px;
         font-weight: 700;
-        font-family: 'KoPubWorld Dotum';
+        font-family: 'Dotum Bold';
         word-wrap: break-word;
         margin-right: 50px;
     }

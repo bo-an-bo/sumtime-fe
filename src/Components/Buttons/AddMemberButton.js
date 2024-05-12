@@ -8,6 +8,15 @@ const StyledInput = styled(Input)`
     margin-bottom: 5px;
 `
 
+const StyledAddButton = styled(Button)`
+    font-family: 'Dotum Light';
+    font-size: 18px;
+    width: 100px;
+    height: 40px;
+    margin: 10px 10px 0 0;
+    background-color: #003f98;
+`
+
 const AddMember = ({ groupId }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [name, setName] = useState('')
@@ -31,9 +40,9 @@ const AddMember = ({ groupId }) => {
 
     return (
         <>
-            <Button type="primary" onClick={() => setIsModalOpen(true)}>
+            <StyledAddButton type="primary" onClick={() => setIsModalOpen(true)}>
                 회원 추가
-            </Button>
+            </StyledAddButton>
             <Modal
                 title="회원 추가"
                 open={isModalOpen}
