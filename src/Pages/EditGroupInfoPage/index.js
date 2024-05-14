@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { getGroupDetail, patchGroup } from '../../apis/groups'
 import { Form, Input, Button } from 'antd'
+import DeleteGrp from './DeleteGrp'
 
 const StyledBox = styled.div`
     //background-color: rgba(0, 62.67, 151.94, 0.08);
@@ -90,7 +91,7 @@ const EditGroupInfo = () => {
     const [newDesc, setNewDesc] = useState('')
     const [isProcessing, setIsProcessing] = useState(false)
     const groupId = window.location.href.split('/')[4]
-
+    console.log('groupid', groupId)
     const handleChangeGroupInfo = async () => {
         if (isProcessing) {
             return
@@ -163,6 +164,11 @@ const EditGroupInfo = () => {
                         <p>그룹 설명: {groups.description}</p>
                     </StyledShowInfo>
                 )}
+            </StyledSection>
+            <StyledSection>
+                <StyledEditTitle groupId={groupId}>모임 삭제</StyledEditTitle>
+                <div>모임을 삭제합니다.</div>
+                <DeleteGrp />
             </StyledSection>
         </StyledBox>
     )
