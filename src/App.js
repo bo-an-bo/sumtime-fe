@@ -14,6 +14,7 @@ import ShowEventList from './Pages/ShowEventList'
 import UploadMember from './Pages/UploadMember'
 import UploadTransactions from './Pages/UploadTransaction'
 import ShowEventResult from './Pages/ShowEventResult'
+import EditGroupInfo from './Pages/EditGroupInfoPage'
 
 const StyledLayout = styled.div`
     // background-color: gray;
@@ -62,6 +63,7 @@ function GroupRoutesWithSidebar() {
                 <Route path="/uploadMember" element={<UploadMember />} />
                 <Route path="/uploadTransaction" element={<UploadTransactions />} />
                 <Route path="/showEventResult" element={<ShowEventResult />} />
+                <Route path="/editInfo" element={<EditGroupInfo />} />
             </Routes>
         </StyledLayout>
     )

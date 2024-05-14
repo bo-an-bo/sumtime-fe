@@ -32,7 +32,7 @@ const CreateForm = () => {
             const formData = new FormData()
             formData.append('name', name)
             formData.append('description', description)
-            formData.append('memberExcel', file)
+            formData.append('memberFile', file)
             await createGroup(formData)
             alert('모임이 생성되었습니다.')
             navigate('/group')
@@ -47,7 +47,7 @@ const CreateForm = () => {
         name: 'file',
         accept: '.xlsx, .xls, .csv',
         multiple: false,
-        showUploadList: false,
+        showUploadList: true,
         beforeUpload: (file) => {
             setFile(file)
             return false
@@ -87,7 +87,6 @@ const CreateForm = () => {
                     <StyledFormItems label="파일 업로드" valuePropName="fileList" getValueFromEvent={normFile}>
                         <Upload {...props}>
                             <Button icon={<UploadOutlined />}>파일 업로드</Button>
-                            {file && file.name}
                         </Upload>
                     </StyledFormItems>
                 </StyledFormWrapper>
