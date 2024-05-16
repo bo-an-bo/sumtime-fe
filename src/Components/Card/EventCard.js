@@ -15,28 +15,43 @@ const EventCard = ({ groupId }) => {
         return new Date(date).toLocaleDateString()
     }
 
-    const items = events.map((event, i) => ({
-        key: i,
-        label: events[i].name,
-        children: (
-            <div>
-                <p>
-                    <strong>설명</strong>: {events[i].description}
-                </p>
-                <p>
-                    <strong>요금</strong>:{' '}
-                    {typeof events[i].fee === 'number' ? events[i].fee.toLocaleString() + '원' : events[i].fee}
-                </p>
+    const items = events
+        .map((event, i) => {
+            // events[i]가 null이거나 undefined인 경우 빈 객체로 대체하여 오류를 방지합니다.
+            const currentEvent = events[i] || {}
 
-                <p>
-                    <strong>이벤트 기한</strong>: {formatDate(events[i].endDate)}
-                </p>
-                <p>
-                    <strong>결제 기한</strong>: {formatDate(events[i].transactionEndDate)}
-                </p>
-            </div>
-        ),
-    }))
+            // label이 null인 경우 해당 아이템을 무시하고 다음 아이템을 생성하지 않음
+            if (currentEvent.label === null) {
+                return null
+            }
+
+            // label이 null이 아닌 경우 정상적으로 아이템을 생성함
+            return {
+                key: i,
+                label: currentEvent.name || '', // name이 null이면 빈 문자열로 처리
+                children: (
+                    <div>
+                        <p>
+                            <strong>설명</strong>: {currentEvent.description || ''}
+                        </p>
+                        <p>
+                            <strong>요금</strong>:{' '}
+                            {typeof currentEvent.fee === 'number'
+                                ? currentEvent.fee.toLocaleString() + '원'
+                                : currentEvent.fee || ''}
+                        </p>
+
+                        <p>
+                            <strong>이벤트 기한</strong>: {formatDate(currentEvent.endDate) || ''}
+                        </p>
+                        <p>
+                            <strong>결제 기한</strong>: {formatDate(currentEvent.transactionEndDate) || ''}
+                        </p>
+                    </div>
+                ),
+            }
+        })
+        .filter((item) => item !== null) // null인 아이템 제거
 
     return <StyledCollapse accordion bordered={false} items={items}></StyledCollapse>
 }
