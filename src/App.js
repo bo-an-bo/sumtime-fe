@@ -14,6 +14,7 @@ import ShowEventList from './Pages/ShowEventList'
 import UploadMember from './Pages/UploadMember'
 import UploadTransactions from './Pages/UploadTransaction'
 import EditGroupInfo from './Pages/EditGroupInfoPage'
+import SelectMembers from './Pages/CreateEventPage/SelectMembers'
 
 const StyledLayout = styled.div`
     // background-color: gray;
@@ -27,6 +28,7 @@ function App() {
         <BrowserRouter>
             <div className="App">
                 <Routes>
+                 
                     <Route path="/" element={<MainPage />} />
                     <Route path="/group/*" element={<GroupRoutes />} />
                 </Routes>
@@ -58,6 +60,7 @@ function GroupRoutesWithSidebar() {
                 <Route path="/" element={<GroupMainPage />} />
                 <Route path="/showGroupDetails" element={<ShowGroupDetails />} />
                 <Route path="/createEvent" element={<CreateEventPage />} />
+                <Route path="/createEvent/selectMembers" element={<SelectMembers />} />
                 <Route path="/showEventList" element={<ShowEventList />} />
                 <Route path="/uploadMember" element={<UploadMember />} />
                 <Route path="/uploadTransaction" element={<UploadTransactions />} />
