@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Table } from 'antd'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { useSelectedRowKeys, useSelectedRows, useDeleteMemberIds } from '../../store/member'
+import { useSelectedRowKeys, useSelectedRows } from '../../store/member'
 //getGroupDetail로 변경
 import { getMember } from '../../apis/members'
 import { useTableMemInfo } from '../../store/event'
@@ -11,11 +11,11 @@ const Tables = ({ groupId }) => {
     const { memName, setMemName } = useTableMemInfo()
     const [members, setMembers] = useState([])
     const [memberKeys, setMemberKeys] = useState([])
-    const { selectedRows, setSelectedRows } = useSelectedRows()
+    const { setSelectedRows } = useSelectedRows()
 
     const { selectedRowKeys, setSelectedRowKeys } = useSelectedRowKeys()
 
-    const { setDeleteMemberIds } = useDeleteMemberIds()
+    // const { setDeleteMemberIds } = useDeleteMemberIds()
 
     useEffect(() => {
         getMember(groupId).then((data) => {
@@ -58,11 +58,11 @@ const Tables = ({ groupId }) => {
     // const [selectedRows, setSelectedRows] = useState([])
     // const [deleteMemberIds, setDeleteMemberIds] = useState([])
 
-    useEffect(() => {
-        const ids = selectedRows.map((row) => row._id)
+    // useEffect(() => {
+    //     const ids = selectedRows.map((row) => row._id)
 
-        setDeleteMemberIds(ids)
-    }, [selectedRows])
+    //     setDeleteMemberIds(ids)
+    // }, [selectedRows])
 
     useEffect(() => {
         // console.log('memName updated:', memName)

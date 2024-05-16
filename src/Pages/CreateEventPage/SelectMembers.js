@@ -22,7 +22,7 @@ const SelectMembers = () => {
             setMembers(data)
             console.log(members)
         })
-    }, [groupId])
+    }, [groupId, members])
     const navigate = useNavigate()
 
     useEffect(() => {}, [eventId])

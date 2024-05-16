@@ -16,7 +16,7 @@ const ShowGroupDetails = () => {
         const ids = selectedRows.map((row) => row._id)
 
         setDeleteMemberIds(ids)
-    }, [selectedRows])
+    }, [selectedRows, setDeleteMemberIds])
     return (
         <div>
             <ButtonWrapper>
