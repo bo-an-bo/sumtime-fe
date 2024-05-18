@@ -34,3 +34,5 @@ export const uploadMember = async (groupId, file) => {
     const response = await formApi.post(`group/${groupId}/member/excel`, formData)
     return response.data
 }
+
+
