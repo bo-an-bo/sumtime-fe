@@ -1,4 +1,4 @@
-import React from 'react' // eslint-disable-line no-unused-vars
+import React, { useEffect, useState } from 'react' // eslint-disable-line no-unused-vars
 import { useNavigate } from 'react-router-dom' // eslint-disable-line no-unused-vars
 import styled from 'styled-components' // eslint-disable-line no-unused-vars
 import LogoColor from '../../IMG/logo_color.svg'
@@ -6,6 +6,7 @@ import exmTab from '../../IMG/exmple_table.svg'
 
 import { Button } from 'antd'
 import LoginKakao from '../../Components/Login/SocialKakao'
+import LogoutKakao from '../../Components/Login/LogoutKakao'
 
 const MainPage = () => {
     const navigate = useNavigate()
@@ -13,12 +14,21 @@ const MainPage = () => {
         navigate('/group')
     }
 
+    useEffect(() => {
+        const storedNickname = localStorage.getItem('nickname')
+        if (storedNickname) {
+            setNickname(storedNickname)
+        } else {
+            setNickname('')
+        }
+    }, [])
+
     const StyledLayoutMain = styled.div`
         display: flex;
         flex-direction: column;
     `
     const StyledButtonStart = styled(Button)`
-        font-family: 'Dotum Bold';
+        font-family: 'Dotum Bold', serif;
         font-size: 28px;
         width: 300px;
         height: 60px;
@@ -39,7 +49,7 @@ const MainPage = () => {
 
     const StyledContentSection = styled.div`
         display: flex;
-        margin: flex-direction: row;
+        flex-direction: row;
         width: 100%;
         height: 250px;
         background-color: #dceaff;
@@ -50,6 +60,8 @@ const MainPage = () => {
     const StyldMainText = styled.div`
         margin: 40px 0 0 -250px;
     `
+    const [nickname, setNickname] = useState('')
+
     return (
         <StyledLayoutMain>
             <StyledLogoImg src={LogoColor} alt="logo_white_img"></StyledLogoImg>
@@ -59,7 +71,12 @@ const MainPage = () => {
                 <StyldMainText>sumtime과 함께 필요한 데이터를 마음껏 다루어 보세요!</StyldMainText>
             </StyledContentSection>
             <StyledButtonStart onClick={onClickHandler}>sumtime 시작하기</StyledButtonStart>
-            <LoginKakao />
+            {nickname || '로그인 필요'}
+            {nickname ? (
+                <LogoutKakao onLogout={() => setNickname('')} />
+            ) : (
+                <LoginKakao onLogin={() => setNickname(localStorage.getItem('nickname'))} />
+            )}
         </StyledLayoutMain>
     )
 }

@@ -1,5 +1,4 @@
 import api from './index'
-import authInstance from './authInstance'
 
 export const loginKakao = async (token) => {
     try {
@@ -12,13 +11,13 @@ export const loginKakao = async (token) => {
     }
 }
 
-export const logoutKakaoHeader = async () => {
+export const logoutKakao = async (token) => {
     try {
-        const response = await authInstance.post(`/auth/kakao/logout/header`)
-        console.log('kakao login api response', response)
+        const response = await api.post(`/auth/kakao/logout?kakaoToken=${encodeURIComponent(token)}`)
+        console.log('kakao logout api response', response)
         return response
     } catch (error) {
-        console.error('Error kakao login:', error.response ? error.response.data : error.message)
+        console.error('Error kakao logout:', error.response ? error.response.data : error.message)
         throw error
     }
 }
