@@ -15,7 +15,6 @@ import UploadMember from './Pages/UploadMember'
 import UploadTransactions from './Pages/UploadTransaction'
 import EditGroupInfo from './Pages/EditGroupInfoPage'
 import SelectMembers from './Pages/CreateEventPage/SelectMembers'
-import KakaoCallback from './Components/Login/KakaoCallback'
 
 const StyledLayout = styled.div`
     // background-color: gray;
@@ -65,7 +64,6 @@ function GroupRoutesWithSidebar() {
                 <Route path="/uploadMember" element={<UploadMember />} />
                 <Route path="/uploadTransaction" element={<UploadTransactions />} />
                 <Route path="/editInfo" element={<EditGroupInfo />} />
-                <Route path="/auth/kakao/callback" element={<KakaoCallback />} />
             </Routes>
         </StyledLayout>
     )
