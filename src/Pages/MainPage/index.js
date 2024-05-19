@@ -5,7 +5,7 @@ import LogoColor from '../../IMG/logo_color.svg'
 import exmTab from '../../IMG/exmple_table.svg'
 
 import { Button } from 'antd'
-import LoginKakao from '../../Components/Login/LoginKakao'
+import LoginKakao from '../../Components/Login/KakaoLogin'
 
 const MainPage = () => {
     const navigate = useNavigate()

@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
-import { Button, Form, Input, DatePicker, Radio, Space } from 'antd'
+// import BasicButton from '../Buttons/BasicButton'
+import React, { useEffect, useState } from 'react'
+import { Button, DatePicker, Form, Input } from 'antd'
 import { postEvent } from '../../apis/event'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-
-// import BasicButton from '../Buttons/BasicButton'
+import { useNavigate } from 'react-router-dom'
+import { useEventStore } from '../../store/event'
 
 const CreateEvent = ({ groupId }) => {
+    const { eventId, setEventId } = useEventStore()
+
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [startDate, setStartDate] = useState('')
@@ -14,8 +17,10 @@ const CreateEvent = ({ groupId }) => {
     const [transactionStartDate, setTransactionStartDate] = useState('')
     const [transactionEndDate, setTransactionEndDate] = useState('')
     const [fee, setFee] = useState(0)
-    const [value, setValue] = useState(1)
+    // const [value, setValue] = useState(1)
     const [isProcessing, setIsProcessing] = useState(false)
+
+    const navigate = useNavigate()
     const eventInfo = {
         name,
         description,
@@ -36,30 +41,39 @@ const CreateEvent = ({ groupId }) => {
         }
         setIsProcessing(true)
         try {
-            await postEvent(groupId, eventInfo)
-            alert('이벤트가 생성되었습니다.')
-            window.location.reload()
+            const data = await postEvent(groupId, eventInfo)
+            console.log('이벤트가 생성되었습니다.', data)
+            setEventId(data.eventId)
+
+            console.log('eventId:', eventId)
+            navigate(`/group/${groupId}/createEvent/selectMembers`)
         } catch (error) {
-            alert('이벤트 생성에 실패했습니다.')
+            console.log('이벤트 생성에 실패했습니다.', error)
         } finally {
             setIsProcessing(false)
         }
     }
 
-    const onChange = (e) => {
-        setValue(e.target.value)
-    }
+    useEffect(() => {
+        // if (eventId) {
+        //     handleMem(eventId)
+        // }
+    }, [eventId])
+
+    // const onChange = (e) => {
+    //     setValue(e.target.value)
+    // }
 
     return (
         <StyledLayout>
             <StyledButton
-                text="확인"
+                text="다음"
                 size="mid"
                 htmlType="submit"
                 onClick={handleCreateEvent}
                 disabled={isAnyFieldEmpty()}
             >
-                확인
+                다음
             </StyledButton>
             <StyledForm
                 name="basic"
@@ -155,7 +169,7 @@ const CreateEvent = ({ groupId }) => {
                         <Input placeholder="ex) 10000" type="text" onChange={(e) => setFee(e.target.value)} />
                     </StyledFormItems>
                 </StyledFormWrapper>
-                <StyledFormWrapper>
+                {/* <StyledFormWrapper>
                     <Title>이벤트 회원 등록</Title>
                     <StyledRadio.Group style={{}} onChange={onChange} value={value}>
                         <Space direction="vertical">
@@ -163,13 +177,14 @@ const CreateEvent = ({ groupId }) => {
                             <StyledRadio value={2}>업로드한 회원 목록에서 선택하기</StyledRadio>
                         </Space>
                     </StyledRadio.Group>
-                </StyledFormWrapper>
-                <StyledFormItems
+                </StyledFormWrapper> */}
+
+                {/* <StyledFormItems
                     wrapperCol={{
                         offset: 11,
                         span: 13,
                     }}
-                ></StyledFormItems>
+                ></StyledFormItems> */}
             </StyledForm>
         </StyledLayout>
     )
@@ -183,7 +198,7 @@ export default CreateEvent
 const StyledLayout = styled.div`
     display: flex;
     flex-direction: column;
-    margin: 2% 0 2% 200px;
+    // margin: 2% 0 2% 200px;
     width: 100%;
 `
 const StyledForm = styled(Form)`
@@ -204,14 +219,14 @@ const Title = styled.h1`
     margin: 20px 0 10px 20px;
     text-align: left;
     font-size: 28px;
-    font-family: 'Dotum Bold';
+    font-family: 'Dotum Bold', 'serif';
     word-wrap: break-word;
 `
 // 폼 아이템을 감싸는 스타일드 컴포넌트
 const StyledFormItems = styled(Form.Item)`
     .ant-form-item-label {
         font-size: 24px;
-        font-family: 'Dotum Bold';
+        font-family: 'Dotum Bold', 'serif';
         word-wrap: break-word;
         margin: 0 0 0 10px;
     }
@@ -248,13 +263,13 @@ const StyledButton = styled(Button)`
     color: white;
 `
 
-const StyledRadio = styled(Radio)`
-    display: flex;
-    justify-content: left;
-    // margin-right: 400px;
-    // margin-left: 20px;
-    // margin-top: 10px;
-    margin: 0 0 0 40px;
-    font-size: 16px;
-    font-family: 'Dotum Medium';
-`
+// const StyledRadio = styled(Radio)`
+//     display: flex;
+//     justify-content: left;
+//     // margin-right: 400px;
+//     // margin-left: 20px;
+//     // margin-top: 10px;
+//     margin: 0 0 0 40px;
+//     font-size: 16px;
+//     font-family: 'Dotum Medium';
+// `

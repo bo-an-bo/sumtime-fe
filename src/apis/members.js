@@ -22,7 +22,9 @@ export const addMember = async (groupId, name, memberInfo) => {
 }
 
 export const deleteMember = async (groupId, memberId) => {
-    const response = await api.delete(`group/${groupId}/member`, memberId)
+    const response = await api.delete(`group/${groupId}/member`, {
+        data: memberId,
+    })
     return response.data
 }
 
@@ -32,3 +34,5 @@ export const uploadMember = async (groupId, file) => {
     const response = await formApi.post(`group/${groupId}/member/excel`, formData)
     return response.data
 }
+
+

@@ -14,7 +14,8 @@ import ShowEventList from './Pages/ShowEventList'
 import UploadMember from './Pages/UploadMember'
 import UploadTransactions from './Pages/UploadTransaction'
 import EditGroupInfo from './Pages/EditGroupInfoPage'
-import Redirection from './Components/Login/Redirection'
+import SelectMembers from './Pages/CreateEventPage/SelectMembers'
+import KakaoCallback from './Components/Login/KakaoCallback'
 
 const StyledLayout = styled.div`
     // background-color: gray;
@@ -59,11 +60,12 @@ function GroupRoutesWithSidebar() {
                 <Route path="/" element={<GroupMainPage />} />
                 <Route path="/showGroupDetails" element={<ShowGroupDetails />} />
                 <Route path="/createEvent" element={<CreateEventPage />} />
+                <Route path="/createEvent/selectMembers" element={<SelectMembers />} />
                 <Route path="/showEventList" element={<ShowEventList />} />
                 <Route path="/uploadMember" element={<UploadMember />} />
                 <Route path="/uploadTransaction" element={<UploadTransactions />} />
                 <Route path="/editInfo" element={<EditGroupInfo />} />
-                <Route path="/auth/kakao/callback" element={<Redirection />} />
+                <Route path="/auth/kakao/callback" element={<KakaoCallback />} />
             </Routes>
         </StyledLayout>
     )

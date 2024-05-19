@@ -2,14 +2,20 @@ import React, { useEffect, useState } from 'react'
 import { Table } from 'antd'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import AddMemberButton from '../Buttons/AddMemberButton'
-import DeleteMemberButton from '../Buttons/DeleteMemberButton'
+import { useSelectedRowKeys, useSelectedRows } from '../../store/member'
 //getGroupDetail로 변경
 import { getMember } from '../../apis/members'
+import { useTableMemInfo } from '../../store/event'
 
 const Tables = ({ groupId }) => {
+    const { memName, setMemName } = useTableMemInfo()
     const [members, setMembers] = useState([])
     const [memberKeys, setMemberKeys] = useState([])
+    const { setSelectedRows } = useSelectedRows()
+
+    const { selectedRowKeys, setSelectedRowKeys } = useSelectedRowKeys()
+
+    // const { setDeleteMemberIds } = useDeleteMemberIds()
 
     useEffect(() => {
         getMember(groupId).then((data) => {
@@ -48,19 +54,29 @@ const Tables = ({ groupId }) => {
         })
     }
 
-    const [selectedRowKeys, setSelectedRowKeys] = useState([])
-    const [selectedRows, setSelectedRows] = useState([])
-    const [deleteMemberIds, setDeleteMemberIds] = useState([])
+    // const [selectedRowKeys, setSelectedRowKeys] = useState([])
+    // const [selectedRows, setSelectedRows] = useState([])
+    // const [deleteMemberIds, setDeleteMemberIds] = useState([])
+
+    // useEffect(() => {
+    //     const ids = selectedRows.map((row) => row._id)
+
+    //     setDeleteMemberIds(ids)
+    // }, [selectedRows])
 
     useEffect(() => {
-        const ids = selectedRows.map((row) => row._id)
-
-        setDeleteMemberIds(ids)
-    }, [selectedRows])
+        // console.log('memName updated:', memName)
+    }, [memName])
 
     const onSelectChange = (selectedRowKeys, selectedRows) => {
         setSelectedRowKeys(selectedRowKeys)
         setSelectedRows(selectedRows)
+
+        // 가져올 데이터
+        const selectedNames = selectedRows.map((row) => row._id)
+        setMemName(selectedNames)
+        // console.log('rows', selectedRows)
+        // console.log('가져오는 데이터', memName)
     }
 
     const rowSelection = {
@@ -70,10 +86,6 @@ const Tables = ({ groupId }) => {
 
     return (
         <StyledLayout>
-            <ButtonWrapper>
-                <AddMemberButton groupId={groupId} />
-                <DeleteMemberButton groupId={groupId} memberIds={deleteMemberIds} />
-            </ButtonWrapper>
             <Wrapper>
                 <StyledTable
                     rowSelection={rowSelection}
@@ -91,7 +103,7 @@ const StyledLayout = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-left: 8%;
+    // margin-left: 8%;
     margin-top: 2%;
 `
 const Wrapper = styled.div`
@@ -103,36 +115,26 @@ const Wrapper = styled.div`
     // margin-top: 20px;
     // margin: 0 15%;
 `
-const ButtonWrapper = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    gap: 5px;
-    // padding: 10px;
-    font-family: 'Dotum Light';
-    margin-bottom: 2%;
-`
 
 const StyledTable = styled(Table)`
-    .ant-table-row {
-        background-color: ${(props) =>
-            props.hoveredRow === props.rowKey ? 'rgba(0, 62.67, 151.94, 0.04)' : 'transparent'};
-    }
     .ant-table-thead > tr > th {
         border-bottom: 2px solid #d9d9d9;
         font-size: 16px;
         // font-weight: 700;
         text-align: center;
         background-color: rgba(0, 62.67, 151.94, 0.04);
-        font-family: 'Dotum Bold';
+        font-family: 'Dotum Bold', 'serif';
     }
+
     .ant-table-tbody > tr > td {
         border-bottom: 1px solid #d9d9d9;
         font-size: 15px;
         text-align: center;
         padding: 10px;
         background-color: rgba(0, 62.67, 151.94, 0.04);
-        font-family: 'Dotum Medium';
+        font-family: 'Dotum Medium', 'serif';
     }
+
     .ant-table-tbody > tr:last-child > td {
         border-bottom: none;
     }
