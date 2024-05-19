@@ -14,6 +14,7 @@ import ShowEventList from './Pages/ShowEventList'
 import UploadMember from './Pages/UploadMember'
 import UploadTransactions from './Pages/UploadTransaction'
 import EditGroupInfo from './Pages/EditGroupInfoPage'
+import Redirection from './Components/Login/Redirection'
 
 const StyledLayout = styled.div`
     // background-color: gray;
@@ -62,6 +63,7 @@ function GroupRoutesWithSidebar() {
                 <Route path="/uploadMember" element={<UploadMember />} />
                 <Route path="/uploadTransaction" element={<UploadTransactions />} />
                 <Route path="/editInfo" element={<EditGroupInfo />} />
+                <Route path="/auth/kakao/callback" element={<Redirection />} />
             </Routes>
         </StyledLayout>
     )

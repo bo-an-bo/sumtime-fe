@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react' // eslint-disable-line no-unused-vars
+import React from 'react' // eslint-disable-line no-unused-vars
 import { useNavigate } from 'react-router-dom' // eslint-disable-line no-unused-vars
 import styled from 'styled-components' // eslint-disable-line no-unused-vars
-import { getMember } from '../../apis/members' // eslint-disable-line no-unused-vars
 import LogoColor from '../../IMG/logo_color.svg'
 import exmTab from '../../IMG/exmple_table.svg'
 
 import { Button } from 'antd'
+import LoginKakao from '../../Components/Login/LoginKakao'
+
 const MainPage = () => {
     const navigate = useNavigate()
     const onClickHandler = () => {
@@ -38,12 +39,11 @@ const MainPage = () => {
 
     const StyledContentSection = styled.div`
         display: flex;
-        margin: 
-        flex-direction: row;
+        margin: flex-direction: row;
         width: 100%;
         height: 250px;
         background-color: #dceaff;
-        font-family: 'Dotum Bold';
+        font-family: 'Dotum Bold', serif;
         font-size: 20px;
     `
 
@@ -59,6 +59,7 @@ const MainPage = () => {
                 <StyldMainText>sumtime과 함께 필요한 데이터를 마음껏 다루어 보세요!</StyldMainText>
             </StyledContentSection>
             <StyledButtonStart onClick={onClickHandler}>sumtime 시작하기</StyledButtonStart>
+            <LoginKakao />
         </StyledLayoutMain>
     )
 }
