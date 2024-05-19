@@ -10,9 +10,10 @@ const SocialKakao = () => {
             const idToken = data.response.access_token
             const loginResponse = await loginKakao(idToken)
             console.log('loginResponse', loginResponse)
+
             // 액세스 토큰을 로컬 스토리지에 저장
             localStorage.setItem('access_token', idToken)
-            localStorage.setItem('user_info', JSON.stringify(loginResponse))
+            localStorage.setItem('nickname', loginResponse.data.properties.nickname)
         } catch (error) {
             console.error('Login failed:', error)
         }
