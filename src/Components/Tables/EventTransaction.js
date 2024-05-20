@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { getEvent } from '../../apis/event'
 import { Table } from 'antd'
 import styled from 'styled-components'
+import { useEventStore } from '../../store/event'
 
 const EventTransaction = ({ groupId }) => {
     const [events, setEvents] = useState([])
-    const [selectedRows, setSelectedRows] = useState([])
-    const [selectedRowKeys, setSelectedRowKeys] = useState('')
-    const [selectedEventId, setSelectedEventId] = useState('')
+    const [selectedRowKeys, setSelectedRowKeys] = useState([])
+    const setSelectedEventId = useEventStore((state) => state.setEventId)
 
     useEffect(() => {
         getEvent(groupId).then((data) => {
@@ -16,11 +16,15 @@ const EventTransaction = ({ groupId }) => {
     }, [groupId])
 
     useEffect(() => {
-        const ids = selectedRows.map((row) => row._id)
-        setSelectedEventId(ids)
-    }, [selectedRows])
+        if (events.length > 0 && selectedRowKeys.length === 0) {
+            setSelectedRowKeys([0]) // Automatically select the first row
+        }
+    }, [events, selectedRowKeys, setSelectedRowKeys])
 
-    console.log(selectedEventId)
+    useEffect(() => {
+        const ids = selectedRowKeys.map((key) => events[key]?._id)
+        setSelectedEventId(ids)
+    }, [selectedRowKeys, events, setSelectedEventId])
 
     const columns = [
         {
@@ -33,7 +37,7 @@ const EventTransaction = ({ groupId }) => {
             dataIndex: 'name',
             key: 'name',
         },
-        // Add more columns as needed
+        // 필요한 경우 더 많은 컬럼 추가
     ]
 
     const data = events.map((event, index) => ({
@@ -45,13 +49,10 @@ const EventTransaction = ({ groupId }) => {
 
     const handleRowClick = (record) => {
         const { key } = record
-        const index = selectedRowKeys.indexOf(key)
-        if (index === -1) {
-            setSelectedRowKeys([key])
-            setSelectedRows([record])
-        } else {
+        if (selectedRowKeys.includes(key)) {
             setSelectedRowKeys([])
-            setSelectedRows([])
+        } else {
+            setSelectedRowKeys([key])
         }
     }
 
@@ -61,7 +62,6 @@ const EventTransaction = ({ groupId }) => {
 
     return (
         <Wrapper>
-            <h1>이벤트 목록</h1>
             <StyledTable
                 columns={columns}
                 dataSource={data}
@@ -85,7 +85,7 @@ const Wrapper = styled.div`
 `
 
 const StyledTable = styled(Table)`
-    margin-top: 20px;
+    margin-top: 100px;
 
     tbody tr.selected-row {
         background-color: #f0f0f0;
