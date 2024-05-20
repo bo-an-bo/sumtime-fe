@@ -117,26 +117,24 @@ const Wrapper = styled.div`
 `
 
 const StyledTable = styled(Table)`
-    .ant-table-row {
-        background-color: ${(props) =>
-            props.hoveredRow === props.rowKey ? 'rgba(0, 62.67, 151.94, 0.04)' : 'transparent'};
-    }
     .ant-table-thead > tr > th {
         border-bottom: 2px solid #d9d9d9;
         font-size: 16px;
         // font-weight: 700;
         text-align: center;
         background-color: rgba(0, 62.67, 151.94, 0.04);
-        font-family: 'Dotum Bold';
+        font-family: 'Dotum Bold', 'serif';
     }
+
     .ant-table-tbody > tr > td {
         border-bottom: 1px solid #d9d9d9;
         font-size: 15px;
         text-align: center;
         padding: 10px;
         background-color: rgba(0, 62.67, 151.94, 0.04);
-        font-family: 'Dotum Medium';
+        font-family: 'Dotum Medium', 'serif';
     }
+
     .ant-table-tbody > tr:last-child > td {
         border-bottom: none;
     }

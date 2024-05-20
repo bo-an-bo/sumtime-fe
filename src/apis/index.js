@@ -2,18 +2,19 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL: 'https://sumtime-be.w8385.dev',
+    baseURL: process.env.REACT_APP_URL,
     headers: {
         'Content-Type': 'application/json',
     },
 })
 
 export const formApi = axios.create({
-    baseURL: 'https://sumtime-be.w8385.dev',
+    baseURL: process.env.REACT_APP_URL,
     headers: {
         'Content-Type': 'multipart/form-data',
     },
 })
+
 
 // api.interceptors.request.use(
 //     (config) => {

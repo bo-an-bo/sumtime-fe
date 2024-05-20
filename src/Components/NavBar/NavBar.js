@@ -1,6 +1,6 @@
 import { Menu } from 'antd'
 import { Link } from 'react-router-dom'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import whiteLogo from '../../IMG/logo_white.svg'
 
@@ -14,27 +14,38 @@ const StyledLinkBox = styled(Link)`
 `
 
 const NavBar = () => {
+    const [nickname, setNickname] = useState('')
+
+    useEffect(() => {
+        const storedNickname = localStorage.getItem('nickname')
+        if (storedNickname) {
+            setNickname(storedNickname)
+        }
+    }, [])
+
+    const items = [
+        {
+            key: 'home',
+            label: (
+                <StyledLinkBox to="/">
+                    <StyledImg src={whiteLogo} alt="white_logo_img" />
+                </StyledLinkBox>
+            ),
+        },
+        {
+            key: 'myGroups',
+            label: <Link to="/group">나의 모임</Link>,
+        },
+        {
+            key: 'myProfile',
+            label: <Link to="/showProfile">{nickname || '로그인 필요'}</Link>,
+        },
+    ]
+
     return <StyledMenu mode="horizontal" items={items}></StyledMenu>
 }
 
-const items = [
-    {
-        key: 'home',
-        label: (
-            <StyledLinkBox to="/">
-                <StyledImg src={whiteLogo} alt="white_logo_img" />
-            </StyledLinkBox>
-        ),
-    },
-    {
-        key: 'myGroups',
-        label: <Link to="/group">나의 모임</Link>,
-    },
-    {
-        key: 'myProfile',
-        label: <Link to="/showProfile">김보안</Link>,
-    },
-]
+
 const StyledMenu = styled(Menu)`
     height: 120px;
     width: 100%;
@@ -42,6 +53,7 @@ const StyledMenu = styled(Menu)`
     display: flex;
     justify-content: flex-end;
     padding: 40px;
+
     .ant-menu-item {
         height: 40px;
         color: white;

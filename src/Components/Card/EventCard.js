@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Collapse } from 'antd'
 import { getEvent } from '../../apis/event'
 import styled from 'styled-components'
@@ -64,11 +64,8 @@ const StyledCollapse = styled(Collapse)`
     background-color: rgba(0, 62.67, 151.94, 0.08);
     overflow: auto;
     max-height: 450px;
-    font-family: 'Dotum Bold';
+    font-family: 'Dotum Bold', serif;
 
-    .itmes {
-        background-color: red;
-    }
 `
 
 export default EventCard

@@ -12,8 +12,7 @@ export const getEvent = async (groupId) => {
 
 export const postEventMember = async (groupId, eventId, meminfo) => {
     try {
-        const response = await api.post(`group/${groupId}/event/${eventId}/member`, meminfo)
-        return response
+        return await api.post(`group/${groupId}/event/${eventId}/member`, meminfo)
     } catch (error) {
         console.error('Error posting event member:', error.response ? error.response.data : error.message)
         throw error

@@ -29,7 +29,6 @@ function App() {
         <BrowserRouter>
             <div className="App">
                 <Routes>
-                 
                     <Route path="/" element={<MainPage />} />
                     <Route path="/group/*" element={<GroupRoutes />} />
                 </Routes>

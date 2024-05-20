@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
-import { Button, Form, Input, DatePicker } from 'antd'
+// import BasicButton from '../Buttons/BasicButton'
+import React, { useEffect, useState } from 'react'
+import { Button, DatePicker, Form, Input } from 'antd'
 import { postEvent } from '../../apis/event'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { useEventStore } from '../../store/event'
-// import BasicButton from '../Buttons/BasicButton'
-import { useEffect } from 'react'
 
 const CreateEvent = ({ groupId }) => {
     const { eventId, setEventId } = useEventStore()
@@ -220,14 +219,14 @@ const Title = styled.h1`
     margin: 20px 0 10px 20px;
     text-align: left;
     font-size: 28px;
-    font-family: 'Dotum Bold';
+    font-family: 'Dotum Bold', 'serif';
     word-wrap: break-word;
 `
 // 폼 아이템을 감싸는 스타일드 컴포넌트
 const StyledFormItems = styled(Form.Item)`
     .ant-form-item-label {
         font-size: 24px;
-        font-family: 'Dotum Bold';
+        font-family: 'Dotum Bold', 'serif';
         word-wrap: break-word;
         margin: 0 0 0 10px;
     }
