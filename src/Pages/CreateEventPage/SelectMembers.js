@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { getMember } from '../../apis/members'
 // import { useState } from 'react'
 import { useEffect } from 'react'
-import Tables from '../../Components/Tables/Tables'
+import MemberList from '../../Components/Tables/MemberList'
 import { postEventMember } from '../../apis/event'
 import { useTableMemInfo, useEventStore } from '../../store/event'
 // import { Button } from 'antd'
@@ -41,7 +41,7 @@ const SelectMembers = () => {
         <div>
             {/* <Button onClick={handleMem}>멤버 선택 완료</Button> */}
             <BasicButton text="멤버 선택 완료" onClick={handleMem}></BasicButton>
-            <Tables groupId={groupId} />
+            <MemberList groupId={groupId} />
         </div>
     )
 }
