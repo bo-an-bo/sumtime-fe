@@ -28,27 +28,38 @@ const MainPage = () => {
 
     return (
         <StyledLayoutMain>
-            <StyledLogoImg src={LogoColor} alt="logo_white_img"></StyledLogoImg>
+            <LogoContainer>
+                <StyledLogoImg src={LogoColor} alt="logo_white_img"></StyledLogoImg>
+                <StyledText style={{ fontSize: '4vh' }}>모임의 계산을 쉽게</StyledText>
+            </LogoContainer>
 
             <StyledContentSection>
                 <StyledTableImg src={exmTab} alt="example_tabel" />
-                <StyldMainText>sumtime과 함께 필요한 데이터를 마음껏 다루어 보세요!
-                    {nickname &&
-                        <div><span
-                            style={{
-                                backgroundColor: '#b9d5ff',
-                                padding: '0px 5px 0px 5px',
-                                margin: '0px 5px 0px 0px',
-                                borderRadius: '10px',
-                            }}>{nickname}</span>님
-                            환영합니다.
-                        </div>}
+                <StyldMainText>
+                    <StyledText style={{ fontSize: '1.4rem', marginBottom: '5px' }}>sumtime과 함께 필요한 데이터를 마음껏 다루어
+                        보세요!</StyledText>
+                    <StyledText style={{ fontSize: '1.2rem' }}>이런 걸 할 수 있어요</StyledText>
+                    <StyledContent>✔️ 모임 회비 안 낸 사람 조회</StyledContent>
+                    <StyledContent>✔️ 간식 행사와 같은 모임 내 이벤트 생성</StyledContent>
+                    <StyledContent>✔️ 쉽고 빠른 회원 조회, 삭제</StyledContent>
+
                 </StyldMainText>
             </StyledContentSection>
             <StyledButtonContainer>
+                {nickname &&
+                    <StyledContent><span
+                        style={{
+                            backgroundColor: '#b9d5ff',
+                            padding: '0px 5px 0px 5px',
+                            margin: '0px 5px 0px 0px',
+                            borderRadius: '10px',
+                        }}>{nickname}</span>님
+                        환영합니다.
+                    </StyledContent>}
                 <StyledButtonStart onClick={onClickHandler}>sumtime 시작하기</StyledButtonStart>
                 {nickname ? (
                     <LogoutKakao onLogout={() => setNickname('')} />
+
                 ) : (
                     <LoginKakao onLogin={() => setNickname(localStorage.getItem('nickname'))} />
                 )}
@@ -56,6 +67,23 @@ const MainPage = () => {
         </StyledLayoutMain>
     )
 }
+
+const StyledText = styled.div`
+    color: #003F98;
+    font-family: 'Dotum Bold', serif;
+`
+
+const StyledContent = styled.div`
+    color: #003F98;
+    font-family: 'Dotum Medium', serif;
+    font-size: 1rem;
+`
+
+const LogoContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
 const StyledButtonContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -69,7 +97,7 @@ const StyledButtonStart = styled(Button)`
     font-family: 'Dotum Bold', serif;
     font-size: 20px;
     padding: 10px;
-    width: auto;
+    width: 40vh;
     height: auto;
     align-content: center;
 `
@@ -86,14 +114,10 @@ const StyledLayoutMain = styled.div`
 
 
 const StyledLogoImg = styled.img`
-    width: 200px;
-    height: 115px;
+    width: 20vh;
+    height: 15vh;
     align-self: center; // 중앙 정렬을 위해 추가
 
-    @media (max-width: 768px) {
-        width: 150px; // 모바일에서 로고 크기 조정
-        height: 86px;
-    }
 `
 
 const StyledTableImg = styled.img`
@@ -108,16 +132,16 @@ const StyledTableImg = styled.img`
 `
 
 const StyledContentSection = styled.div`
-    margin-top: 30px;
-    margin-bottom: 30px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    //padding-top: 20px;
+    //padding-bottom: 20px;
 
     display: flex;
     flex-direction: row;
     gap: 20px;
     width: 100%;
-    height: auto;
+    height: 35vh;
     background-color: #dceaff;
     font-family: 'Dotum Bold', serif;
     font-size: 20px;
@@ -129,10 +153,6 @@ const StyldMainText = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
-
-    @media (max-width: 768px) {
-        font-size: 16px; // 모바일에서 폰트 사이즈 조정
-    }
 `
 
 export default MainPage
