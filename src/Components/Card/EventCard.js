@@ -7,7 +7,7 @@ const EventCard = ({ groupId }) => {
     const [events, setEvents] = useState([])
     useEffect(() => {
         getEvent(groupId).then((data) => {
-            setEvents(data)
+            setEvents(data.filter((event) => event !== null))
         })
     }, [groupId])
 

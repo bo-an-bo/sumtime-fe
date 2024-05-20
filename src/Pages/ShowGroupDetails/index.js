@@ -1,5 +1,5 @@
 import React from 'react'
-import Tables from '../../Components/Tables/Tables'
+import MemberList from '../../Components/Tables/MemberList'
 import styled from 'styled-components'
 import { useEffect } from 'react'
 import { useSelectedRows, useDeleteMemberIds } from '../../store/member'
@@ -23,8 +23,7 @@ const ShowGroupDetails = () => {
                 <AddMemberButton groupId={groupId} />
                 <DeleteMemberButton groupId={groupId} memberIds={deleteMemberIds} />
             </ButtonWrapper>
-            v
-            <Tables groupId={groupId} />
+            <MemberList groupId={groupId} />
         </div>
     )
 }

@@ -1,3 +1,4 @@
+import api from './index'
 import { formApi } from './index'
 
 export const createTransaction = async (groupId, password, file) => {
@@ -5,5 +6,10 @@ export const createTransaction = async (groupId, password, file) => {
     formData.append('password', password)
     formData.append('transactionFile', file)
     const response = await formApi.post(`/group/${groupId}/transaction/excel`, formData)
+    return response.data
+}
+
+export const getTransactions = async (groupId, eventId) => {
+    const response = await api.get(`/group/${groupId}/event/${eventId}/transaction`)
     return response.data
 }

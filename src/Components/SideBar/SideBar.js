@@ -93,7 +93,7 @@ const SideBar = () => {
         {
             index: 2,
             name: '이벤트별 조회',
-            path: `showResult`,
+            path: `showEventResult`,
         },
         {
             index: 3,
