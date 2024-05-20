@@ -7,7 +7,7 @@ import { useSelectedRowKeys, useSelectedRows } from '../../store/member'
 import { getMember } from '../../apis/members'
 import { useTableMemInfo } from '../../store/event'
 
-const Tables = ({ groupId }) => {
+const MemberList = ({ groupId }) => {
     const { memName, setMemName } = useTableMemInfo()
     const [members, setMembers] = useState([])
     const [memberKeys, setMemberKeys] = useState([])
@@ -139,7 +139,7 @@ const StyledTable = styled(Table)`
         border-bottom: none;
     }
 `
-Tables.propTypes = {
+MemberList.propTypes = {
     groupId: PropTypes.string.isRequired,
 }
-export default Tables
+export default MemberList

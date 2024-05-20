@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
-import Tables from '../../Components/Tables/Tables'
+import React from 'react'
+import MemberList from '../../Components/Tables/MemberList'
 import styled from 'styled-components'
-import { useDeleteMemberIds, useSelectedRows } from '../../store/member'
+import { useEffect } from 'react'
+import { useSelectedRows, useDeleteMemberIds } from '../../store/member'
 import AddMemberButton from '../../Components/Buttons/AddMemberButton'
 import DeleteMemberButton from '../../Components/Buttons/DeleteMemberButton'
 
@@ -22,8 +23,7 @@ const ShowGroupDetails = () => {
                 <AddMemberButton groupId={groupId} />
                 <DeleteMemberButton groupId={groupId} memberIds={deleteMemberIds} />
             </ButtonWrapper>
-            v
-            <Tables groupId={groupId} />
+            <MemberList groupId={groupId} />
         </div>
     )
 }
@@ -33,7 +33,7 @@ const ButtonWrapper = styled.div`
     justify-content: flex-end;
     gap: 5px;
     // padding: 10px;
-    font-family: 'Dotum Light', serif;
+    font-family: 'Dotum Light';
     margin-bottom: 2%;
 `
 export default ShowGroupDetails
