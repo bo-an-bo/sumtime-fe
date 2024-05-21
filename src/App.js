@@ -8,7 +8,7 @@ import ShowGroupList from './Pages/ShowGroupList'
 import ShowGroupDetails from './Pages/ShowGroupDetails'
 import NavBar from './Components/NavBar/NavBar'
 import MainPage from './Pages/MainPage'
-import SideBar from './Components/SideBar/SideBar'
+import SideBarIndex from './Components/SideBar/index'
 import GroupMainPage from './Pages/GroupMainPage'
 import ShowEventList from './Pages/ShowEventList'
 import UploadMember from './Pages/UploadMember'
@@ -20,6 +20,7 @@ import SelectMembers from './Pages/CreateEventPage/SelectMembers'
 const StyledLayout = styled.div`
     // background-color: gray;
     display: flex;
+
     width: 100%;
     height: 100%;
 `
@@ -41,6 +42,7 @@ function GroupRoutes() {
     return (
         <>
             <NavBar />
+
             <StyledLayout>
                 <Routes>
                     <Route path="/" element={<ShowGroupList />} />
@@ -55,7 +57,8 @@ function GroupRoutes() {
 function GroupRoutesWithSidebar() {
     return (
         <StyledLayout>
-            <SideBar />
+            <SideBarIndex />
+
             <Routes>
                 <Route path="/" element={<GroupMainPage />} />
                 <Route path="/showGroupDetails" element={<ShowGroupDetails />} />

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import whiteLogo from '../../IMG/logo_white.svg'
+import { useMediaQuery } from 'react-responsive'
+import Hamburger from '../SideBar/Hamburger'
 
 const StyledImg = styled.img`
     width: 100px;
@@ -14,6 +16,7 @@ const StyledLinkBox = styled(Link)`
 `
 
 const NavBar = () => {
+    const isOpen = useMediaQuery({ maxWidth: 1180 })
     const [nickname, setNickname] = useState('')
 
     useEffect(() => {
@@ -42,9 +45,8 @@ const NavBar = () => {
         },
     ]
 
-    return <StyledMenu mode="horizontal" items={items}></StyledMenu>
+    return <div>{isOpen ? <Hamburger /> : <StyledMenu mode="horizontal" items={items}></StyledMenu>}</div>
 }
-
 
 const StyledMenu = styled(Menu)`
     height: 120px;
