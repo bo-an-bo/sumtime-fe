@@ -1,8 +1,9 @@
 import React from 'react'
 import KakaoLogin from 'react-kakao-login'
 import { loginKakao } from '../../apis/auth'
+import styled from 'styled-components'
 
-const SocialKakao = ({ onLogin }) => {
+const LoginKakao = ({ onLogin }) => {
     const kakaoClientId = process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY
 
     const kakaoOnSuccess = async (data) => {
@@ -30,9 +31,22 @@ const SocialKakao = ({ onLogin }) => {
                 token={kakaoClientId}
                 onSuccess={kakaoOnSuccess}
                 onFail={kakaoOnFailure}
+                render={({ onClick }) => (
+                    <KakaoButton onClick={onClick} />
+                )}
             />
         </>
     )
 }
 
-export default SocialKakao
+const KakaoButton = styled.button`
+    background-image: url("/img/kakao_login_medium.png");
+    width: 90px;
+    height: 45px;
+    border: transparent;
+
+    &:hover {
+        opacity: 0.9;
+    }
+`
+export default LoginKakao
