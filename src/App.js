@@ -16,6 +16,7 @@ import UploadTransactions from './Pages/UploadTransaction'
 import ShowEventResult from './Pages/ShowEventResult'
 import EditGroupInfo from './Pages/EditGroupInfoPage'
 import SelectMembers from './Pages/CreateEventPage/SelectMembers'
+import { AuthProvider } from './context/AuthContext'
 
 const StyledLayout = styled.div`
     // background-color: gray;
@@ -26,15 +27,18 @@ const StyledLayout = styled.div`
 `
 
 function App() {
+
     return (
-        <BrowserRouter>
-            <div className="App">
-                <Routes>
-                    <Route path="/" element={<MainPage />} />
-                    <Route path="/group/*" element={<GroupRoutes />} />
-                </Routes>
-            </div>
-        </BrowserRouter>
+        <AuthProvider>
+            <BrowserRouter>
+                <div className="App">
+                    <Routes>
+                        <Route path="/" element={<MainPage />} />
+                        <Route path="/group/*" element={<GroupRoutes />} />
+                    </Routes>
+                </div>
+            </BrowserRouter>
+        </AuthProvider>
     )
 }
 
