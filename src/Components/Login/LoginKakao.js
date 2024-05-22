@@ -1,18 +1,19 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { useAuth } from '../../context/AuthContext'
 
+
 const LoginKakao = () => {
-    const { user, setUser } = useAuth()
+    const { setUser } = useAuth()
     const [isLogin, setIsLogin] = useState(false)
-    const Kakao = window.Kakao || {}
-    // Ensure Kakao is initialized
+    const Kakao = useMemo(() => window.Kakao || {}, [])
+
     const initKakao = useCallback(() => {
         if (Kakao && !Kakao.isInitialized()) {
             Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY)
             console.log(Kakao.isInitialized())
         }
-    }, [])
+    }, [Kakao])
 
 
     const kakaoLogin = async () => {
@@ -44,14 +45,13 @@ const LoginKakao = () => {
 
     useEffect(() => {
         initKakao()
-    }, [])
+    }, [initKakao])
 
     useEffect(() => {
         if (Kakao && Kakao.Auth) {
             setIsLogin(!!Kakao.Auth.getAccessToken())
         }
-        console.log('user', user)
-    }, [])
+    }, [Kakao])
 
     useEffect(() => {
         if (isLogin) {
@@ -60,7 +60,7 @@ const LoginKakao = () => {
                 nickname: localStorage.getItem('nickname'),
             })
         }
-    }, [isLogin])
+    }, [isLogin, setUser])
 
     return (
         <>
