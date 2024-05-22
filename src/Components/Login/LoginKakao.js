@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { useAuth } from '../../context/AuthContext'
 
-const LoginKakao = ({ onLogin }) => {
-    const [user, setUser] = useState(null)
+const LoginKakao = () => {
+    const { user, setUser } = useAuth()
     const [isLogin, setIsLogin] = useState(false)
     const Kakao = window.Kakao || {}
-    if (onLogin) onLogin()
     // Ensure Kakao is initialized
     const initKakao = useCallback(() => {
         if (Kakao && !Kakao.isInitialized()) {
@@ -14,21 +14,19 @@ const LoginKakao = ({ onLogin }) => {
         }
     }, [])
 
+
     const kakaoLogin = async () => {
         if (Kakao && Kakao.Auth) {
             await Kakao.Auth.login({
                 success(res) {
-                    console.log(res)
                     Kakao.Auth.setAccessToken(res.access_token)
                     console.log('카카오 로그인 성공')
 
                     Kakao.API.request({
                         url: '/v2/user/me',
                         success(res) {
-                            console.log('카카오 인가 요청 성공', res)
                             setIsLogin(true)
                             const kakaoAccount = res.kakao_account
-                            localStorage.setItem('email', kakaoAccount.email)
                             localStorage.setItem('profileImg', kakaoAccount.profile.profile_image_url)
                             localStorage.setItem('nickname', kakaoAccount.profile.nickname)
                         },
@@ -52,12 +50,12 @@ const LoginKakao = ({ onLogin }) => {
         if (Kakao && Kakao.Auth) {
             setIsLogin(!!Kakao.Auth.getAccessToken())
         }
+        console.log('user', user)
     }, [])
 
     useEffect(() => {
         if (isLogin) {
             setUser({
-                email: localStorage.getItem('email'),
                 profileImg: localStorage.getItem('profileImg'),
                 nickname: localStorage.getItem('nickname'),
             })
@@ -67,17 +65,6 @@ const LoginKakao = ({ onLogin }) => {
     return (
         <>
             <KakaoButton onClick={kakaoLogin} />
-            {user && (
-                <div>
-                    <h2>카카오 로그인 성공!</h2>
-                    <h3>카카오 프로필 사진</h3>
-                    <img src={user.profileImg} alt="" />
-                    <h3>카카오 닉네임</h3>
-                    <h4>{user.nickname}</h4>
-                    <h3>카카오 이메일</h3>
-                    <h4>{user.email}</h4>
-                </div>
-            )}
         </>
     )
 }

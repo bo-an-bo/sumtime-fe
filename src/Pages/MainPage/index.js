@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react' // eslint-disable-line no-unused-vars
+import React from 'react' // eslint-disable-line no-unused-vars
 import { useNavigate } from 'react-router-dom' // eslint-disable-line no-unused-vars
 import styled from 'styled-components' // eslint-disable-line no-unused-vars
 import LogoColor from '../../IMG/logo_color.svg'
@@ -7,24 +7,15 @@ import exmTab from '../../IMG/exmple_table.svg'
 import { Button } from 'antd'
 import LogoutKakao from '../../Components/Login/LogoutKakao'
 import LoginKakao from '../../Components/Login/LoginKakao'
+import { useAuth } from '../../context/AuthContext'
 
 const MainPage = () => {
+    const { user } = useAuth()
+
     const navigate = useNavigate()
     const onClickHandler = () => {
         navigate('/group')
     }
-
-    useEffect(() => {
-        const storedNickname = localStorage.getItem('nickname')
-        if (storedNickname) {
-            setNickname(storedNickname)
-        } else {
-            setNickname('')
-        }
-    }, [])
-
-
-    const [nickname, setNickname] = useState('')
 
     return (
         <StyledLayoutMain>
@@ -46,22 +37,24 @@ const MainPage = () => {
                 </StyldMainText>
             </StyledContentSection>
             <StyledButtonContainer>
-                {nickname &&
+                {user &&
                     <StyledContent><span
                         style={{
                             backgroundColor: '#b9d5ff',
                             padding: '0px 5px 0px 5px',
                             margin: '0px 5px 0px 0px',
                             borderRadius: '10px',
-                        }}>{nickname}</span>님
+                        }}>{user.nickname}</span>님
                         환영합니다.
                     </StyledContent>}
                 <StyledButtonStart onClick={onClickHandler}>sumtime 시작하기</StyledButtonStart>
-                {nickname ? (
-                    <LogoutKakao onLogout={() => setNickname('')} />
-
+                {user ? (
+                    <>
+                        <LogoutKakao />
+                        {/*<KakaoPicker />*/}
+                    </>
                 ) : (
-                    <LoginKakao onLogin={() => setNickname(localStorage.getItem('nickname'))} />
+                    <LoginKakao />
                 )}
             </StyledButtonContainer>
         </StyledLayoutMain>
