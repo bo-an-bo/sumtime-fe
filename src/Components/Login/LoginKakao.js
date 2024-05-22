@@ -15,10 +15,10 @@ const LoginKakao = () => {
         }
     }, [Kakao])
 
-
     const kakaoLogin = async () => {
         if (Kakao && Kakao.Auth) {
             await Kakao.Auth.login({
+                scope: 'friends',
                 success(res) {
                     Kakao.Auth.setAccessToken(res.access_token)
                     console.log('카카오 로그인 성공')

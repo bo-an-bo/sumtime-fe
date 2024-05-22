@@ -8,6 +8,7 @@ import { Button } from 'antd'
 import LogoutKakao from '../../Components/Login/LogoutKakao'
 import LoginKakao from '../../Components/Login/LoginKakao'
 import { useAuth } from '../../context/AuthContext'
+import KakaoPicker from '../../Components/Kakao/KakaoPicker'
 
 const MainPage = () => {
     const { user } = useAuth()
@@ -51,7 +52,7 @@ const MainPage = () => {
                 {user ? (
                     <>
                         <LogoutKakao />
-                        {/*<KakaoPicker />*/}
+                        <KakaoPicker />
                     </>
                 ) : (
                     <LoginKakao />
