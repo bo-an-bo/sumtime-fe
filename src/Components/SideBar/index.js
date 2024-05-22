@@ -75,12 +75,6 @@ const SideBarIndex = () => {
             {isOpen ? (
                 <div></div>
             ) : (
-                // <Hamburger
-                //     memberData={memberData}
-                //     eventData={eventData}
-                //     settingData={settingData}
-                //     transactionData={transactionData}
-                // />
                 <SideBar
                     memberData={memberData}
                     eventData={eventData}

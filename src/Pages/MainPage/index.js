@@ -136,7 +136,7 @@ const StyledContentSection = styled.div`
 
     gap: 20px;
     width: 100%;
-    height: ${(props) => (props.isOpen ? '60vh' : '35vh')};
+    height: ${(props) => (props.isOpen ? '55vh' : '30vh')};
     background-color: #dceaff;
     font-family: 'Dotum Bold', serif;
     font-size: 20px;

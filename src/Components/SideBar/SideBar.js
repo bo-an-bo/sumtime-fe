@@ -7,8 +7,8 @@ import propTypes from 'prop-types'
 const StyledSideBarBox = styled.div`
     display: flex;
     width: 200px;
-    height: 500px;
-    background-color: #b9b9b9;
+    height: 600px;
+    // background-color: #b9b9b9;
 `
 
 const StyledLI = styled.li`
@@ -44,7 +44,6 @@ const StyledNavLink = styled(NavLink)`
         border-left: 4px solid rgb(0, 63, 150);
         font-family: 'Dotum Bold';
     }
-
 `
 
 // const StyledToggleBox = styled.div`
@@ -52,7 +51,7 @@ const StyledNavLink = styled(NavLink)`
 //     display: ${(props) => (props.state ? 'none' : 'inline')};
 //     background-color: yellow;
 // `
-const SideBar = ({memberData, eventData, settingData, transactionData}) => {
+const SideBar = ({ memberData, eventData, settingData, transactionData }) => {
     // const [toggleBtn, setToggleBtn] = useState(false)
 
     return (
@@ -102,7 +101,6 @@ const SideBar = ({memberData, eventData, settingData, transactionData}) => {
                         ))}
                     </StyledLI>
                 </ul>
-                닫혔다
             </p>
         </StyledSideBarBox>
     )

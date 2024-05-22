@@ -12,7 +12,6 @@ const MemberList = ({ groupId }) => {
     const [members, setMembers] = useState([])
     const [memberKeys, setMemberKeys] = useState([])
     const { setSelectedRows } = useSelectedRows()
-
     const { selectedRowKeys, setSelectedRowKeys } = useSelectedRowKeys()
 
     // const { setDeleteMemberIds } = useDeleteMemberIds()
@@ -20,8 +19,11 @@ const MemberList = ({ groupId }) => {
     useEffect(() => {
         getMember(groupId).then((data) => {
             setMembers(data)
+
         })
     }, [groupId])
+
+
 
     useEffect(() => {
         const keys = Object.keys(members[0]?.memberInfo || {})
@@ -53,16 +55,6 @@ const MemberList = ({ groupId }) => {
             ...members[i].memberInfo,
         })
     }
-
-    // const [selectedRowKeys, setSelectedRowKeys] = useState([])
-    // const [selectedRows, setSelectedRows] = useState([])
-    // const [deleteMemberIds, setDeleteMemberIds] = useState([])
-
-    // useEffect(() => {
-    //     const ids = selectedRows.map((row) => row._id)
-
-    //     setDeleteMemberIds(ids)
-    // }, [selectedRows])
 
     useEffect(() => {
         // console.log('memName updated:', memName)
@@ -103,17 +95,14 @@ const StyledLayout = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    // margin-left: 8%;
-    margin-top: 2%;
+    // margin: 2%;
+    // background-color: red;
 `
 const Wrapper = styled.div`
-    width: 1000px;
+    width: 100%;
     border-radius: 20px;
-    background-color: rgba(0, 62.67, 151.94, 0.04);
-    // max-width: 750px;
-    // margin-left: 100px;
-    // margin-top: 20px;
-    // margin: 0 15%;
+    // background-color: rgba(0, 62.67, 151.94, 0.04);
+    // margin: 2%;
 `
 
 const StyledTable = styled(Table)`

@@ -198,8 +198,9 @@ export default CreateEvent
 const StyledLayout = styled.div`
     display: flex;
     flex-direction: column;
-    // margin: 2% 0 2% 200px;
-    width: 100%;
+    width: 1500px;
+    // background-color: red;
+    margin: 2%;
 `
 const StyledForm = styled(Form)`
     width: 100%;
@@ -245,7 +246,7 @@ const StyledFormItems = styled(Form.Item)`
         height: 40px;
         width: 100px;
         font-size: 18px;
-        margin-top: 10px;
+        // margin-top: 10px;
         font-family: 'Dotum Light';
     }
 `
