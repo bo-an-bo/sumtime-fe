@@ -1,10 +1,11 @@
 import { Menu } from 'antd'
 import { Link } from 'react-router-dom'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import whiteLogo from '../../IMG/logo_white.svg'
 import { useMediaQuery } from 'react-responsive'
 import Hamburger from '../SideBar/Hamburger'
+import { useUser } from '../../hooks/useUser'
 
 const StyledImg = styled.img`
     width: 100px;
@@ -17,14 +18,7 @@ const StyledLinkBox = styled(Link)`
 
 const NavBar = () => {
     const isOpen = useMediaQuery({ maxWidth: 1180 })
-    const [nickname, setNickname] = useState('')
-
-    useEffect(() => {
-        const storedNickname = localStorage.getItem('nickname')
-        if (storedNickname) {
-            setNickname(storedNickname)
-        }
-    }, [])
+    const user = useUser()
 
     const items = [
         {
@@ -41,12 +35,13 @@ const NavBar = () => {
         },
         {
             key: 'myProfile',
-            label: <Link to="/showProfile">{nickname || '로그인 필요'}</Link>,
+            label: <Link to="/showProfile">{user ? (user.nickname) : ('로그인 필요')}</Link>,
         },
     ]
 
     return <div>{isOpen ? <Hamburger /> : <StyledMenu mode="horizontal" items={items}></StyledMenu>}</div>
 }
+
 
 const StyledMenu = styled(Menu)`
     height: 120px;
@@ -61,7 +56,7 @@ const StyledMenu = styled(Menu)`
         color: white;
         font-size: 22px;
         font-weight: 700;
-        font-family: 'Dotum Bold';
+        font-family: 'Dotum Bold', serif;
         word-wrap: break-word;
         margin-right: 50px;
     }

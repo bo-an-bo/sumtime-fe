@@ -1,40 +1,69 @@
-import React from 'react'
-import KakaoLogin from 'react-kakao-login'
-import { loginKakao } from '../../apis/auth'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
+import { useAuth } from '../../context/AuthContext'
 
-const LoginKakao = ({ onLogin }) => {
-    const kakaoClientId = process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY
 
-    const kakaoOnSuccess = async (data) => {
-        try {
-            const idToken = data.response.access_token
-            const loginResponse = await loginKakao(idToken)
-            console.log('loginResponse', loginResponse)
+const LoginKakao = () => {
+    const { setUser } = useAuth()
+    const [isLogin, setIsLogin] = useState(false)
+    const Kakao = useMemo(() => window.Kakao || {}, [])
 
-            // 액세스 토큰을 로컬 스토리지에 저장
-            localStorage.setItem('access_token', idToken)
-            localStorage.setItem('nickname', loginResponse.data.properties.nickname)
-            if (onLogin) onLogin()
-        } catch (error) {
-            console.error('Login failed:', error)
+    const initKakao = useCallback(() => {
+        if (Kakao && !Kakao.isInitialized()) {
+            Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY)
+        }
+    }, [Kakao])
+
+    const kakaoLogin = async () => {
+        if (Kakao && Kakao.Auth) {
+            await Kakao.Auth.login({
+                scope: 'friends',
+                success(res) {
+                    Kakao.Auth.setAccessToken(res.access_token)
+                    console.log('카카오 로그인 성공')
+
+                    Kakao.API.request({
+                        url: '/v2/user/me',
+                        success(res) {
+                            setIsLogin(true)
+                            const kakaoAccount = res.kakao_account
+                            localStorage.setItem('profileImg', kakaoAccount.profile.profile_image_url)
+                            localStorage.setItem('nickname', kakaoAccount.profile.nickname)
+                        },
+                        fail(error) {
+                            console.log(error)
+                        },
+                    })
+                },
+                fail(error) {
+                    console.log(error)
+                },
+            })
         }
     }
 
-    const kakaoOnFailure = (error) => {
-        console.log('Login failed:', error)
-    }
+    useEffect(() => {
+        initKakao()
+    }, [initKakao])
+
+    useEffect(() => {
+        if (Kakao && Kakao.Auth) {
+            setIsLogin(!!Kakao.Auth.getAccessToken())
+        }
+    }, [Kakao])
+
+    useEffect(() => {
+        if (isLogin) {
+            setUser({
+                profileImg: localStorage.getItem('profileImg'),
+                nickname: localStorage.getItem('nickname'),
+            })
+        }
+    }, [isLogin, setUser])
 
     return (
         <>
-            <KakaoLogin
-                token={kakaoClientId}
-                onSuccess={kakaoOnSuccess}
-                onFail={kakaoOnFailure}
-                render={({ onClick }) => (
-                    <KakaoButton onClick={onClick} />
-                )}
-            />
+            <KakaoButton onClick={kakaoLogin} />
         </>
     )
 }
@@ -49,4 +78,5 @@ const KakaoButton = styled.button`
         opacity: 0.9;
     }
 `
+
 export default LoginKakao
