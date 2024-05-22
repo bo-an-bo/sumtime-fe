@@ -1,22 +1,24 @@
+// LogoutKakao.js
 import React from 'react'
-import { logoutKakao } from '../../apis/auth'
 import { Button } from 'antd'
+import { useAuth } from '../../context/AuthContext'
 
-const LogoutKakao = ({ onLogout }) => {
-    const handleLogout = async () => {
-        try {
-            await logoutKakao(localStorage.getItem('access_token'))
-
-            localStorage.removeItem('access_token')
-            localStorage.removeItem('nickname')
-            if (onLogout) onLogout()
-        } catch (error) {
-            console.error('Logout failed:', error)
+const LogoutKakao = () => {
+    const { setUser } = useAuth()
+    const Kakao = window.Kakao || {}
+    
+    const kakaoLogout = () => {
+        if (Kakao && Kakao.Auth) {
+            Kakao.Auth.logout(() => {
+                localStorage.removeItem('profileImg')
+                localStorage.removeItem('nickname')
+                setUser(null)
+                console.log('Logged out successfully')
+            })
         }
     }
 
-    return (
-        <Button onClick={handleLogout}>Logout</Button>
-    )
+    return <Button onClick={kakaoLogout}>Logout</Button>
 }
+
 export default LogoutKakao
