@@ -11,7 +11,6 @@ const LoginKakao = () => {
     const initKakao = useCallback(() => {
         if (Kakao && !Kakao.isInitialized()) {
             Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY)
-            console.log(Kakao.isInitialized())
         }
     }, [Kakao])
 
