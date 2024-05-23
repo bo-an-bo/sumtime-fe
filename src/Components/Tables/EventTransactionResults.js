@@ -96,6 +96,7 @@ const Wrapper = styled.div`
 
 const StyledTable = styled(Table)`
     margin-top: 20px;
+
     tbody tr.paid-row {
         background-color: #d8f0ff;
     }

@@ -3,13 +3,18 @@ import { Collapse } from 'antd'
 import { getEvent } from '../../apis/event'
 import styled from 'styled-components'
 
-const EventCard = ({ groupId }) => {
+const EventCard = ({ groupId, setSelectedEvent }) => {
     const [events, setEvents] = useState([])
     useEffect(() => {
         getEvent(groupId).then((data) => {
             setEvents(data.filter((event) => event !== null))
         })
     }, [groupId])
+
+    useEffect(() => {
+        const ids = events.map((item) => item._id)
+        setSelectedEvent(ids)
+    }, [])
 
     const formatDate = (date) => {
         return new Date(date).toLocaleDateString()
@@ -57,7 +62,7 @@ const EventCard = ({ groupId }) => {
 }
 
 const StyledCollapse = styled(Collapse)`
-    width: 60%;
+    width: 50%;
     margin-left: 100px;
     margin-top: 50px;
     padding: 10px;
@@ -65,7 +70,6 @@ const StyledCollapse = styled(Collapse)`
     overflow: auto;
     max-height: 450px;
     font-family: 'Dotum Bold', serif;
-
 `
 
 export default EventCard
