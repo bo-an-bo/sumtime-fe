@@ -26,13 +26,14 @@ export const kakaoFriends = async (token) => {
     }
 }
 
-export const sendKakaoMessage = async (token, receiverUuids, templateObject) => {
+export const sendKakaoMessage = async (token, receiverUuids, template_args) => {
     try {
         const response = await axios.post(
-            'https://kapi.kakao.com/v1/api/talk/friends/message/default/send',
+            'https://kapi.kakao.com/v1/api/talk/friends/message/send',
             new URLSearchParams({
                 'receiver_uuids': JSON.stringify(receiverUuids),
-                'template_object': JSON.stringify(templateObject),
+                'template_id': 108212,
+                'template_args': JSON.stringify(template_args),
             }),
             {
                 headers: {
