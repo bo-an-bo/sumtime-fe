@@ -17,7 +17,9 @@ const KakaoMessage = ({ friends }) => {
         .map(friend => friend.uuid)
 
     const handleSendMessage = () => {
-        sendKakaoMessage(Kakao.Auth.getAccessToken(), filteredUuids, eventInfo)
+        for (let i = 0; i < filteredUuids.length; i += 5) {
+            sendKakaoMessage(Kakao.Auth.getAccessToken(), filteredUuids.slice(i, i + 5), eventInfo)
+        }
     }
 
 
@@ -27,7 +29,6 @@ const KakaoMessage = ({ friends }) => {
                 <div>
                     아래의 친구들에게 메세지를 보냅니다.
                     <p>미납회원: {minap}</p>
-                    <p>미납 알림 보낼 카카오톡 친구: {filteredUuids}</p>
                     <button onClick={handleSendMessage}>메세지 보내기</button>
                 </div>
             ) : null
