@@ -3,6 +3,7 @@ import SideBar from './SideBar'
 // import Hamburger from './Hamburger'
 import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
+import Hamburger from '../SideBar/Hamburger'
 
 const SideBarIndex = () => {
     const isOpen = useMediaQuery({ maxWidth: 1180 })
@@ -70,19 +71,25 @@ const SideBarIndex = () => {
     if (window.location.pathname === '/group' || window.location.pathname === '/') return null
 
     return (
-        <StyledSideBar>
-            {' '}
+        <div>
             {isOpen ? (
-                <div></div>
+                <Hamburger />
             ) : (
-                <SideBar
-                    memberData={memberData}
-                    eventData={eventData}
-                    settingData={settingData}
-                    transactionData={transactionData}
-                />
+                <StyledSideBar>
+                    {' '}
+                    {isOpen ? (
+                        <div></div>
+                    ) : (
+                        <SideBar
+                            memberData={memberData}
+                            eventData={eventData}
+                            settingData={settingData}
+                            transactionData={transactionData}
+                        />
+                    )}
+                </StyledSideBar>
             )}
-        </StyledSideBar>
+        </div>
     )
 }
 

@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 import React from 'react'
 import styled from 'styled-components'
 import whiteLogo from '../../IMG/logo_white.svg'
-import { useMediaQuery } from 'react-responsive'
-import Hamburger from '../SideBar/Hamburger'
 import { useUser } from '../../hooks/useUser'
 
 const StyledImg = styled.img`
@@ -17,7 +15,6 @@ const StyledLinkBox = styled(Link)`
 `
 
 const NavBar = () => {
-    const isOpen = useMediaQuery({ maxWidth: 1180 })
     const user = useUser()
 
     const items = [
@@ -35,13 +32,12 @@ const NavBar = () => {
         },
         {
             key: 'myProfile',
-            label: <Link to="/showProfile">{user ? (user.nickname) : ('로그인 필요')}</Link>,
+            label: <Link to="/showProfile">{user ? user.nickname : '로그인 필요'}</Link>,
         },
     ]
 
-    return <div>{isOpen ? <Hamburger /> : <StyledMenu mode="horizontal" items={items}></StyledMenu>}</div>
+    return <StyledMenu mode="horizontal" items={items}></StyledMenu>
 }
-
 
 const StyledMenu = styled(Menu)`
     height: 120px;
