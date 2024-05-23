@@ -15,6 +15,16 @@ export const formApi = axios.create({
     },
 })
 
+export const kakaoAPI = axios.create({
+    baseURL: 'https://kapi.kakao.com/v1/api/talk',
+})
+
+export const authInstance = axios.create({
+    baseURL: process.env.REACT_APP_URL,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+})
 
 // api.interceptors.request.use(
 //     (config) => {

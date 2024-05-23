@@ -8,8 +8,8 @@ import { Button } from 'antd'
 import LogoutKakao from '../../Components/Login/LogoutKakao'
 import LoginKakao from '../../Components/Login/LoginKakao'
 import { useAuth } from '../../context/AuthContext'
-import KakaoPicker from '../../Components/Kakao/KakaoPicker'
 import { useMediaQuery } from 'react-responsive'
+import KakaoContainer from '../../Components/Kakao/KakaoContainer'
 
 const MainPage = () => {
     const { user } = useAuth()
@@ -56,7 +56,7 @@ const MainPage = () => {
                 {user ? (
                     <>
                         <LogoutKakao />
-                        <KakaoPicker />
+                        <KakaoContainer />
                     </>
                 ) : (
                     <LoginKakao />

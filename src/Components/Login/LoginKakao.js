@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { useAuth } from '../../context/AuthContext'
 
-
 const LoginKakao = () => {
     const { setUser } = useAuth()
     const [isLogin, setIsLogin] = useState(false)
@@ -13,6 +12,15 @@ const LoginKakao = () => {
             Kakao.init(process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY)
         }
     }, [Kakao])
+
+    useEffect(() => {
+        initKakao()
+    }, [initKakao])
+
+    const serverLogin = () => {
+        // const jwt = loginServer(Kakao.Auth.getAccessToken())
+        // console.log(jwt)
+    }
 
     const kakaoLogin = async () => {
         if (Kakao && Kakao.Auth) {
@@ -40,12 +48,8 @@ const LoginKakao = () => {
                 },
             })
         }
+        serverLogin()
     }
-
-    useEffect(() => {
-        initKakao()
-    }, [initKakao])
-
     useEffect(() => {
         if (Kakao && Kakao.Auth) {
             setIsLogin(!!Kakao.Auth.getAccessToken())
