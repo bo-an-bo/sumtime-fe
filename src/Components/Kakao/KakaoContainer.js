@@ -5,7 +5,6 @@ import KakaoMessage from './KakaoMessage'
 
 const KakaoContainer = () => {
     const [friends, setFriends] = useState([])
-    const [error, setError] = useState(null)
 
     const Kakao = useMemo(() => window.Kakao || {}, [])
 
@@ -21,19 +20,15 @@ const KakaoContainer = () => {
     }, [initKakao])
 
     const getFriends = async () => {
-        try {
-            const res = await kakaoFriends(Kakao.Auth.getAccessToken())
-            setFriends(res.elements) // Adjust based on actual response structure
-        } catch (err) {
-            setError(err)
-        }
+        const res = await kakaoFriends(Kakao.Auth.getAccessToken())
+        setFriends(res.elements) // Adjust based on actual response structure
+
     }
 
     return (
         <div>
             <KakaoFriends getFriends={getFriends} />
             <KakaoMessage friends={friends} />
-            {error && <p>Error: {error.message}</p>}
         </div>
     )
 }

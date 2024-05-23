@@ -25,3 +25,24 @@ export const kakaoFriends = async (token) => {
         throw error
     }
 }
+
+export const sendKakaoMessage = async (token, receiverUuids, templateObject) => {
+    try {
+        const response = await axios.post(
+            'https://kapi.kakao.com/v1/api/talk/friends/message/default/send',
+            new URLSearchParams({
+                'receiver_uuids': JSON.stringify(receiverUuids),
+                'template_object': JSON.stringify(templateObject),
+            }),
+            {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': `Bearer ${token}`,
+                },
+            },
+        )
+        console.log('Message sent successfully:', response.data)
+    } catch (error) {
+        console.error('Error sending message:', error)
+    }
+}
