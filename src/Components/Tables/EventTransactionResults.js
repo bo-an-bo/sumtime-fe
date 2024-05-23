@@ -10,35 +10,50 @@ const EventTransactionResults = ({ eventId }) => {
     const { startDate, endDate } = useDayStore()
     const { sort } = useSort()
     const [members, setMembers] = useState([])
+    const [paidMembers, setPaidMembers] = useState([])
+    const [unpaidMembers, setUnpaidMembers] = useState([])
     const [selectedRowKeys, setSelectedRowKeys] = useState([])
     const [selectedMemberIds, setSelectedMemberIds] = useState([])
 
     useEffect(() => {
         getTransactions(groupId, eventId).then((response) => {
-            const filteredMembers = response.filter((member) => {
+            const paidMembersList = response.filter((member) => member.isPaid)
+            const unpaidMembersList = response.filter((member) => !member.isPaid)
+
+            const filteredPaidMembers = paidMembersList.filter((member) => {
                 const memberTimestamp = moment(member.timestamp[0])
                 const isWithinDateRange =
                     startDate && endDate
                         ? memberTimestamp.isSameOrAfter(startDate) && memberTimestamp.isSameOrBefore(endDate)
                         : true
+                if (!isWithinDateRange) unpaidMembersList.push(member)
                 return isWithinDateRange
             })
-            const sortedMembers = filteredMembers.sort((a, b) => {
+
+            const sortedPaidMembers = filteredPaidMembers.sort((a, b) => {
                 if (sort === 'descend') {
                     return new Date(b.timestamp[0]) - new Date(a.timestamp[0])
                 } else {
                     return new Date(a.timestamp[0]) - new Date(b.timestamp[0])
                 }
             })
-            setMembers(sortedMembers)
+
+            const finalMembersList = unpaidMembersList.concat(sortedPaidMembers)
+            setMembers(finalMembersList)
+            setPaidMembers(sortedPaidMembers)
+            setUnpaidMembers(unpaidMembersList)
         })
     }, [groupId, eventId, startDate, endDate, sort])
 
     const handleRowSelectChange = (selectedRowKeys) => {
+        // Filter the selected row keys to include only those that correspond to unpaid members
         const filteredSelectedRowKeys = selectedRowKeys.filter((key) => {
             const index = Number(key)
-            return members[index] && members[index].isPaid === false
+            const member = members[index]
+            // Check if the member is in the unpaidMembers array
+            return unpaidMembers.some((unpaidMember) => unpaidMember.member._id === member.member._id)
         })
+
         setSelectedRowKeys(filteredSelectedRowKeys)
         setSelectedMemberIds(filteredSelectedRowKeys.map((key) => members[Number(key)].member._id))
     }
@@ -78,7 +93,11 @@ const EventTransactionResults = ({ eventId }) => {
                 dataSource={data}
                 pagination={false}
                 scroll={{ y: 300 }}
-                rowClassName={(record) => (record.isPaid ? 'paid-row' : 'unpaid-row')}
+                rowClassName={(record) =>
+                    paidMembers.some((paidMember) => paidMember.member._id === record.member._id)
+                        ? 'paid-row'
+                        : 'unpaid-row'
+                }
             />
         </Wrapper>
     )
