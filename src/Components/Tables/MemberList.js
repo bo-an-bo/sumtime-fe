@@ -19,11 +19,8 @@ const MemberList = ({ groupId }) => {
     useEffect(() => {
         getMember(groupId).then((data) => {
             setMembers(data)
-
         })
     }, [groupId])
-
-
 
     useEffect(() => {
         const keys = Object.keys(members[0]?.memberInfo || {})

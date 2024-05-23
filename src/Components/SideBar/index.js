@@ -71,7 +71,7 @@ const SideBarIndex = () => {
     if (window.location.pathname === '/group' || window.location.pathname === '/') return null
 
     return (
-        <div>
+        <StyledLayout>
             {isOpen ? (
                 <Hamburger />
             ) : (
@@ -89,11 +89,16 @@ const SideBarIndex = () => {
                     )}
                 </StyledSideBar>
             )}
-        </div>
+        </StyledLayout>
     )
 }
 
 const StyledSideBar = styled.div`
+    display: flex;
+    flex-direction: column;
+`
+
+const StyledLayout = styled.div`
     display: flex;
     flex-direction: column;
 `
