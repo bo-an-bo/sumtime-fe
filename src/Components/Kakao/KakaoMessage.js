@@ -1,9 +1,8 @@
-import React, { useMemo } from 'react'
-import { sendKakaoMessage } from '../../apis/auth'
+import React from 'react'
+import { sendKakaoMessage } from '../../apis/kakao'
 
 const KakaoMessage = ({ friends }) => {
-    const Kakao = useMemo(() => window.Kakao || {}, [])
-    const minap = ['이예림', '조준호', '박근형']
+    const minap = ['이예림']
     const eventInfo = {
         'group': '소프트웨어학부 소모임',
         'event': '2024 여름 MT',
@@ -18,7 +17,7 @@ const KakaoMessage = ({ friends }) => {
 
     const handleSendMessage = () => {
         for (let i = 0; i < filteredUuids.length; i += 5) {
-            sendKakaoMessage(Kakao.Auth.getAccessToken(), filteredUuids.slice(i, i + 5), eventInfo)
+            sendKakaoMessage(filteredUuids.slice(i, i + 5), eventInfo)
         }
     }
 
