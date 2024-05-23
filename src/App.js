@@ -16,6 +16,7 @@ import UploadTransactions from './Pages/UploadTransaction'
 import ShowEventResult from './Pages/ShowEventResult'
 import EditGroupInfo from './Pages/EditGroupInfoPage'
 import SelectMembers from './Pages/CreateEventPage/SelectMembers'
+import ShowResult from './Pages/ShowResult'
 import { AuthProvider } from './context/AuthContext'
 
 const StyledLayout = styled.div`
@@ -27,7 +28,6 @@ const StyledLayout = styled.div`
 `
 
 function App() {
-
     return (
         <AuthProvider>
             <BrowserRouter>
@@ -73,6 +73,7 @@ function GroupRoutesWithSidebar() {
                 <Route path="/uploadTransaction" element={<UploadTransactions />} />
                 <Route path="/showEventResult" element={<ShowEventResult />} />
                 <Route path="/editInfo" element={<EditGroupInfo />} />
+                <Route path="/showResult" element={<ShowResult />} />
             </Routes>
         </StyledLayout>
     )
