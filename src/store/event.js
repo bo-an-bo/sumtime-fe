@@ -37,5 +37,5 @@ export const usePaidMembers = create((set) => ({
 
 export const useUnpaidMembers = create((set) => ({
     unpaidMembers: [],
-    setPaidMembers: (data) => set({ unpaidMembers: data }),
+    setUnpaidMembers: (data) => set({ unpaidMembers: data }),
 }))
