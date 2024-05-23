@@ -17,7 +17,7 @@ const LoginKakao = () => {
     const kakaoLogin = async () => {
         if (Kakao && Kakao.Auth) {
             await Kakao.Auth.login({
-                scope: 'friends',
+                scope: 'profile_nickname, profile_image, account_email, talk_message, friends',
                 success(res) {
                     Kakao.Auth.setAccessToken(res.access_token)
                     console.log('카카오 로그인 성공')
