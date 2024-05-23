@@ -4,16 +4,20 @@ import { getTransactions } from '../../apis/tranaction'
 import { Table } from 'antd'
 import styled from 'styled-components'
 import moment from 'moment'
+import { usePaidMembers, useUnpaidMembers } from '../../store/event'
 
 const EventTransactionResults = ({ eventId }) => {
     const groupId = window.location.href.split('/')[4]
     const { startDate, endDate } = useDayStore()
     const { sort } = useSort()
     const [members, setMembers] = useState([])
-    const [paidMembers, setPaidMembers] = useState([])
-    const [unpaidMembers, setUnpaidMembers] = useState([])
+    // const [paidMembers, setPaidMembers] = useState([])
+    // const [unpaidMembers, setUnpaidMembers] = useState([])
     const [selectedRowKeys, setSelectedRowKeys] = useState([])
     const [selectedMemberIds, setSelectedMemberIds] = useState([])
+
+    const { paidMembers, setPaidMembers } = usePaidMembers()
+    const { unpaidMembers, setUnpaidMembers } = useUnpaidMembers()
 
     useEffect(() => {
         getTransactions(groupId, eventId).then((response) => {

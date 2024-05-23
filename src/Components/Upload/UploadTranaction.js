@@ -3,6 +3,7 @@ import { createTransaction } from '../../apis/tranaction'
 import { InboxOutlined, LockOutlined } from '@ant-design/icons'
 import { Upload, Button, Input } from 'antd'
 import styled from 'styled-components'
+import { useMediaQuery } from 'react-responsive'
 
 const { Dragger } = Upload
 
@@ -10,7 +11,7 @@ const UploadTransaction = ({ groupId }) => {
     const [file, setFile] = useState(null)
     const [password, setPassword] = useState('')
     const [isFileUploaded, setIsFileUploaded] = useState(false)
-
+    const isOpen = useMediaQuery({ maxWidth: 1180 })
     const props = {
         name: 'file',
         accept: '.xlsx, .xls, .csv',
@@ -30,7 +31,7 @@ const UploadTransaction = ({ groupId }) => {
     }
 
     return (
-        <Wrapper>
+        <Wrapper isOpen={isOpen}>
             <StyledButton
                 onClick={handleUpload}
                 type="primary"
@@ -110,6 +111,7 @@ export const Wrapper = styled.div`
     align-items: flex-end;
     width: 100%;
     margin: 2%;
+    margin-top: ${(props) => (props.isOpen ? '150px' : '')};
 `
 const FileIconWrapper = styled.div`
     width: 100%;

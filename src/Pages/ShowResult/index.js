@@ -2,6 +2,8 @@ import React from 'react'
 import EventChart from '../../Components/Chart/EventChart'
 
 const ShowResult = () => {
+
+  
     return (
         <div>
             <EventChart />
