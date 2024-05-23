@@ -31,7 +31,12 @@ const UploadTransaction = ({ groupId }) => {
 
     return (
         <Wrapper>
-            <StyledButton onClick={handleUpload} type="primary" disabled={!isFileUploaded}>
+            <StyledButton
+                onClick={handleUpload}
+                type="primary"
+                disabled={!isFileUploaded}
+                style={{ fontFamily: 'Dotum Light', height: '40px', fontSize: '18px', width: '80px' }}
+            >
                 확인
             </StyledButton>
 
@@ -50,12 +55,16 @@ const UploadTransaction = ({ groupId }) => {
                         <p className="ant-upload-drag-icon">
                             <InboxOutlined style={{ fontSize: '64px', color: '#1890ff' }} />
                         </p>
-                        <p className="ant-upload-text">클릭 또는 파일을 드래그하여 업로드하세요</p>
-                        <p className="ant-upload-hint">xlsx, csv 파일만 첨부 가능</p>
+                        <p className="ant-upload-text" style={{ fontFamily: 'Dotum Bold', fontSize: '18px' }}>
+                            클릭 또는 파일을 드래그하여 업로드하세요
+                        </p>
+                        <p className="ant-upload-hint" style={{ fontFamily: 'Dotum Bold', fontSize: '16px' }}>
+                            xlsx, csv 파일만 첨부 가능
+                        </p>
                     </div>
                 )}
             </StyledDragger>
-            <Input
+            <StyledPW
                 prefix={<LockOutlined />}
                 type="password"
                 placeholder="비밀번호"
@@ -68,6 +77,12 @@ const UploadTransaction = ({ groupId }) => {
 
 export default UploadTransaction
 
+const StyledPW = styled(Input)`
+    font-famliy: 'Dotum Bold';
+    padding: 10px;
+    margin: 10px 0;
+    width: 30%;
+`
 export const StyledButton = styled(Button)`
     margin-top: 20px;
     margin-bottom: 10px;
@@ -83,7 +98,7 @@ export const StyledButton = styled(Button)`
 `
 export const StyledDragger = styled(Dragger)`
     width: 100%;
-    height: 100%;
+    height: 300px;
     padding: 10px;
     background-color: rgba(0, 62.67, 151.94, 0.08);
     border-radius: 10px;
@@ -93,8 +108,8 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    width: 50%;
-    margin-left: 12%;
+    width: 100%;
+    margin: 2%;
 `
 const FileIconWrapper = styled.div`
     width: 100%;

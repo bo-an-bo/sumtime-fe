@@ -5,8 +5,9 @@ import { NavLink } from 'react-router-dom'
 import propTypes from 'prop-types'
 
 const StyledSideBarBox = styled.div`
-    width: 20%;
-    height: 500px;
+    display: flex;
+    width: 200px;
+    height: 600px;
     // background-color: #b9b9b9;
 `
 
@@ -41,114 +42,66 @@ const StyledNavLink = styled(NavLink)`
     &.active {
         background-color: rgb(0, 63, 150, 0.1);
         border-left: 4px solid rgb(0, 63, 150);
-        font-family: 'Dotum Bold'
+        font-family: 'Dotum Bold';
     }
 `
-const SideBar = () => {
-    const memberData = [
-        {
-            index: 1,
-            name: '회원 명단 업로드',
-            path: `uploadMember`,
-        },
-        {
-            index: 2,
-            name: '회원 목록',
-            path: `showGroupDetails`,
-        },
-    ]
 
-    const eventData = [
-        {
-            index: 1,
-            name: '이벤트 생성',
-            path: `createEvent`,
-        },
-        {
-            index: 2,
-            name: '이벤트 목록',
-            path: `showEventList`,
-        },
-    ]
+// const StyledToggleBox = styled.div`
+//     display: flex;
+//     display: ${(props) => (props.state ? 'none' : 'inline')};
+//     background-color: yellow;
+// `
+const SideBar = ({ memberData, eventData, settingData, transactionData }) => {
+    // const [toggleBtn, setToggleBtn] = useState(false)
 
-    const settingData = [
-        {
-            index: 1,
-            name: '모임 정보 변경',
-            path: `editInfo`,
-        },
-        {
-            index: 2,
-            name: '부매니저 설정',
-            path: `setSubMng`,
-        },
-    ]
-
-    const transactionData = [
-        {
-            index: 1,
-            name: '거래내역 업로드',
-            path: `uploadTransaction`,
-        },
-        {
-            index: 2,
-            name: '이벤트별 조회',
-            path: `showEventResult`,
-        },
-        {
-            index: 3,
-            name: '거래내역 분석',
-            path: `showResult`,
-        },
-    ]
-
-    if (window.location.pathname === '/group' || window.location.pathname === '/') return null
     return (
         <StyledSideBarBox>
-            <ul>
-                <StyledLI>
-                    <StyledTitle>회원</StyledTitle>
-                    {memberData.map((data) => (
-                        <StyledItem key={data.index}>
-                            <StyledNavLink to={data.path} className="nav-link">
-                                &nbsp;{data.name}
-                            </StyledNavLink>
-                        </StyledItem>
-                    ))}
-                </StyledLI>
-                <StyledLI>
-                    <StyledTitle>이벤트</StyledTitle>
-                    {eventData.map((data) => (
-                        <StyledItem key={data.index}>
-                            <StyledNavLink to={data.path} className="nav-link">
-                                &nbsp;{data.name}
-                            </StyledNavLink>
-                        </StyledItem>
-                    ))}
-                </StyledLI>
-                <StyledLI>
-                    <StyledTitle>설정</StyledTitle>
+            <p>
+                <ul>
+                    <StyledLI>
+                        <StyledTitle>회원</StyledTitle>
+                        {memberData.map((data) => (
+                            <StyledItem key={data.index}>
+                                <StyledNavLink to={data.path} className="nav-link">
+                                    &nbsp;{data.name}
+                                </StyledNavLink>
+                            </StyledItem>
+                        ))}
+                    </StyledLI>
+                    <StyledLI>
+                        <StyledTitle>이벤트</StyledTitle>
+                        {eventData.map((data) => (
+                            <StyledItem key={data.index}>
+                                <StyledNavLink to={data.path} className="nav-link">
+                                    &nbsp;{data.name}
+                                </StyledNavLink>
+                            </StyledItem>
+                        ))}
+                    </StyledLI>
+                    <StyledLI>
+                        <StyledTitle>설정</StyledTitle>
 
-                    {settingData.map((data) => (
-                        <StyledItem key={data.index}>
-                            <StyledNavLink to={data.path} className="nav-link">
-                                &nbsp;{data.name}
-                            </StyledNavLink>
-                        </StyledItem>
-                    ))}
-                </StyledLI>
-                <StyledLI>
-                    <StyledTitle>거래내역</StyledTitle>
+                        {settingData.map((data) => (
+                            <StyledItem key={data.index}>
+                                <StyledNavLink to={data.path} className="nav-link">
+                                    &nbsp;{data.name}
+                                </StyledNavLink>
+                            </StyledItem>
+                        ))}
+                    </StyledLI>
+                    <StyledLI>
+                        <StyledTitle>거래내역</StyledTitle>
 
-                    {transactionData.map((data) => (
-                        <StyledItem key={data.index}>
-                            <StyledNavLink to={data.path} className="nav-link">
-                                &nbsp;{data.name}
-                            </StyledNavLink>
-                        </StyledItem>
-                    ))}
-                </StyledLI>
-            </ul>
+                        {transactionData.map((data) => (
+                            <StyledItem key={data.index}>
+                                <StyledNavLink to={data.path} className="nav-link">
+                                    &nbsp;{data.name}
+                                </StyledNavLink>
+                            </StyledItem>
+                        ))}
+                    </StyledLI>
+                </ul>
+            </p>
         </StyledSideBarBox>
     )
 }

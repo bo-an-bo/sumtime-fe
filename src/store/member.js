@@ -15,3 +15,8 @@ export const useDeleteMemberIds = create((set) => ({
     deleteMemberIds: [],
     setDeleteMemberIds: (data) => set({ deleteMemberIds: data }),
 }))
+
+export const useEventMemberStore = create((set) => ({
+  eventMembers:[],
+  setEventMembers: (data)=>set({eventMembers: data}),
+}))

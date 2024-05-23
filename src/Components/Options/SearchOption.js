@@ -87,7 +87,16 @@ const TransactionFilter = () => {
                         </Col>
                         <Col span={24}>
                             <Form.Item>
-                                <Button type="primary" onClick={handleFilter} style={{ width: '100%' }}>
+                                <Button
+                                    type="primary"
+                                    onClick={handleFilter}
+                                    style={{
+                                        width: '100%',
+                                        fontFamily: 'Dotum Light',
+                                        height: '40px',
+                                        margin: '10px 0 0 0',
+                                    }}
+                                >
                                     필터 적용
                                 </Button>
                             </Form.Item>
@@ -114,6 +123,7 @@ const Wrapper = styled.div`
 const StyledForm = styled(Form)`
     .ant-form-item {
         margin-bottom: 10px;
+        font-family: 'Dotum Bold';
     }
 `
 

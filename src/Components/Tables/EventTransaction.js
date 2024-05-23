@@ -89,9 +89,18 @@ const StyledTable = styled(Table)`
 
     tbody tr.selected-row {
         background-color: #f0f0f0;
+        font-family: 'Dotum Bold';
+    }
+    .ant-table-thead > tr {
+        font-family: 'Dotum Bold';
     }
 
-    tbody tr:hover {
+    .ant-table-tbody > tr {
+        font-family: 'Dotum Light';
+    }
+
+    .ant-table-tbody > tr:hover {
         cursor: pointer;
+        font-family: 'Dotum Bold';
     }
 `

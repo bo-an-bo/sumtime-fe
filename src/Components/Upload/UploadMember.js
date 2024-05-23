@@ -41,7 +41,7 @@ const UploadMember = ({ groupId }) => {
                     <FileIconWrapper>
                         <img
                             src={process.env.PUBLIC_URL + '/img/excel.png'}
-                            style={{ width: '128px', height: '128px' }}
+                            style={{ width: '40px', height: '40px', padding: '10px' }}
                             alt="file"
                         />
                         <p style={{ fontSize: '24px', fontWeight: 'bold' }}>{file.name}</p>
@@ -93,8 +93,9 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    width: 50%;
-    margin-left: 12%;
+    width: 100%;
+    margin: 2%;
+    height: 500px;
 `
 const FileIconWrapper = styled.div`
     width: 100%;

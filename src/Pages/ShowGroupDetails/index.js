@@ -18,22 +18,26 @@ const ShowGroupDetails = () => {
         setDeleteMemberIds(ids)
     }, [selectedRows, setDeleteMemberIds])
     return (
-        <div>
+        <StyledPageLayout>
             <ButtonWrapper>
                 <AddMemberButton groupId={groupId} />
                 <DeleteMemberButton groupId={groupId} memberIds={deleteMemberIds} />
             </ButtonWrapper>
             <MemberList groupId={groupId} />
-        </div>
+        </StyledPageLayout>
     )
 }
 
+const StyledPageLayout = styled.div`
+    width: 100%;
+    margin: 2%;
+`
 const ButtonWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
     gap: 5px;
     // padding: 10px;
     font-family: 'Dotum Light';
-    margin-bottom: 2%;
+    margin: 0 2% 2% 2%;
 `
 export default ShowGroupDetails
