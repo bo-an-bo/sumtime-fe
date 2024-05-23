@@ -14,7 +14,7 @@ const EventCard = ({ groupId, setSelectedEvent }) => {
     useEffect(() => {
         const ids = events.map((item) => item._id)
         setSelectedEvent(ids)
-    }, [])
+    }, [events, setSelectedEvent])
 
     const formatDate = (date) => {
         return new Date(date).toLocaleDateString()

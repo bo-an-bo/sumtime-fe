@@ -17,7 +17,7 @@ const ShowEventList = () => {
         getMember(groupId).then((data) => {
             setEventMembers(data)
         })
-    }, [groupId])
+    }, [groupId, setEventMembers])
 
     // // console.log('selectedevent', selectedEvent)
     // console.log('eveneme', eventMembers)
