@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getEvent } from '../../apis/event'
 import { Table } from 'antd'
 import styled from 'styled-components'
@@ -91,6 +91,7 @@ const StyledTable = styled(Table)`
         background-color: #f0f0f0;
         font-family: 'Dotum Bold';
     }
+
     .ant-table-thead > tr {
         font-family: 'Dotum Bold';
     }

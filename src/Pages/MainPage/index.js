@@ -57,7 +57,7 @@ const MainPage = () => {
                 {user ? (
                     <>
                         <LogoutKakao />
-                        <KakaoMessage />
+                        <KakaoMessage groupId={{}} eventId={{}} unpaidMembers={{}} />
                         <SignOutServer />
                     </>
                 ) : (
