@@ -46,7 +46,7 @@ const KakaoMessage = () => {
         messageApi.open({
             type: 'success',
             content: '메세지를 전송하였습니다.',
-        })
+        }).then()
 
         setIsModalOpen(false)
     }
