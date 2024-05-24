@@ -11,7 +11,6 @@ const StyledMenu = styled(Menu)`
     width: 100%;
     background-color: #003f98;
     display: flex;
-
     justify-content: flex-end;
     padding: 40px;
 
@@ -36,7 +35,7 @@ const StyledLinkBox = styled(Link)`
 `
 
 const StyledMobiLeNavbar = styled.div`
-    position: absolute;
+    // position: absolute;
     display: flex;
     width: 100%;
     height: 120px;
@@ -70,8 +69,8 @@ const Hamburger = () => {
     ]
     // if (location.pathname === '/group' || location.pathname === '/') return null
     return (
-        <StyledLayout>
-            {isOpen ? (
+        <div>
+            { isOpen ? (
                 <StyledMobiLeNavbar>
                     <Dropdown />
                     <StyledMenu mode="horizontal" items={items}></StyledMenu>
@@ -79,11 +78,14 @@ const Hamburger = () => {
             ) : (
                 <StyledMenu mode="horizontal" items={items}></StyledMenu>
             )}
-        </StyledLayout>
+        </div>
+
+        // const StyledSideBarBox = styled.div`
+        //     display: flex;
+        //     width: 200px;
+        //     height: 500px;
+        //     background-color: #b9b9b9;
+        // `
     )
 }
 export default Hamburger
-
-const StyledLayout = styled.div`
-    display: flex;
-`

@@ -5,10 +5,10 @@ import { useEffect } from 'react'
 import { useSelectedRows, useDeleteMemberIds } from '../../store/member'
 import AddMemberButton from '../../Components/Buttons/AddMemberButton'
 import DeleteMemberButton from '../../Components/Buttons/DeleteMemberButton'
-import { useMediaQuery } from 'react-responsive'
+
 const ShowGroupDetails = () => {
     const { selectedRows } = useSelectedRows()
-    const isOpen = useMediaQuery({ maxWidth: 1180 })
+
     const { deleteMemberIds, setDeleteMemberIds } = useDeleteMemberIds()
     const groupId = window.location.href.split('/')[4]
 
@@ -18,7 +18,7 @@ const ShowGroupDetails = () => {
         setDeleteMemberIds(ids)
     }, [selectedRows, setDeleteMemberIds])
     return (
-        <StyledPageLayout isOpen={isOpen}>
+        <StyledPageLayout>
             <ButtonWrapper>
                 <AddMemberButton groupId={groupId} />
                 <DeleteMemberButton groupId={groupId} memberIds={deleteMemberIds} />
@@ -31,7 +31,6 @@ const ShowGroupDetails = () => {
 const StyledPageLayout = styled.div`
     width: 100%;
     margin: 2%;
-    margin-top: ${(props) => (props.isOpen ? '150px' : '')};
 `
 const ButtonWrapper = styled.div`
     display: flex;

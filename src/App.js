@@ -18,7 +18,7 @@ import EditGroupInfo from './Pages/EditGroupInfoPage'
 import SelectMembers from './Pages/CreateEventPage/SelectMembers'
 import ShowResult from './Pages/ShowResult'
 import { AuthProvider } from './context/AuthContext'
-import { useMediaQuery } from 'react-responsive'
+
 const StyledLayout = styled.div`
     // background-color: gray;
     display: flex;
@@ -43,10 +43,9 @@ function App() {
 }
 
 function GroupRoutes() {
-    const isOpen = useMediaQuery({ maxWidth: 1180 })
     return (
         <>
-            {isOpen ? <></> : <NavBar />}
+            <NavBar />
 
             <StyledLayout>
                 <Routes>

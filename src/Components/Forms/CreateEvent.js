@@ -6,10 +6,10 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { useEventStore } from '../../store/event'
-import { useMediaQuery } from 'react-responsive'
+
 const CreateEvent = ({ groupId }) => {
     const { eventId, setEventId } = useEventStore()
-    const isOpen = useMediaQuery({ maxWidth: 1180 })
+
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [startDate, setStartDate] = useState('')
@@ -65,7 +65,7 @@ const CreateEvent = ({ groupId }) => {
     // }
 
     return (
-        <StyledLayout isOpen={isOpen}>
+        <StyledLayout>
             <StyledButton
                 text="다음"
                 size="mid"
@@ -199,8 +199,8 @@ const StyledLayout = styled.div`
     display: flex;
     flex-direction: column;
     width: 1500px;
+    // background-color: red;
     margin: 2%;
-    margin-top: ${(props) => (props.isOpen ? '150px;' : '')};
 `
 const StyledForm = styled(Form)`
     width: 100%;

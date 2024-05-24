@@ -29,13 +29,3 @@ export const useSort = create((set) => ({
     sort: '',
     setSort: (data) => set({ sort: data }),
 }))
-
-export const usePaidMembers = create((set) => ({
-    paidMembers: [],
-    setPaidMembers: (data) => set({ paidMembers: data }),
-}))
-
-export const useUnpaidMembers = create((set) => ({
-    unpaidMembers: [],
-    setUnpaidMembers: (data) => set({ unpaidMembers: data }),
-}))

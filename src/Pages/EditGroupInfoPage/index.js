@@ -2,21 +2,18 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { getGroupDetail, patchGroup } from '../../apis/groups'
 import { Form, Input, Button } from 'antd'
-import { useMediaQuery } from 'react-responsive'
 
 const StyledBox = styled.div`
     //background-color: rgba(0, 62.67, 151.94, 0.08);
     border-radius: 10px;
-    width: 100%;
-    margin-top: ${(props) => (props.isOpen ? '150px' : '')};
-    margin-left: 30px;
+    width: 70%;
 `
 
 const StyledSection = styled.div`
     width: 90%;
     height: 200px;
     background-color: rgba(0, 62.67, 151.94, 0.08);
-    margin: 30px 0px;
+    margin: 30px 20px;
     border-radius: 10px;
     font-family: 'Dotum Bold';
 `
@@ -59,7 +56,7 @@ const StyledButtonSection = styled.div`
     display: flex;
     //background-color: yellow;
     float: right;
-    padding: 10px 
+    padding: 10px;
     font-family: 'Dotum Light';
 `
 
@@ -93,7 +90,6 @@ const EditGroupInfo = () => {
     const [newDesc, setNewDesc] = useState('')
     const [isProcessing, setIsProcessing] = useState(false)
     const groupId = window.location.href.split('/')[4]
-    const isOpen = useMediaQuery({ maxWidth: 1180 })
 
     const handleChangeGroupInfo = async () => {
         if (isProcessing) {
@@ -136,7 +132,7 @@ const EditGroupInfo = () => {
         setNewName(e.target.value)
     }
     return (
-        <StyledBox isOpen={isOpen}>
+        <StyledBox>
             <StyledSection>
                 <StyledEditTitle>모임 기본 정보 수정</StyledEditTitle>
                 <StyledButtonSection>
