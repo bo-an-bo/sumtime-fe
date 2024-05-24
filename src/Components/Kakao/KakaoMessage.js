@@ -42,7 +42,7 @@ const KakaoMessage = () => {
     }
 
     const handleOk = () => {
-        handleSendMessage()
+        handleSendMessage().then()
         messageApi.open({
             type: 'success',
             content: '메세지를 전송하였습니다.',
