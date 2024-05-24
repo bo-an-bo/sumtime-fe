@@ -10,8 +10,8 @@ const EventTransactionResults = ({ eventId }) => {
     const { startDate, endDate } = useDayStore()
     const { sort } = useSort()
     const [members, setMembers] = useState([])
-    // const [paidMembers, setPaidMembers] = useState([])
-    // const [unpaidMembers, setUnpaidMembers] = useState([])
+    const [paidMembers, setPaidMembers] = useState([])
+    const [unpaidMembers, setUnpaidMembers] = useState([])
     const [selectedRowKeys, setSelectedRowKeys] = useState([])
     const [selectedMemberIds, setSelectedMemberIds] = useState([])
 
