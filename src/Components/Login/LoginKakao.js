@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { useAuth } from '../../context/AuthContext'
+import { loginServer } from '../../apis/auth'
 
 const LoginKakao = () => {
     const { setUser } = useAuth()
@@ -17,9 +18,9 @@ const LoginKakao = () => {
         initKakao()
     }, [initKakao])
 
-    const serverLogin = () => {
-        // const jwt = loginServer(Kakao.Auth.getAccessToken())
-        // console.log(jwt)
+    const serverLogin = async () => {
+        const jwt = await loginServer()
+        localStorage.setItem('jwt', jwt.data.access_token)
     }
 
     const kakaoLogin = async () => {
@@ -37,6 +38,8 @@ const LoginKakao = () => {
                             const kakaoAccount = res.kakao_account
                             localStorage.setItem('profileImg', kakaoAccount.profile.profile_image_url)
                             localStorage.setItem('nickname', kakaoAccount.profile.nickname)
+                            serverLogin()
+
                         },
                         fail(error) {
                             console.log(error)
@@ -48,7 +51,6 @@ const LoginKakao = () => {
                 },
             })
         }
-        serverLogin()
     }
     useEffect(() => {
         if (Kakao && Kakao.Auth) {

@@ -1,13 +1,20 @@
 import api from './index'
 
-export const loginServer = async (token) => {
+export const loginServer = async () => {
+
     try {
-        const response = await api.post(`/auth/login?kakaoToken=${encodeURIComponent(token)}`)
-        console.log('server login api response', response)
-        return response
+        return await api.get(`/auth/login?kakaoToken=${encodeURIComponent(window.Kakao.Auth.getAccessToken())}`)
     } catch (error) {
         console.error('server kakao login:', error.response ? error.response.data : error.message)
         throw error
     }
 }
 
+export const signOutServer = async () => {
+    try {
+        return await api.get(`/auth/signout?kakaoToken=${encodeURIComponent(window.Kakao.Auth.getAccessToken())}`)
+    } catch (error) {
+        console.error('server server signout:', error.response ? error.response.data : error.message)
+        throw error
+    }
+}
