@@ -9,8 +9,8 @@ import LogoutKakao from '../../Components/Login/LogoutKakao'
 import LoginKakao from '../../Components/Login/LoginKakao'
 import { useAuth } from '../../context/AuthContext'
 import { useMediaQuery } from 'react-responsive'
-import KakaoContainer from '../../Components/Kakao/KakaoContainer'
 import SignOutServer from '../../Components/Login/SignOutServer'
+import KakaoMessage from '../../Components/Kakao/KakaoMessage'
 
 const MainPage = () => {
     const { user } = useAuth()
@@ -57,7 +57,7 @@ const MainPage = () => {
                 {user ? (
                     <>
                         <LogoutKakao />
-                        <KakaoContainer />
+                        <KakaoMessage />
                         <SignOutServer />
                     </>
                 ) : (
