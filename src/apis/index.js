@@ -8,7 +8,7 @@ export const api = axios.create({
 })
 
 export const formApi = axios.create({
-    baseURL: 'http://localhost:5354',
+    baseURL: process.env.REACT_APP_URL,
     headers: {
         'Content-Type': 'multipart/form-data',
     },
@@ -29,7 +29,7 @@ export const kakaoAPI = axios.create({
 })
 
 export const authAPI = axios.create({
-    baseURL: 'http://localhost:5354',
+    baseURL: process.env.REACT_APP_URL,
     headers: {
         'Content-Type': 'application/json',
     },
