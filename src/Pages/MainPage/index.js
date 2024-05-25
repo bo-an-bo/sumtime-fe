@@ -4,7 +4,7 @@ import styled from 'styled-components' // eslint-disable-line no-unused-vars
 import LogoColor from '../../IMG/logo_color.svg'
 import exmTab from '../../IMG/exmple_table.svg'
 
-import { Button } from 'antd'
+import { Button, message } from 'antd'
 import LogoutKakao from '../../Components/Login/LogoutKakao'
 import LoginKakao from '../../Components/Login/LoginKakao'
 import { useAuth } from '../../context/AuthContext'
@@ -16,12 +16,22 @@ const MainPage = () => {
     const { user } = useAuth()
     const isOpen = useMediaQuery({ maxWidth: 768 })
     const navigate = useNavigate()
+    const [messageApi, contextHolder] = message.useMessage()
+
     const onClickHandler = () => {
-        navigate('/group')
+        if (!user)
+            messageApi.open({
+                type: 'warning',
+                content: '로그인 후 이용해주세요.',
+            }).then()
+        else
+            navigate('/group')
     }
 
     return (
         <StyledLayoutMain>
+            {contextHolder}
+
             <LogoContainer>
                 <StyledLogoImg src={LogoColor} alt="logo_white_img" isOpen={isOpen}></StyledLogoImg>
                 <StyledText isOpen={isOpen}>모임의 계산을 쉽게</StyledText>
