@@ -8,9 +8,10 @@ export const api = axios.create({
 })
 
 export const formApi = axios.create({
-    baseURL: process.env.REACT_APP_URL,
+    baseURL: 'http://localhost:5354',
     headers: {
         'Content-Type': 'multipart/form-data',
+        'Authorization': 'Bearer ' + localStorage.getItem('jwt'),
     },
 })
 
@@ -18,10 +19,11 @@ export const kakaoAPI = axios.create({
     baseURL: 'https://kapi.kakao.com/v1/api/talk',
 })
 
-export const authInstance = axios.create({
-    baseURL: process.env.REACT_APP_URL,
+export const authAPI = axios.create({
+    baseURL: 'http://localhost:5354',
     headers: {
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('jwt'),
     },
 })
 

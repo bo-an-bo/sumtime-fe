@@ -1,5 +1,4 @@
-import api from './index'
-import { formApi } from './index'
+import { authAPI, formApi } from './index'
 
 export const createTransaction = async (groupId, password, file) => {
     const formData = new FormData()
@@ -10,6 +9,6 @@ export const createTransaction = async (groupId, password, file) => {
 }
 
 export const getTransactions = async (groupId, eventId) => {
-    const response = await api.get(`/group/${groupId}/event/${eventId}/transaction`)
+    const response = await authAPI.get(`/group/${groupId}/event/${eventId}/transaction`)
     return response.data
 }
