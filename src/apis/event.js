@@ -10,6 +10,12 @@ export const getEvent = async (groupId) => {
     return response.data
 }
 
+export const getEventDetail = async (groupId, eventId) => {
+    const response = await api.get(`group/${groupId}/event/${eventId}`)
+    return response.data
+}
+
+
 export const postEventMember = async (groupId, eventId, meminfo) => {
     try {
         return await api.post(`group/${groupId}/event/${eventId}/member`, meminfo)

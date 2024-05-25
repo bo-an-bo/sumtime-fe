@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDayStore, useSort } from '../../store/event'
 import { getTransactions } from '../../apis/tranaction'
 import { Table } from 'antd'
 import styled from 'styled-components'
 import moment from 'moment'
+import KakaoMessage from '../Kakao/KakaoMessage'
 
 const EventTransactionResults = ({ eventId }) => {
     const groupId = window.location.href.split('/')[4]
@@ -83,6 +84,8 @@ const EventTransactionResults = ({ eventId }) => {
 
     return (
         <Wrapper>
+            <KakaoMessage groupId={groupId} eventId={eventId} unpaidMembers={unpaidMembers} />
+
             <StyledTable
                 rowSelection={{
                     type: 'checkbox',
@@ -119,6 +122,7 @@ const StyledTable = styled(Table)`
     tbody tr.paid-row {
         background-color: #d8f0ff;
     }
+
     tbody tr.unpaid-row {
         background-color: #ffe6e6;
     }

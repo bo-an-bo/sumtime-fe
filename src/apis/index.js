@@ -1,7 +1,6 @@
-// import { GroupSizeContext } from 'antd/es/button/button-group'
 import axios from 'axios'
 
-const api = axios.create({
+export const api = axios.create({
     baseURL: process.env.REACT_APP_URL,
     headers: {
         'Content-Type': 'application/json',
