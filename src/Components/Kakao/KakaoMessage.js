@@ -27,8 +27,8 @@ const KakaoMessage = ({ groupId, eventId, unpaidMembers }) => {
                 'group': group.name,
                 'event': event.name,
                 'fee': event.fee,
-                'start_date': event.startDate,
-                'end_date': event.endDate,
+                'start_date': event.startDate.toISOString().slice(0, 10),
+                'end_date': event.endDate.toISOString().slice(0, 10),
             }
         }
         const tmpEvent = {
@@ -75,28 +75,28 @@ const KakaoMessage = ({ groupId, eventId, unpaidMembers }) => {
     return (
         <>
             {contextHolder}
-                <KakaoMessageButton onClick={showModal}>
-                    <RiKakaoTalkFill />
-                    미납 회원에게 알리기
-                </KakaoMessageButton>
-                <Modal title="카카오톡 메세지 전송" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
-                       footer={[
-                           <KakaoModalButton key="cancel" onClick={handleCancel}>
-                               돌아가기
-                           </KakaoModalButton>,
-                           <KakaoModalButton key="submit" type="primary" onClick={handleOk} style={{
-                               backgroundColor: '#fee500', color: 'black',
-                           }}>
-                               전송하기
-                           </KakaoModalButton>,
-                       ]}
-                       style={{ fontFamily: 'Dotum Medium' }}
-                >
-                    <>
-                        아래의 회원들에게 메세지를 보냅니다.
-                        <p>미납회원: {unpaidNames}</p>
-                    </>
-                </Modal>
+            <KakaoMessageButton onClick={showModal}>
+                <RiKakaoTalkFill />
+                미납 회원에게 알리기
+            </KakaoMessageButton>
+            <Modal title="카카오톡 메세지 전송" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
+                   footer={[
+                       <KakaoModalButton key="cancel" onClick={handleCancel}>
+                           돌아가기
+                       </KakaoModalButton>,
+                       <KakaoModalButton key="submit" type="primary" onClick={handleOk} style={{
+                           backgroundColor: '#fee500', color: 'black',
+                       }}>
+                           전송하기
+                       </KakaoModalButton>,
+                   ]}
+                   style={{ fontFamily: 'Dotum Medium' }}
+            >
+                <>
+                    아래의 회원들에게 메세지를 보냅니다.
+                    <p>미납회원: {unpaidNames}</p>
+                </>
+            </Modal>
         </>
     )
 }
