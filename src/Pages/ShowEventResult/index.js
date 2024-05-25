@@ -1,6 +1,5 @@
 import React from 'react'
 import EventTransaction from '../../Components/Tables/EventTransaction'
-import SearchOtion from '../../Components/Options/SearchOption'
 import styled from 'styled-components'
 
 const ShowEventResult = () => {
@@ -9,7 +8,6 @@ const ShowEventResult = () => {
     return (
         <Wrapper>
             <EventTransaction groupId={groupId} />
-            <SearchOtion />
         </Wrapper>
     )
 }
