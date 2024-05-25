@@ -1,9 +1,8 @@
-import api from './index'
-import { formApi } from './index'
+import { authAPI, formApi } from './index'
 
 export const getMember = async (groupId) => {
     try {
-        const response = await api.get(`group/${groupId}/member`)
+        const response = await authAPI.get(`group/${groupId}/member`)
         return response.data
     } catch (error) {
         console.log(error)
@@ -12,7 +11,7 @@ export const getMember = async (groupId) => {
 
 export const addMember = async (groupId, name, memberInfo) => {
     console.log(name, memberInfo)
-    const response = await api.post(`group/${groupId}/member`, [
+    const response = await authAPI.post(`group/${groupId}/member`, [
         {
             name,
             memberInfo,
@@ -22,7 +21,7 @@ export const addMember = async (groupId, name, memberInfo) => {
 }
 
 export const deleteMember = async (groupId, memberId) => {
-    const response = await api.delete(`group/${groupId}/member`, {
+    const response = await authAPI.delete(`group/${groupId}/member`, {
         data: memberId,
     })
     return response.data

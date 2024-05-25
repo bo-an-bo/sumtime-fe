@@ -18,16 +18,15 @@ const MemberList = ({ groupId }) => {
 
     useEffect(() => {
         getMember(groupId).then((data) => {
-            setMembers(data)
-
+            setMembers(data.members)
         })
     }, [groupId])
-
 
 
     useEffect(() => {
         const keys = Object.keys(members[0]?.memberInfo || {})
         setMemberKeys(keys)
+        console.log(keys)
     }, [members])
 
     const columns = [

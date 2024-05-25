@@ -6,12 +6,10 @@ import { useAuth } from '../../context/AuthContext'
 const LogoutKakao = () => {
     const { setUser } = useAuth()
     const Kakao = window.Kakao || {}
-
     const kakaoLogout = () => {
         if (Kakao && Kakao.Auth) {
             Kakao.Auth.logout(() => {
-                localStorage.removeItem('profileImg')
-                localStorage.removeItem('nickname')
+                localStorage.clear()
                 setUser(null)
 
                 console.log('Logged out successfully')

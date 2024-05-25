@@ -1,13 +1,12 @@
-import api from './index'
-import { formApi } from './index'
+import { authAPI, formApi } from './index'
 
 export const getGroups = async () => {
-    const response = await api.get('/group')
+    const response = await authAPI.get('/group')
     return response.data
 }
 
 export const getGroupDetail = async (groupId) => {
-    const response = await api.get(`/group/${groupId}`)
+    const response = await authAPI.get(`/group/${groupId}`)
     return response.data
 }
 
@@ -20,7 +19,7 @@ export const createGroup = async (groupInfo) => {
 export const patchGroup = async (groupInfo) => {
     console.log('patchGroup에서')
     console.log(groupInfo)
-    const response = await api.patch(`/group/${groupInfo.groupId}`, {
+    const response = await authAPI.patch(`/group/${groupInfo.groupId}`, {
         name: groupInfo.name,
         description: groupInfo.description,
     })
