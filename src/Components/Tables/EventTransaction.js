@@ -18,7 +18,6 @@ const EventTransaction = ({ groupId }) => {
             if (filteredEvents.length > 0) {
                 setSelectedRowKeys([0]) // Automatically select the first row
                 setSelectedEvent(filteredEvents[0]) // Automatically select the first event
-                console.log(filteredEvents[0])
             }
         }
 

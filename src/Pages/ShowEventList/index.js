@@ -17,12 +17,10 @@ const ShowEventList = () => {
 
     useEffect(() => {
         getMember(groupId).then((data) => {
-            setEventMembers(data)
+            setEventMembers(data.members)
         })
     }, [groupId, setEventMembers])
 
-    // // console.log('selectedevent', selectedEvent)
-    // console.log('eveneme', eventMembers)
     return (
         <StyledPageLayout isopen={isopen}>
             <EventCard groupId={groupId} selectedEvent={selectedEvent} setSelectedEvent={setSelectedEvent} />
