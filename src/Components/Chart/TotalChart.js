@@ -1,11 +1,12 @@
 import * as React from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import { useEffect, useState } from 'react'
-import { styled } from '@mui/system'
+import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
 import { useMediaQuery } from 'react-responsive'
+
 // eslint-disable-next-line
-const StyledDiv = styled('div')(({ isOpen, theme }) => ({
+const StyledDiv = styled('div')(({ isOpen }) => ({
     width: '100%',
     marginTop: isOpen ? '150px' : '10px',
     // marginLeft: '30px',
@@ -24,7 +25,6 @@ const StyledDiv = styled('div')(({ isOpen, theme }) => ({
         color: '#000',
         fontFamily: 'Dotum Bold',
     },
-
     '& .MuiDataGrid-cell, & .MuiDataGrid-columnHeader': {
         fontFamily: 'Dotum Bold',
     },
