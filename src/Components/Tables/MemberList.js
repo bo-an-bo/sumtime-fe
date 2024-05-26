@@ -22,11 +22,9 @@ const MemberList = ({ groupId }) => {
         })
     }, [groupId])
 
-
     useEffect(() => {
         const keys = Object.keys(members[0]?.memberInfo || {})
         setMemberKeys(keys)
-        console.log(keys)
     }, [members])
 
     const columns = [
