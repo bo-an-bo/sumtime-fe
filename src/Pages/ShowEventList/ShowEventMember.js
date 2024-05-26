@@ -13,9 +13,11 @@ const ShowEventMember = ({ groupId, eventMembers }) => {
 
     useEffect(() => {
         getEvent(groupId).then((data) => {
-            setEvents(data.filter((event) => event !== null))
+            setEvents(data)
         })
     }, [groupId])
+
+    console.log('eventMembers', eventMembers)
 
     const handleClick = (memIds) => {
         const matchingMembers = eventMembers.filter((member) => memIds.includes(member._id))
