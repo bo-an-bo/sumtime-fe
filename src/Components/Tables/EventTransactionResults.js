@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useDayStore, useSort } from '../../store/event'
 import { getTransactions } from '../../apis/tranaction'
 import { Table } from 'antd'
 import styled from 'styled-components'
-import moment from 'moment'
 import KakaoMessage from '../Kakao/KakaoMessage'
 
-const EventTransactionResults = ({ eventId }) => {
-    const groupId = window.location.href.split('/')[4]
-    const { startDate, endDate } = useDayStore()
-    const { sort } = useSort()
+const EventTransactionResults = ({ groupId, eventId }) => {
     const [members, setMembers] = useState([])
     const [paidMembers, setPaidMembers] = useState([])
     const [unpaidMembers, setUnpaidMembers] = useState([])
@@ -21,30 +16,11 @@ const EventTransactionResults = ({ eventId }) => {
             const paidMembersList = response.filter((member) => member.isPaid)
             const unpaidMembersList = response.filter((member) => !member.isPaid)
 
-            const filteredPaidMembers = paidMembersList.filter((member) => {
-                const memberTimestamp = moment(member.timestamp[0])
-                const isWithinDateRange =
-                    startDate && endDate
-                        ? memberTimestamp.isSameOrAfter(startDate) && memberTimestamp.isSameOrBefore(endDate)
-                        : true
-                if (!isWithinDateRange) unpaidMembersList.push(member)
-                return isWithinDateRange
-            })
-
-            const sortedPaidMembers = filteredPaidMembers.sort((a, b) => {
-                if (sort === 'descend') {
-                    return new Date(b.timestamp[0]) - new Date(a.timestamp[0])
-                } else {
-                    return new Date(a.timestamp[0]) - new Date(b.timestamp[0])
-                }
-            })
-
-            const finalMembersList = unpaidMembersList.concat(sortedPaidMembers)
-            setMembers(finalMembersList)
-            setPaidMembers(sortedPaidMembers)
+            setPaidMembers(paidMembersList)
             setUnpaidMembers(unpaidMembersList)
+            setMembers(paidMembersList.concat(unpaidMembersList))
         })
-    }, [groupId, eventId, startDate, endDate, sort])
+    }, [groupId, eventId])
 
     const handleRowSelectChange = (selectedRowKeys) => {
         // Filter the selected row keys to include only those that correspond to unpaid members

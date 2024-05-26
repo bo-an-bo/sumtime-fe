@@ -2,29 +2,28 @@ import React, { useEffect, useState } from 'react'
 import { getEvent } from '../../apis/event'
 import { Table } from 'antd'
 import styled from 'styled-components'
-import { useEventStore } from '../../store/event'
+import EventTransactionResults from './EventTransactionResults'
 
 const EventTransaction = ({ groupId }) => {
     const [events, setEvents] = useState([])
-    const [selectedRowKeys, setSelectedRowKeys] = useState([])
-    const setSelectedEventId = useEventStore((state) => state.setEventId)
+    const [selectedRowKeys, setSelectedRowKeys] = useState([0])
+    const [selectedEvent, setSelectedEvent] = useState(null)
 
     useEffect(() => {
-        getEvent(groupId).then((data) => {
-            setEvents(data.filter((event) => event !== null))
-        })
-    }, [groupId])
+        const fetchEvents = async () => {
+            const data = await getEvent(groupId)
+            const filteredEvents = data.filter((event) => event !== null)
+            setEvents(filteredEvents)
 
-    useEffect(() => {
-        if (events.length > 0 && selectedRowKeys.length === 0) {
-            setSelectedRowKeys([0]) // Automatically select the first row
+            if (filteredEvents.length > 0) {
+                setSelectedRowKeys([0]) // Automatically select the first row
+                setSelectedEvent(filteredEvents[0]) // Automatically select the first event
+                console.log(filteredEvents[0])
+            }
         }
-    }, [events, selectedRowKeys, setSelectedRowKeys])
 
-    useEffect(() => {
-        const ids = selectedRowKeys.map((key) => events[key]?._id)
-        setSelectedEventId(ids)
-    }, [selectedRowKeys, events, setSelectedEventId])
+        fetchEvents()
+    }, [groupId])
 
     const columns = [
         {
@@ -49,11 +48,8 @@ const EventTransaction = ({ groupId }) => {
 
     const handleRowClick = (record) => {
         const { key } = record
-        if (selectedRowKeys.includes(key)) {
-            setSelectedRowKeys([])
-        } else {
-            setSelectedRowKeys([key])
-        }
+        setSelectedRowKeys([key])
+        setSelectedEvent(events[key])
     }
 
     const rowClassName = (record) => {
@@ -72,6 +68,7 @@ const EventTransaction = ({ groupId }) => {
                 })}
                 rowClassName={rowClassName}
             />
+            {selectedEvent && <EventTransactionResults groupId={groupId} eventId={selectedEvent._id} />}
         </Wrapper>
     )
 }
@@ -80,8 +77,7 @@ export default EventTransaction
 
 const Wrapper = styled.div`
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
 `
 
 const StyledTable = styled(Table)`
