@@ -35,7 +35,7 @@ const StyledLinkBox = styled(Link)`
 `
 
 const StyledMobiLeNavbar = styled.div`
-    // position: absolute;
+    position: absolute;
     display: flex;
     width: 100%;
     height: 120px;
@@ -43,7 +43,7 @@ const StyledMobiLeNavbar = styled.div`
 `
 
 const Hamburger = () => {
-    const isOpen = useMediaQuery({ maxWidth: 1180 })
+    const isopen = useMediaQuery({ maxWidth: 1180 })
     const [nickname, setNickname] = useState('')
 
     useEffect(() => {
@@ -70,7 +70,7 @@ const Hamburger = () => {
     // if (location.pathname === '/group' || location.pathname === '/') return null
     return (
         <div>
-            { isOpen ? (
+            {isopen ? (
                 <StyledMobiLeNavbar>
                     <Dropdown />
                     <StyledMenu mode="horizontal" items={items}></StyledMenu>

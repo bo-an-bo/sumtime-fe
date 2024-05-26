@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { addMember } from '../../apis/members'
+import React, { useState, useEffect } from 'react'
+import { addMember, getMember } from '../../apis/members'
 import { Button, Modal, Input } from 'antd'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
@@ -19,19 +19,50 @@ const StyledAddButton = styled(Button)`
 
 const AddMember = ({ groupId }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
-    const [name, setName] = useState('')
-    const [studentId, setStudentId] = useState('')
-    const [email, setEmail] = useState('')
-    const [phoneNumber, setPhoneNumber] = useState('')
     const [loading, setLoading] = useState(false)
+    const [formData, setFormData] = useState({})
+    const [propNames, setPropNames] = useState([])
+    const [name, setName] = useState('')
+
+    console.log('propNames:', propNames)
+
+    useEffect(() => {
+        const fetchMemberData = async () => {
+            try {
+                const data = await getMember(groupId)
+                const memberInfo = data.memberInfo || {}
+                console.log('memberInfo:', memberInfo)
+                const initialFormData = {}
+                const propNamesArray = [...memberInfo]
+                propNamesArray.forEach((propName) => {
+                    initialFormData[propName] = memberInfo[propName] || ''
+                })
+
+                setFormData(initialFormData)
+                setPropNames(propNamesArray)
+            } catch (error) {
+                console.error('Failed to fetch member data:', error)
+            }
+        }
+        fetchMemberData()
+    }, [groupId])
 
     const isAnyFieldEmpty = () => {
-        return !name || !studentId || !email || !phoneNumber
+        return propNames.some((propName) => !formData[propName])
     }
+
+    const handleInputChange = (e, propName) => {
+        setFormData({
+            ...formData,
+            [propName]: e.target.value,
+        })
+    }
+
+    console.log('formData:', formData)
 
     const handleAddMember = async () => {
         setLoading(true)
-        await addMember(groupId, name, { studentId, email, phoneNumber })
+        await addMember(groupId, name, formData)
         setLoading(false)
         setIsModalOpen(false)
         alert('회원 추가가 완료되었습니다.')
@@ -52,13 +83,14 @@ const AddMember = ({ groupId }) => {
                 okButtonProps={{ disabled: isAnyFieldEmpty() }}
             >
                 <StyledInput placeholder="이름" value={name} onChange={(e) => setName(e.target.value)} />
-                <StyledInput placeholder="학번" value={studentId} onChange={(e) => setStudentId(e.target.value)} />
-                <StyledInput placeholder="이메일" value={email} onChange={(e) => setEmail(e.target.value)} />
-                <StyledInput
-                    placeholder="전화번호"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                />
+                {propNames.map((propName) => (
+                    <StyledInput
+                        key={propName}
+                        placeholder={propName}
+                        value={formData[propName]}
+                        onChange={(e) => handleInputChange(e, propName)}
+                    />
+                ))}
             </Modal>
         </>
     )

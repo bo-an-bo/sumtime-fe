@@ -113,7 +113,8 @@ export const Wrapper = styled.div`
     flex-direction: column;
     align-items: flex-end;
     width: 100%;
-    margin: 2%;
+    // margin: 2%;
+    margin-right: 20px;
 `
 const FileIconWrapper = styled.div`
     width: 100%;

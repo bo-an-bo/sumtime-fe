@@ -4,6 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import whiteLogo from '../../IMG/logo_white.svg'
 import { useUser } from '../../hooks/useUser'
+import Hamburger from '../SideBar/Hamburger'
 
 const StyledImg = styled.img`
     width: 100px;
@@ -14,7 +15,7 @@ const StyledLinkBox = styled(Link)`
     width: 100px;
 `
 
-const NavBar = () => {
+const NavBar = ({ isopen }) => {
     const user = useUser()
 
     const items = [
@@ -36,14 +37,22 @@ const NavBar = () => {
         },
     ]
 
-    return <StyledMenu mode="horizontal" items={items}></StyledMenu>
+    return (
+        <div>
+            {' '}
+            <StyledMenu isopen={isopen} mode="horizontal" items={items}></StyledMenu>{' '}
+            <StyledHamburger isopen={isopen}>
+                <Hamburger />
+            </StyledHamburger>
+        </div>
+    )
 }
 
 const StyledMenu = styled(Menu)`
     height: 120px;
     width: 100%;
     background-color: #003f98;
-    display: flex;
+    display: ${(props) => (props.isopen ? 'none' : 'display')};
     justify-content: flex-end;
     padding: 40px;
 
@@ -56,6 +65,10 @@ const StyledMenu = styled(Menu)`
         word-wrap: break-word;
         margin-right: 50px;
     }
+`
+
+const StyledHamburger = styled.div`
+    display: ${(props) => (props.isopen ? 'display' : 'none')};
 `
 
 export default NavBar
