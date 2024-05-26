@@ -3,14 +3,16 @@ import GroupCard from '../../Components/Card/GroupCard'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'antd'
+import { useMediaQuery } from 'react-responsive'
 
 const ShowGroupList = () => {
     const navigate = useNavigate()
+    const isopen = useMediaQuery({ maxWidth: 1180 })
     const onClickCreateGroup = () => {
         navigate('/group/createGroup')
     }
     return (
-        <StyledGroupPageLayout>
+        <StyledGroupPageLayout isopen={isopen}>
             <StyledButtonSection>
                 <StyledButton type="primary" htmlType="submit" onClick={onClickCreateGroup}>
                     모임 생성
@@ -36,6 +38,7 @@ const StyledGroupPageLayout = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin-top: ${(props) => (props.isopen ? '150px' : '')};
 `
 
 const StyledButtonSection = styled.div`

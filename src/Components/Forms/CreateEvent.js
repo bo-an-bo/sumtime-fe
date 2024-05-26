@@ -198,7 +198,7 @@ export default CreateEvent
 const StyledLayout = styled.div`
     display: flex;
     flex-direction: column;
-    width: 1500px;
+    width: 100%;
     // background-color: red;
     margin: 2%;
 `

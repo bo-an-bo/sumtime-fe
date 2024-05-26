@@ -18,7 +18,9 @@ const ShowEventMember = ({ groupId, eventMembers }) => {
     }, [groupId])
 
     const handleClick = (memIds) => {
-        const matchingMembers = eventMembers.filter((member) => memIds.includes(member._id))
+        console.log('memIds:', memIds)
+        const matchingMembers = eventMembers.members.filter((member) => memIds.includes(member._id))
+
         setMatchingarr(matchingMembers)
         console.log('matting', matchingarr)
     }

@@ -14,18 +14,19 @@ import KakaoMessage from '../../Components/Kakao/KakaoMessage'
 
 const MainPage = () => {
     const { user } = useAuth()
-    const isOpen = useMediaQuery({ maxWidth: 768 })
+    const isopen = useMediaQuery({ maxWidth: 768 })
     const navigate = useNavigate()
     const [messageApi, contextHolder] = message.useMessage()
 
     const onClickHandler = () => {
         if (!user)
-            messageApi.open({
-                type: 'warning',
-                content: '로그인 후 이용해주세요.',
-            }).then()
-        else
-            navigate('/group')
+            messageApi
+                .open({
+                    type: 'warning',
+                    content: '로그인 후 이용해주세요.',
+                })
+                .then()
+        else navigate('/group')
     }
 
     return (
@@ -33,14 +34,14 @@ const MainPage = () => {
             {contextHolder}
 
             <LogoContainer>
-                <StyledLogoImg src={LogoColor} alt="logo_white_img" isOpen={isOpen}></StyledLogoImg>
-                <StyledText isOpen={isOpen}>모임의 계산을 쉽게</StyledText>
+                <StyledLogoImg src={LogoColor} alt="logo_white_img" isopen={isopen}></StyledLogoImg>
+                <StyledText isopen={isopen}>모임의 계산을 쉽게</StyledText>
             </LogoContainer>
 
-            <StyledContentSection isOpen={isOpen}>
+            <StyledContentSection isopen={isopen}>
                 <StyledTableImg src={exmTab} alt="example_tabel" />
                 <StyldMainText>
-                    <StyledText isOpen={isOpen}>sumtime과 함께 필요한 데이터를 마음껏 다루어 보세요!</StyledText>
+                    <StyledText isopen={isopen}>sumtime과 함께 필요한 데이터를 마음껏 다루어 보세요!</StyledText>
                     <StyledText style={{ fontSize: '1.2rem' }}>이런 걸 할 수 있어요</StyledText>
                     <StyledContent>✔️ 모임 회비 안 낸 사람 조회</StyledContent>
                     <StyledContent>✔️ 간식 행사와 같은 모임 내 이벤트 생성</StyledContent>
@@ -81,7 +82,7 @@ const MainPage = () => {
 const StyledText = styled.div`
     color: #003f98;
     font-family: 'Dotum Bold', serif;
-    font-size: ${(props) => (props.isOpen ? '2vh' : '4vh')};
+    font-size: ${(props) => (props.isopen ? '2vh' : '4vh')};
     // margin: 20px;
 `
 
@@ -125,7 +126,7 @@ const StyledLayoutMain = styled.div`
 const StyledLogoImg = styled.img`
     // height: 100px;
     align-self: center; // 중앙 정렬을 위해 추가
-    width: ${(props) => (props.isOpen ? '10vh' : '20vh')};
+    width: ${(props) => (props.isopen ? '10vh' : '20vh')};
 `
 
 const StyledTableImg = styled.img`
@@ -144,11 +145,11 @@ const StyledContentSection = styled.div`
     margin-bottom: 50px;
 
     display: flex;
-    flex-direction: ${(props) => (props.isOpen ? 'column' : 'row')};
+    flex-direction: ${(props) => (props.isopen ? 'column' : 'row')};
 
     gap: 20px;
     width: 100%;
-    height: ${(props) => (props.isOpen ? '55vh' : '30vh')};
+    height: ${(props) => (props.isopen ? '55vh' : '30vh')};
     background-color: #dceaff;
     font-family: 'Dotum Bold', serif;
     font-size: 20px;

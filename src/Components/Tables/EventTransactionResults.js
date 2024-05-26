@@ -95,11 +95,17 @@ const Wrapper = styled.div`
 const StyledTable = styled(Table)`
     margin-top: 20px;
 
+    .ant-table-thead > tr {
+        font-family: 'Dotum Bold';
+    }
+
     tbody tr.paid-row {
         background-color: #d8f0ff;
+        font-family: 'Dotum Medium';
     }
 
     tbody tr.unpaid-row {
         background-color: #ffe6e6;
+        font-family: 'Dotum Medium';
     }
 `

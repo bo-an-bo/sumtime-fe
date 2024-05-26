@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import Hamburger from '../SideBar/Hamburger'
 
 const SideBarIndex = () => {
-    const isOpen = useMediaQuery({ maxWidth: 1180 })
+    const isopen = useMediaQuery({ maxWidth: 1180 })
     const memberData = [
         {
             index: 1,
@@ -72,12 +72,12 @@ const SideBarIndex = () => {
 
     return (
         <div>
-            {isOpen ? (
+            {isopen ? (
                 <Hamburger />
             ) : (
                 <StyledSideBar>
                     {' '}
-                    {isOpen ? (
+                    {isopen ? (
                         <div></div>
                     ) : (
                         <SideBar
