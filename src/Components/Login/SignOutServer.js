@@ -21,7 +21,8 @@ const SignOutServer = () => {
     }
 
     return <Button type="link" onClick={serverSignout}
-                   style={{ padding: '0', height: 'auto', lineHeight: 'inherit' }}>회원 탈퇴</Button>
+                   style={{ padding: '0', height: 'auto', lineHeight: 'inherit', fontFamily: 'Dotum Bold' }}>회원
+        탈퇴</Button>
 }
 
 export default SignOutServer

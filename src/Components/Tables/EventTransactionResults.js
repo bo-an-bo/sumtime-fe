@@ -46,7 +46,8 @@ const EventTransactionResults = ({ groupId, eventId }) => {
             dataIndex: 'isPaid',
             key: 'paid',
             render: isPaid => (
-                <Tag color={isPaid ? 'geekblue' : 'volcano'}>{isPaid ? '납부 완료' : '미납'}</Tag>
+                <Tag color={isPaid ? 'geekblue' : 'volcano'}
+                     style={{ fontFamily: 'Dotum Medium' }}>{isPaid ? '납부 완료' : '미납'}</Tag>
             ),
         },
     ]
@@ -135,7 +136,13 @@ const StyledTable = styled(Table)`
     margin-top: 20px;
 
     .ant-table-thead > tr {
-        font-family: 'Dotum Bold';
+        font-family: 'Dotum Bold', sans-serif;
+    }
+
+    .ant-table-body {
+        font-family: 'Dotum Medium', sans-serif;
+
+
     }
 
     //
