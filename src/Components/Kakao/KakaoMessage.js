@@ -27,8 +27,8 @@ const KakaoMessage = ({ groupId, eventId, unpaidMembers }) => {
                 'group': group.name,
                 'event': event.name,
                 'fee': event.fee,
-                'start_date': event.startDate.toISOString().slice(0, 10),
-                'end_date': event.endDate.toISOString().slice(0, 10),
+                'start_date': event.startDate.slice(0, 10),
+                'end_date': event.endDate.slice(0, 10),
             }
         }
         const tmpEvent = {

@@ -10,7 +10,6 @@ import LoginKakao from '../../Components/Login/LoginKakao'
 import { useAuth } from '../../context/AuthContext'
 import { useMediaQuery } from 'react-responsive'
 import SignOutServer from '../../Components/Login/SignOutServer'
-import KakaoMessage from '../../Components/Kakao/KakaoMessage'
 
 const MainPage = () => {
     const { user } = useAuth()
@@ -67,7 +66,6 @@ const MainPage = () => {
                 {user ? (
                     <>
                         <LogoutKakao />
-                        <KakaoMessage groupId={{}} eventId={{}} unpaidMembers={{}} />
                         <SignOutServer />
                     </>
                 ) : (
