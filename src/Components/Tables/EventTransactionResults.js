@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getTransactions } from '../../apis/tranaction'
-import { Button, Table } from 'antd'
+import { Button, Table, Tag } from 'antd'
 import styled from 'styled-components'
 import KakaoMessage from '../Kakao/KakaoMessage'
 
@@ -20,25 +20,19 @@ const EventTransactionResults = ({ groupId, eventId }) => {
             setPaidMembers(paidMembersList)
             setUnpaidMembers(unpaidMembersList)
             setMembers(paidMembersList.concat(unpaidMembersList))
+            setSelectedMemberNames([])
+            setSelectedRowKeys([])
         })
     }, [groupId, eventId])
 
     const handleRowSelectChange = (selectedRowKeys) => {
-        // Filter the selected row keys to include only those that correspond to unpaid members
-        const filteredSelectedRowKeys = selectedRowKeys.filter((key) => {
-            const index = Number(key)
-            const member = members[index]
-            // Check if the member is in the unpaidMembers array
-            return unpaidMembers.some((unpaidMember) => unpaidMember.member._id === member.member._id)
-        })
-
-        setSelectedRowKeys(filteredSelectedRowKeys)
-        setSelectedMemberNames(filteredSelectedRowKeys.map((key) => members[Number(key)].member.name))
+        setSelectedRowKeys(selectedRowKeys)
+        setSelectedMemberNames(selectedRowKeys.map((key) => members[Number(key)].member.name))
     }
 
     const columns = [
         {
-            title: '순',
+            title: '번호',
             dataIndex: 'index',
             key: 'index',
         },
@@ -46,6 +40,14 @@ const EventTransactionResults = ({ groupId, eventId }) => {
             title: '이름',
             dataIndex: 'name',
             key: 'name',
+        },
+        {
+            title: '납부 여부',
+            dataIndex: 'isPaid',
+            key: 'paid',
+            render: isPaid => (
+                <Tag color={isPaid ? 'geekblue' : 'volcano'}>{isPaid ? '납부 완료' : '미납'}</Tag>
+            ),
         },
     ]
 
@@ -82,7 +84,7 @@ const EventTransactionResults = ({ groupId, eventId }) => {
     return (
         <Wrapper>
             <ButtonWrapper>
-                <Button onClick={handleUnpaidMembers}>미납 회원 선택</Button>
+                <Button style={{ fontFamily: 'Dotum Bold' }} onClick={handleUnpaidMembers}>미납 회원 선택</Button>
             </ButtonWrapper>
             <StyledTable
                 rowSelection={{
@@ -122,6 +124,7 @@ const Wrapper = styled.div`
 const KakaoWrapper = styled.div`
     display: flex;
     justify-content: center;
+
 `
 
 const ButtonWrapper = styled.div`
@@ -135,13 +138,14 @@ const StyledTable = styled(Table)`
         font-family: 'Dotum Bold';
     }
 
-    tbody tr.paid-row {
-        background-color: #d8f0ff;
-        font-family: 'Dotum Medium';
-    }
-
-    tbody tr.unpaid-row {
-        background-color: #ffe6e6;
-        font-family: 'Dotum Medium';
-    }
+    //
+    //tbody tr.paid-row {
+    //    background-color: #d8f0ff; // 기본 색상
+    //    font-family: 'Dotum Medium';
+    //}
+    //
+    //tbody tr.unpaid-row {
+    //    background-color: #ffe6e6; // 기본 색상
+    //    font-family: 'Dotum Medium';
+    //}
 `
