@@ -79,7 +79,10 @@ const KakaoMessage = ({ groupId, eventId, selectedMemberNames }) => {
     return (
         <>
             {contextHolder}
-            <KakaoMessageButton onClick={showModal}>
+            <KakaoMessageButton
+                onClick={showModal}
+                disabled={selectedMemberNames.length === 0}
+            >
                 <RiKakaoTalkFill />
                 선택한 회원에게 알리기
             </KakaoMessageButton>
@@ -98,8 +101,7 @@ const KakaoMessage = ({ groupId, eventId, selectedMemberNames }) => {
             >
                 <>
                     아래의 회원들에게 메세지를 보냅니다.
-                    <p>미납회원: {unpaidNames}</p>
-                    <p>전송회원: {filteredNames}</p>
+                    <p>전송 회원: {filteredNames.join(' ')}</p>
                 </>
             </Modal>
         </>
