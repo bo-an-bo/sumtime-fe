@@ -5,6 +5,8 @@ import styled from 'styled-components'
 import whiteLogo from '../../IMG/logo_white.svg'
 import { useUser } from '../../hooks/useUser'
 import Hamburger from '../SideBar/Hamburger'
+import LogoutKakao from '../Login/LogoutKakao'
+import SignOutServer from '../Login/SignOutServer'
 
 const StyledImg = styled.img`
     width: 100px;
@@ -33,7 +35,11 @@ const NavBar = ({ isopen }) => {
         },
         {
             key: 'myProfile',
-            label: <Link to="/showProfile">{user ? user.nickname : '로그인 필요'}</Link>,
+            label: <StyledText>{user ? user.nickname : '로그인 필요'}</StyledText>,
+            children: [
+                { label: <LogoutKakao />, key: 'setting:1' },
+                { label: <SignOutServer />, key: 'setting:2' },
+            ],
         },
     ]
 
@@ -66,6 +72,14 @@ const StyledMenu = styled(Menu)`
         margin-right: 50px;
     }
 `
+const StyledText = styled.div`
+    height: 40px;
+    color: white;
+    font-size: 22px;
+    font-weight: 700;
+    font-family: 'Dotum Bold', serif;
+    word-wrap: break-word;
+    margin-right: 50px;`
 
 const StyledHamburger = styled.div`
     display: ${(props) => (props.isopen ? 'display' : 'none')};

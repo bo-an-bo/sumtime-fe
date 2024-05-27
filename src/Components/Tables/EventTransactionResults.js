@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getTransactions } from '../../apis/tranaction'
-import { Table } from 'antd'
+import { Button, Table, Tag } from 'antd'
 import styled from 'styled-components'
 import KakaoMessage from '../Kakao/KakaoMessage'
 
@@ -9,7 +9,8 @@ const EventTransactionResults = ({ groupId, eventId }) => {
     const [paidMembers, setPaidMembers] = useState([])
     const [unpaidMembers, setUnpaidMembers] = useState([])
     const [selectedRowKeys, setSelectedRowKeys] = useState([])
-    const [selectedMemberIds, setSelectedMemberIds] = useState([])
+    const [selectedMemberNames, setSelectedMemberNames] = useState([])
+    const [isButtonClicked, setIsButtonClicked] = useState(false)
 
     useEffect(() => {
         getTransactions(groupId, eventId).then((response) => {
@@ -19,27 +20,19 @@ const EventTransactionResults = ({ groupId, eventId }) => {
             setPaidMembers(paidMembersList)
             setUnpaidMembers(unpaidMembersList)
             setMembers(paidMembersList.concat(unpaidMembersList))
+            setSelectedMemberNames([])
+            setSelectedRowKeys([])
         })
     }, [groupId, eventId])
 
     const handleRowSelectChange = (selectedRowKeys) => {
-        // Filter the selected row keys to include only those that correspond to unpaid members
-        const filteredSelectedRowKeys = selectedRowKeys.filter((key) => {
-            const index = Number(key)
-            const member = members[index]
-            // Check if the member is in the unpaidMembers array
-            return unpaidMembers.some((unpaidMember) => unpaidMember.member._id === member.member._id)
-        })
-
-        setSelectedRowKeys(filteredSelectedRowKeys)
-        setSelectedMemberIds(filteredSelectedRowKeys.map((key) => members[Number(key)].member._id))
+        setSelectedRowKeys(selectedRowKeys)
+        setSelectedMemberNames(selectedRowKeys.map((key) => members[Number(key)].member.name))
     }
-
-    console.log(selectedMemberIds)
 
     const columns = [
         {
-            title: '순',
+            title: '번호',
             dataIndex: 'index',
             key: 'index',
         },
@@ -47,6 +40,15 @@ const EventTransactionResults = ({ groupId, eventId }) => {
             title: '이름',
             dataIndex: 'name',
             key: 'name',
+        },
+        {
+            title: '납부 여부',
+            dataIndex: 'isPaid',
+            key: 'paid',
+            render: isPaid => (
+                <Tag color={isPaid ? 'geekblue' : 'volcano'}
+                     style={{ fontFamily: 'Dotum Medium' }}>{isPaid ? '납부 완료' : '미납'}</Tag>
+            ),
         },
     ]
 
@@ -58,10 +60,33 @@ const EventTransactionResults = ({ groupId, eventId }) => {
         member: member.member,
     }))
 
+    useEffect(() => {
+        console.log(isButtonClicked)
+    }, [isButtonClicked])
+
+    const handleUnpaidMembers = () => {
+        if (isButtonClicked) {
+            setSelectedRowKeys([])
+            setSelectedMemberNames([])
+            setIsButtonClicked(false)
+        } else {
+            const unpaidKeys = unpaidMembers.map((member) => {
+                const index = members.findIndex(m => m.member._id === member.member._id)
+                return index.toString()
+            })
+
+            setSelectedRowKeys(unpaidKeys)
+            setSelectedMemberNames(unpaidKeys.map((key) => members[Number(key)].member.name))
+            setIsButtonClicked(true)
+        }
+    }
+
+
     return (
         <Wrapper>
-            <KakaoMessage groupId={groupId} eventId={eventId} unpaidMembers={unpaidMembers} />
-
+            <ButtonWrapper>
+                <Button style={{ fontFamily: 'Dotum Bold' }} onClick={handleUnpaidMembers}>미납 회원 선택</Button>
+            </ButtonWrapper>
             <StyledTable
                 rowSelection={{
                     type: 'checkbox',
@@ -78,6 +103,9 @@ const EventTransactionResults = ({ groupId, eventId }) => {
                         : 'unpaid-row'
                 }
             />
+            <KakaoWrapper>
+                <KakaoMessage groupId={groupId} eventId={eventId} selectedMemberNames={selectedMemberNames} />
+            </KakaoWrapper>
         </Wrapper>
     )
 }
@@ -85,27 +113,46 @@ const EventTransactionResults = ({ groupId, eventId }) => {
 export default EventTransactionResults
 
 const Wrapper = styled.div`
-    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     padding: 20px;
     border-radius: 10px;
     background-color: #fff;
     margin-top: 20px;
+    width: 25%;
+`
+const KakaoWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+
 `
 
+const ButtonWrapper = styled.div`
+    display: flex;
+    justify-content: flex-end;
+`
 const StyledTable = styled(Table)`
     margin-top: 20px;
 
     .ant-table-thead > tr {
-        font-family: 'Dotum Bold';
+        font-family: 'Dotum Bold', sans-serif;
     }
 
-    tbody tr.paid-row {
-        background-color: #d8f0ff;
-        font-family: 'Dotum Medium';
+    .ant-table-body {
+        font-family: 'Dotum Medium', sans-serif;
+
+
     }
 
-    tbody tr.unpaid-row {
-        background-color: #ffe6e6;
-        font-family: 'Dotum Medium';
-    }
+    //
+    //tbody tr.paid-row {
+    //    background-color: #d8f0ff; // 기본 색상
+    //    font-family: 'Dotum Medium';
+    //}
+    //
+    //tbody tr.unpaid-row {
+    //    background-color: #ffe6e6; // 기본 색상
+    //    font-family: 'Dotum Medium';
+    //}
 `

@@ -2,9 +2,11 @@
 import React from 'react'
 import { Button } from 'antd'
 import { useAuth } from '../../context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 const LogoutKakao = () => {
     const { setUser } = useAuth()
+    const navigate = useNavigate()
     const Kakao = window.Kakao || {}
     const kakaoLogout = () => {
         if (Kakao && Kakao.Auth) {
@@ -15,9 +17,16 @@ const LogoutKakao = () => {
                 console.log('Logged out successfully')
             })
         }
+        navigate('/')
     }
 
-    return <Button onClick={kakaoLogout}>Logout</Button>
+    return <Button type="link" onClick={kakaoLogout}
+                   style={{
+                       padding: '0',
+                       height: 'auto',
+                       lineHeight: 'inherit',
+                       fontFamily: 'Dotum Bold',
+                   }}>로그아웃</Button>
 }
 
 export default LogoutKakao
