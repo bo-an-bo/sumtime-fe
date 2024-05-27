@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getTransactions } from '../../apis/tranaction'
-import { Table } from 'antd'
+import { Button, Table } from 'antd'
 import styled from 'styled-components'
 import KakaoMessage from '../Kakao/KakaoMessage'
 
@@ -9,7 +9,8 @@ const EventTransactionResults = ({ groupId, eventId }) => {
     const [paidMembers, setPaidMembers] = useState([])
     const [unpaidMembers, setUnpaidMembers] = useState([])
     const [selectedRowKeys, setSelectedRowKeys] = useState([])
-    const [selectedMemberIds, setSelectedMemberIds] = useState([])
+    const [selectedMemberNames, setSelectedMemberNames] = useState([])
+    const [isButtonClicked, setIsButtonClicked] = useState(false)
 
     useEffect(() => {
         getTransactions(groupId, eventId).then((response) => {
@@ -32,10 +33,8 @@ const EventTransactionResults = ({ groupId, eventId }) => {
         })
 
         setSelectedRowKeys(filteredSelectedRowKeys)
-        setSelectedMemberIds(filteredSelectedRowKeys.map((key) => members[Number(key)].member._id))
+        setSelectedMemberNames(filteredSelectedRowKeys.map((key) => members[Number(key)].member.name))
     }
-
-    console.log(selectedMemberIds)
 
     const columns = [
         {
@@ -58,10 +57,33 @@ const EventTransactionResults = ({ groupId, eventId }) => {
         member: member.member,
     }))
 
+    useEffect(() => {
+        console.log(isButtonClicked)
+    }, [isButtonClicked])
+
+    const handleUnpaidMembers = () => {
+        if (isButtonClicked) {
+            setSelectedRowKeys([])
+            setSelectedMemberNames([])
+            setIsButtonClicked(false)
+        } else {
+            const unpaidKeys = unpaidMembers.map((member) => {
+                const index = members.findIndex(m => m.member._id === member.member._id)
+                return index.toString()
+            })
+
+            setSelectedRowKeys(unpaidKeys)
+            setSelectedMemberNames(unpaidKeys.map((key) => members[Number(key)].member.name))
+            setIsButtonClicked(true)
+        }
+    }
+
+
     return (
         <Wrapper>
-            <KakaoMessage groupId={groupId} eventId={eventId} unpaidMembers={unpaidMembers} />
-
+            <ButtonWrapper>
+                <Button onClick={handleUnpaidMembers}>미납 회원 선택</Button>
+            </ButtonWrapper>
             <StyledTable
                 rowSelection={{
                     type: 'checkbox',
@@ -78,6 +100,9 @@ const EventTransactionResults = ({ groupId, eventId }) => {
                         : 'unpaid-row'
                 }
             />
+            <KakaoWrapper>
+                <KakaoMessage groupId={groupId} eventId={eventId} selectedMemberNames={selectedMemberNames} />
+            </KakaoWrapper>
         </Wrapper>
     )
 }
@@ -85,13 +110,24 @@ const EventTransactionResults = ({ groupId, eventId }) => {
 export default EventTransactionResults
 
 const Wrapper = styled.div`
-    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     padding: 20px;
     border-radius: 10px;
     background-color: #fff;
     margin-top: 20px;
+    width: 25%;
+`
+const KakaoWrapper = styled.div`
+    display: flex;
+    justify-content: center;
 `
 
+const ButtonWrapper = styled.div`
+    display: flex;
+    justify-content: flex-end;
+`
 const StyledTable = styled(Table)`
     margin-top: 20px;
 
