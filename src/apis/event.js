@@ -10,11 +10,15 @@ export const getEvent = async (groupId) => {
     return response.data
 }
 
+export const deleteEvent = async (groupId, eventId) => {
+    const response = await authAPI.delete(`group/${groupId}/event/${eventId}`)
+    return response.data
+}
+
 export const getEventDetail = async (groupId, eventId) => {
     const response = await authAPI.get(`group/${groupId}/event/${eventId}`)
     return response.data
 }
-
 
 export const postEventMember = async (groupId, eventId, meminfo) => {
     try {

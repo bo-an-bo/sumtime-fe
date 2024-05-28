@@ -1,64 +1,93 @@
 import React, { useEffect, useState } from 'react'
-import { Collapse } from 'antd'
-import { getEvent } from '../../apis/event'
+import { Collapse, Descriptions, Button, Popconfirm } from 'antd'
+import { getEvent, deleteEvent } from '../../apis/event'
 import styled from 'styled-components'
 
-const EventCard = ({ groupId, setSelectedEvent }) => {
+const EventCard = ({ groupId }) => {
     const [events, setEvents] = useState([])
+
     useEffect(() => {
         getEvent(groupId).then((data) => {
             setEvents(data.filter((event) => event !== null))
         })
     }, [groupId])
 
-    useEffect(() => {
-        const ids = events.map((item) => item._id)
-        setSelectedEvent(ids)
-    }, [events, setSelectedEvent])
-
     const formatDate = (date) => {
         return new Date(date).toLocaleDateString()
     }
 
+    const handleDelete = async (eventId) => {
+        try {
+            await deleteEvent(groupId, eventId)
+            setEvents(events.filter((event) => event._id !== eventId))
+        } catch (error) {
+            console.error('Failed to delete event:', error)
+        }
+    }
+
+    const confirmDelete = (eventId) => {
+        handleDelete(eventId)
+    }
+
     const items = events
         .map((event, i) => {
-            // events[i]가 null이거나 undefined인 경우 빈 객체로 대체하여 오류를 방지합니다.
             const currentEvent = events[i] || {}
-
-            // label이 null인 경우 해당 아이템을 무시하고 다음 아이템을 생성하지 않음
             if (currentEvent.label === null) {
                 return null
             }
 
-            // label이 null이 아닌 경우 정상적으로 아이템을 생성함
             return {
                 key: i,
-                label: currentEvent.name || '', // name이 null이면 빈 문자열로 처리
+                label: currentEvent.name || '',
                 children: (
-                    <div>
-                        <p>
-                            <strong>설명</strong>: {currentEvent.description || ''}
-                        </p>
-                        <p>
-                            <strong>요금</strong>:{' '}
+                    <StyledDescriptions bordered column={2}>
+                        <Descriptions.Item label="설명">{currentEvent.description || ''}</Descriptions.Item>
+                        <Descriptions.Item label="회비">
                             {typeof currentEvent.fee === 'number'
                                 ? currentEvent.fee.toLocaleString() + '원'
                                 : currentEvent.fee || ''}
-                        </p>
+                        </Descriptions.Item>
+                        <Descriptions.Item label="이벤트 기한">
+                            {formatDate(currentEvent.endDate) || ''}
+                        </Descriptions.Item>
+                        <Descriptions.Item label="결제기한">
+                            {formatDate(currentEvent.transactionEndDate) || ''}
+                        </Descriptions.Item>
+                    </StyledDescriptions>
+                ),
 
-                        <p>
-                            <strong>이벤트 기한</strong>: {formatDate(currentEvent.endDate) || ''}
-                        </p>
-                        <p>
-                            <strong>결제 기한</strong>: {formatDate(currentEvent.transactionEndDate) || ''}
-                        </p>
-                    </div>
+                Button: (
+                    <Popconfirm
+                        title="정말 삭제하시겠습니까?"
+                        onConfirm={() => confirmDelete(currentEvent._id)}
+                        okText="삭제"
+                        cancelText="아니요"
+                    >
+                        <ButtonWrapper>
+                            <StyledButton type="primary" danger>
+                                삭제
+                            </StyledButton>
+                        </ButtonWrapper>
+                    </Popconfirm>
                 ),
             }
         })
-        .filter((item) => item !== null) // null인 아이템 제거
+        .filter((item) => item !== null)
 
-    return <StyledCollapse accordion bordered={false} items={items}></StyledCollapse>
+    return (
+        <>
+            <StyledCollapse accordion bordered={false}>
+                {items.map((item, index) => (
+                    <StyledCollapse.Panel key={index} header={item.label}>
+                        <FlexContainer>
+                            {item.children}
+                            {item.Button}
+                        </FlexContainer>
+                    </StyledCollapse.Panel>
+                ))}
+            </StyledCollapse>
+        </>
+    )
 }
 
 const StyledCollapse = styled(Collapse)`
@@ -70,6 +99,34 @@ const StyledCollapse = styled(Collapse)`
     overflow: auto;
     max-height: 450px;
     font-family: 'Dotum Bold', serif;
+`
+
+const StyledDescriptions = styled(Descriptions)`
+    .ant-descriptions-item-label {
+        width: 100px;
+        font-family: 'Dotum Bold', serif;
+    }
+
+    .ant-descriptions-item-content {
+        font-family: 'Dotum Medium', serif;
+    }
+`
+
+const FlexContainer = styled.div`
+    display: flex;
+    justify-content: space-between; /* 아이템을 양쪽으로 정렬합니다 */
+`
+
+const StyledButton = styled(Button)`
+    width: 80px;
+    font-family: 'Dotum Bold', serif;
+`
+
+const ButtonWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 90px;
 `
 
 export default EventCard
