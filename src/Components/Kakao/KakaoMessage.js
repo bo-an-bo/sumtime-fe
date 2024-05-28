@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { getEventDetail } from '../../apis/event'
 import { getGroupDetail } from '../../apis/groups'
 
-const KakaoMessage = ({ groupId, eventId, unpaidMembers }) => {
+const KakaoMessage = ({ groupId, eventId, selectedMemberNames }) => {
     const [friends, setFriends] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [messageApi, contextHolder] = message.useMessage()
@@ -16,7 +16,10 @@ const KakaoMessage = ({ groupId, eventId, unpaidMembers }) => {
         const res = await getKakaoFriends()
         setFriends(res.elements)
     }
-    const unpaidNames = unpaidMembers.length > 0 ? unpaidMembers.map(u => u.member.name) : ['이예림']
+    const unpaidNames = selectedMemberNames
+    const filteredNames = friends
+        .filter(friend => unpaidNames.includes(friend.profile_nickname))
+        .map(friend => friend.profile_nickname)
 
     const handleSendMessage = async () => {
         let res
@@ -27,8 +30,8 @@ const KakaoMessage = ({ groupId, eventId, unpaidMembers }) => {
                 'group': group.name,
                 'event': event.name,
                 'fee': event.fee,
-                'start_date': event.startDate.toISOString().slice(0, 10),
-                'end_date': event.endDate.toISOString().slice(0, 10),
+                'start_date': event.startDate.slice(0, 10),
+                'end_date': event.endDate.slice(0, 10),
             }
         }
         const tmpEvent = {
@@ -45,6 +48,7 @@ const KakaoMessage = ({ groupId, eventId, unpaidMembers }) => {
         const filteredUuids = friends
             .filter(friend => unpaidNames.includes(friend.profile_nickname))
             .map(friend => friend.uuid)
+
 
         // 카카오 메세지 보내기 5명 제한 -> 반복문
         for (let i = 0; i < filteredUuids.length; i += 5) {
@@ -75,9 +79,12 @@ const KakaoMessage = ({ groupId, eventId, unpaidMembers }) => {
     return (
         <>
             {contextHolder}
-            <KakaoMessageButton onClick={showModal}>
+            <KakaoMessageButton
+                onClick={showModal}
+                disabled={selectedMemberNames.length === 0}
+            >
                 <RiKakaoTalkFill />
-                미납 회원에게 알리기
+                선택한 회원에게 알리기
             </KakaoMessageButton>
             <Modal title="카카오톡 메세지 전송" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
                    footer={[
@@ -94,7 +101,7 @@ const KakaoMessage = ({ groupId, eventId, unpaidMembers }) => {
             >
                 <>
                     아래의 회원들에게 메세지를 보냅니다.
-                    <p>미납회원: {unpaidNames}</p>
+                    <p>전송 회원: {filteredNames.join(' ')}</p>
                 </>
             </Modal>
         </>
