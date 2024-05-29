@@ -20,11 +20,15 @@ const ShowEventMember = ({ groupId, eventMembers }) => {
     console.log('eventMembers', eventMembers)
 
     const handleClick = (memIds) => {
-        console.log('memIds:', memIds)
-        const matchingMembers = eventMembers.members.filter((member) => memIds.includes(member._id))
-
-        setMatchingarr(matchingMembers)
-        console.log('matting', matchingarr)
+        if (eventMembers) {
+            console.log('memIds:', memIds)
+            const matchingMembers = eventMembers._id.filter((member) => memIds.includes(member))
+            setMatchingarr(matchingMembers)
+            console.log('matting', matchingarr)
+        } else {
+            alert('이벤트 멤버가 존재하지 않습니다.')
+            console.warn('eventMembers or eventMembers.members is undefined')
+        }
     }
 
     const renderButtons = () => {
