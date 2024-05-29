@@ -17,6 +17,7 @@ import ShowEventResult from './Pages/ShowEventResult'
 import EditGroupInfo from './Pages/EditGroupInfoPage'
 import SelectMembers from './Pages/CreateEventPage/SelectMembers'
 import ShowResult from './Pages/ShowResult'
+import UserGuideline from './Pages/Guide/UserGuideline'
 import { AuthProvider } from './context/AuthContext'
 import { useMediaQuery } from 'react-responsive'
 
@@ -35,6 +36,7 @@ function App() {
                 <div className="App">
                     <Routes>
                         <Route path="/" element={<MainPage />} />
+                        <Route path="/guide" element={<UserGuideline />} />
                         <Route path="/group/*" element={<GroupRoutes />} />
                     </Routes>
                 </div>
@@ -52,6 +54,7 @@ function GroupRoutes() {
             <StyledLayout>
                 <Routes>
                     <Route path="/" element={<ShowGroupList />} />
+
                     <Route path="/createGroup" element={<CreateGroup />} />
                     <Route path="/:id/*" element={<GroupRoutesWithSidebar />} />
                 </Routes>
