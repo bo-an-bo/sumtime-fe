@@ -29,6 +29,10 @@ const MainPage = () => {
         else navigate('/group')
     }
 
+    const onClickIntroHandler = () => {
+        navigate('/guide')
+    }
+
     return (
         <StyledLayoutMain>
             {contextHolder}
@@ -64,7 +68,12 @@ const MainPage = () => {
                         님 환영합니다.
                     </StyledContent>
                 )}
-                <StyledButtonStart onClick={onClickHandler}>sumtime 시작하기</StyledButtonStart>
+                {user ? (
+                    <StyledButtonStart onClick={onClickHandler}>sumtime 시작하기</StyledButtonStart>
+                ) : (
+                    <StyledButtonStart onClick={onClickIntroHandler}>sumtime 소개</StyledButtonStart>
+                )}
+
                 {user ? (
                     <>
                         <LogoutKakao />
