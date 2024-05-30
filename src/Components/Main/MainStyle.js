@@ -5,12 +5,12 @@ export const Section = styled.div`
     height: 100vh;
     scroll-snap-align: start;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
-    text-align: center;
     //padding: 20px;
     box-sizing: border-box;
+
 `
 export const MainSection = styled.div`
     height: 100vh;
@@ -22,15 +22,15 @@ export const MainSection = styled.div`
     //padding: 20px;
     box-sizing: border-box;
 `
-
 export const Image = styled.img`
     height: 60vh;
+    align-self: center;
     margin-bottom: 20px;
 `
 export const VerticalSection = styled.div`
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    gap: 5px;
 `
 
 export const DescriptionSection = styled.div`
@@ -60,6 +60,7 @@ export const StyleNum = styled.span`
     width: 28px;
     height: 28px;
     margin-right: 10px;
+    text-align: center;
 
 
 `

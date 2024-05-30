@@ -5,7 +5,8 @@ import GuideMain from '../../Components/Main/GuideMain'
 import GuideLogin from '../../Components/Main/GuideLogin'
 import GuideUser from '../../Components/Main/GuideUser'
 import GuideEvent from '../../Components/Main/GuideEvent'
-import GuideTransaction from '../../Components/Main/GuideTransaction' // eslint-disable-line no-unused-vars
+import GuideTransaction from '../../Components/Main/GuideTransaction'
+import GuideMinap from '../../Components/Main/GuideMinap' // eslint-disable-line no-unused-vars
 
 const MainPage = () => {
 
@@ -18,6 +19,7 @@ const MainPage = () => {
             <GuideUser />
             <GuideEvent />
             <GuideTransaction />
+            <GuideMinap />
 
         </StyledLayoutMain>
     )
