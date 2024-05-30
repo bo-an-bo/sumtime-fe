@@ -5,34 +5,10 @@ import { useMediaQuery } from 'react-responsive'
 import { useNavigate } from 'react-router-dom'
 import Logo from '../../IMG/logo_white.svg'
 import exmTab from '../../IMG/exmple_table.svg'
-import LogoutKakao from '../Login/LogoutKakao'
 import LoginKakao from '../Login/LoginKakao'
 import { Button } from 'antd'
-// 각 섹션을 스타일링
-const Section = styled.div`
-    height: 100vh;
-    scroll-snap-align: start;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    //padding: 20px;
-    box-sizing: border-box;
-`
+import { MainSection } from './MainStyle'
 
-// const Image = styled.img`
-//     max-width: 80%;
-//     height: auto;
-//     margin-bottom: 20px;
-// `
-//
-// const Text = styled.p`
-//     font-size: 20px;
-//     color: #333;
-// `
-
-// 메인 페이지 컴포넌트
 const Main1 = () => {
     const { user } = useAuth()
     const isopen = useMediaQuery({ maxWidth: 768 })
@@ -42,13 +18,10 @@ const Main1 = () => {
         navigate('/group')
     }
 
-    const onClickIntroHandler = () => {
-        navigate('/guide')
-    }
 
     return (
         <div>
-            <Section>
+            <MainSection>
                 <HeaderContainer>
                     <LogoContainer>
                         <StyledLogoImg src={Logo} alt="logo_white_img" isopen={isopen}></StyledLogoImg>
@@ -56,30 +29,27 @@ const Main1 = () => {
 
                     </LogoContainer>
                     <StyledButtonContainer>
-                        {user && (
-                            <StyledContent>
+
+                        {user ? (
+                            <>
+                                <StyledContent style={{
+                                    color: 'white',
+                                }}>
                         <span
                             style={{
-                                backgroundColor: '#b9d5ff',
-                                padding: '0px 5px 0px 5px',
-                                margin: '0px 5px 0px 0px',
-                                borderRadius: '10px',
+                                backgroundColor: '#F8FAFF',
+                                padding: '0px 7px 0px 7px',
+                                borderRadius: '100px',
+                                color: '#173E92',
+                                fontFamily: 'Dotum Bold',
+                                marginRight: '5px',
                             }}
                         >
                             {user.nickname}
                         </span>
-                                님 환영합니다.
-                            </StyledContent>
-                        )}
-                        {user ? (
-                            <StyledButtonStart onClick={onClickHandler}>sumtime 시작하기</StyledButtonStart>
-                        ) : (
-                            <StyledButtonStart onClick={onClickIntroHandler}>sumtime 소개</StyledButtonStart>
-                        )}
-
-                        {user ? (
-                            <>
-                                <LogoutKakao />
+                                    님 환영합니다.
+                                </StyledContent>
+                                <StyledButtonStart onClick={onClickHandler}>sumtime 시작하기</StyledButtonStart>
                             </>
                         ) : (
                             <LoginKakao />
@@ -98,7 +68,7 @@ const Main1 = () => {
                 </StyledContentSection>
 
 
-            </Section>
+            </MainSection>
         </div>
     )
 }
@@ -108,12 +78,11 @@ export default Main1
 const StyledText = styled.div`
     color: #fff;
     font-family: 'Dotum Bold', serif;
-    font-size: ${(props) => (props.isopen ? '2vh' : '4vh')};
+    font-size: ${(props) => (props.isopen ? '2vh' : '3vh')};
     // margin: 20px;
 `
 
 const StyledContent = styled.div`
-    color: #003f98;
     font-family: 'Dotum Medium', serif;
     font-size: 1rem;
 `
@@ -124,7 +93,7 @@ const LogoContainer = styled.div`
     align-items: center;
     align-content: center;
     justify-content: center;
-    top: 0;
+    padding-left: 42%;
 `
 const StyledButtonContainer = styled.div`
     display: flex;
@@ -133,6 +102,7 @@ const StyledButtonContainer = styled.div`
     justify-content: center;
     align-items: center;
     gap: 20px;
+    padding-right: 5%;
 `
 const StyledButtonStart = styled(Button)`
     font-family: 'Dotum Bold', serif;
@@ -145,7 +115,7 @@ const StyledButtonStart = styled(Button)`
 const StyledLogoImg = styled.img`
     height: 100px;
     align-self: center; // 중앙 정렬을 위해 추가
-    width: ${(props) => (props.isopen ? '10vh' : '20vh')};
+    width: ${(props) => (props.isopen ? '10vh' : '15vh')};
 `
 
 const StyledTableImg = styled.img`
@@ -188,5 +158,7 @@ const HeaderContainer = styled.div`
     padding: 10px;
     background-color: #173E92;
     width: 100%;
+    justify-content: space-between;
+    margin-bottom: 20px;
 
 `
