@@ -1,9 +1,7 @@
 import React from 'react'
 import SideBar from './SideBar'
-// import Hamburger from './Hamburger'
 import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
-import Hamburger from '../SideBar/Hamburger'
 
 const SideBarIndex = () => {
     const isopen = useMediaQuery({ maxWidth: 1180 })
@@ -72,23 +70,16 @@ const SideBarIndex = () => {
 
     return (
         <div>
-            {isopen ? (
-                <Hamburger />
-            ) : (
-                <StyledSideBar>
-                    {' '}
-                    {isopen ? (
-                        <div></div>
-                    ) : (
-                        <SideBar
-                            memberData={memberData}
-                            eventData={eventData}
-                            settingData={settingData}
-                            transactionData={transactionData}
-                        />
-                    )}
-                </StyledSideBar>
-            )}
+            <StyledSideBar>
+                {!isopen ? (
+                    <SideBar
+                        memberData={memberData}
+                        eventData={eventData}
+                        settingData={settingData}
+                        transactionData={transactionData}
+                    />
+                ) : null}
+            </StyledSideBar>
         </div>
     )
 }
@@ -97,4 +88,5 @@ const StyledSideBar = styled.div`
     display: flex;
     flex-direction: column;
 `
+
 export default SideBarIndex

@@ -7,14 +7,16 @@ import { useMediaQuery } from 'react-responsive'
 
 const ShowGroupList = () => {
     const navigate = useNavigate()
-    const isopen = useMediaQuery({ maxWidth: 1180 })
+    const isMobile = useMediaQuery({ maxWidth: 768 })
+
     const onClickCreateGroup = () => {
         navigate('/group/createGroup')
     }
+
     return (
-        <StyledGroupPageLayout isopen={isopen}>
+        <StyledGroupPageLayout>
             <StyledButtonSection>
-                <StyledButton type="primary" htmlType="submit" onClick={onClickCreateGroup}>
+                <StyledButton type="primary" htmlType="submit" onClick={onClickCreateGroup} isMobile={isMobile}>
                     모임 생성
                 </StyledButton>
             </StyledButtonSection>
@@ -38,20 +40,24 @@ const StyledGroupPageLayout = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-top: ${(props) => (props.isopen ? '150px' : '')};
 `
 
 const StyledButtonSection = styled.div`
     display: flex;
     justify-content: flex-end;
     margin-right: 155px;
+
+    @media (max-width: 768px) {
+        margin-right: 0;
+    }
+
     padding: 5px;
 `
 
 const StyledButton = styled(Button)`
     margin-top: 20px;
     margin-bottom: 10px;
-    width: 120px;
+    width: ${(props) => (props.isMobile ? '100%' : '120px')};
     height: 40px;
     font-size: 18px;
     font-weight: 500;

@@ -1,32 +1,28 @@
 import { Menu } from 'antd'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import React from 'react'
 import styled from 'styled-components'
 import whiteLogo from '../../IMG/logo_white.svg'
 import { useUser } from '../../hooks/useUser'
-import Hamburger from '../SideBar/Hamburger'
 import LogoutKakao from '../Login/LogoutKakao'
 import SignOutServer from '../Login/SignOutServer'
+import Dropdown from '../SideBar/Dropdown'
+import { useMediaQuery } from 'react-responsive'
 
-const StyledImg = styled.img`
-    width: 100px;
-    height: 40px;
-    display: flex;
-`
-const StyledLinkBox = styled(Link)`
-    width: 100px;
-`
-
-const NavBar = ({ isopen }) => {
+const NavBar = () => {
     const user = useUser()
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
+    const location = useLocation()
+
+    const pathMatchId = location.pathname.match(/^\/group\/[a-f\d]{24}$/)
 
     const items = [
         {
             key: 'home',
             label: (
-                <StyledLinkBox to="/">
+                <Link to="/">
                     <StyledImg src={whiteLogo} alt="white_logo_img" />
-                </StyledLinkBox>
+                </Link>
             ),
         },
         {
@@ -44,32 +40,41 @@ const NavBar = ({ isopen }) => {
     ]
 
     return (
-        <div>
-            {' '}
-            <StyledMenu isopen={isopen} mode="horizontal" items={items}></StyledMenu>{' '}
-            <StyledHamburger isopen={isopen}>
-                <Hamburger />
-            </StyledHamburger>
-        </div>
+        <Wrapper>
+            {isMobile && pathMatchId && <Dropdown />}
+            <StyledMenu mode="horizontal" items={items}></StyledMenu>
+        </Wrapper>
     )
 }
 
-const StyledMenu = styled(Menu)`
-    height: 120px;
+const Wrapper = styled.div`
+    display: flex;
     width: 100%;
     background-color: #003f98;
-    display: ${(props) => (props.isopen ? 'none' : 'display')};
+`
+const StyledMenu = styled(Menu)`
+    width: 100%;
+    height: 90px;
+    background-color: #003f98;
     justify-content: flex-end;
-    padding: 40px;
+    margin-top: 40px;
+    margin-right: 50px;
+    gap: 40px;
+    @media (max-width: 768px) {
+        gap: 0px;
+        margin-right: 0px;
+    }
 
     .ant-menu-item {
-        height: 40px;
         color: white;
         font-size: 22px;
         font-weight: 700;
         font-family: 'Dotum Bold', serif;
         word-wrap: break-word;
-        margin-right: 50px;
+
+        @media (max-width: 768px) {
+            font-size: 18px;
+        }
     }
 `
 const StyledText = styled.div`
@@ -79,10 +84,15 @@ const StyledText = styled.div`
     font-weight: 700;
     font-family: 'Dotum Bold', serif;
     word-wrap: break-word;
-    margin-right: 50px;`
 
-const StyledHamburger = styled.div`
-    display: ${(props) => (props.isopen ? 'display' : 'none')};
+    @media (max-width: 768px) {
+        font-size: 18px;
+    }
+`
+const StyledImg = styled.img`
+    width: 100px;
+    height: 40px;
+    display: flex;
 `
 
 export default NavBar

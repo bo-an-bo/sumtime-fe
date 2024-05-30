@@ -40,12 +40,12 @@ const StyledBox = styled.div`
 `
 
 const StyledRow = styled(Row)`
-    width: 90%;
+    width: 100%;
 `
 
 const StyledCard = styled(Card)`
     background-color: #f9fbff;
-    margin-left: 100px;
+    margin-left: 10px;
     transition-duration: 0.3s, 0.3s;
     border: 2px solid #f0f0f0;
     &:hover {

@@ -2,14 +2,12 @@ import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 import { Button } from 'antd'
 // import { useIsDropdownView } from '../../store/StoreNavbar'
-import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useState } from 'react'
 
 const Dropdown = () => {
     const [isDropdownView, setIsDropDownView] = useState()
     // eslint-disable-next-line no-unused-vars
     // const [showDropdown, setShowDropdown] = useState(false)
-    const location = useLocation()
     const memberData = [
         {
             index: 1,
@@ -80,14 +78,6 @@ const Dropdown = () => {
             setIsDropDownView(!isDropdownView)
         }, 200)
     }
-
-    useEffect(() => {
-        if (location.pathname === '/group' || location.pathname === '/') {
-            setIsDropDownView(false)
-        }
-    }, [location.pathname])
-
-    if (location.pathname === '/group' || location.pathname === '/') return null
 
     return (
         <StyledHam className="container" onBlur={handleBlurContainer}>

@@ -124,7 +124,7 @@ const StyledButton = styled(Button)`
 // 전체 폼을 감싸는 스타일드 컴포넌트
 const StyledForm = styled(Form)`
     width: 800px;
-    margin-top: 100px;
+    margin-top: 50px;
 `
 // 폼을 감싸는 스타일드 컴포넌트
 const StyledFormWrapper = styled.div`
