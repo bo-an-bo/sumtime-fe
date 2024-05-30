@@ -30,10 +30,6 @@ const NavBar = ({ isopen }) => {
             ),
         },
         {
-          key: 'intro',
-          label: <Link to="/guide">소개</Link>
-        },
-        {
             key: 'myGroups',
             label: <Link to="/group">나의 모임</Link>,
         },
