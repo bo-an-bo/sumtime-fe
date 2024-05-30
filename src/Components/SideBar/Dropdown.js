@@ -3,21 +3,22 @@ import { NavLink } from 'react-router-dom'
 import { Button } from 'antd'
 // import { useIsDropdownView } from '../../store/StoreNavbar'
 import { useState } from 'react'
+import { useGroupStore } from '../../store/group'
 
 const Dropdown = () => {
     const [isDropdownView, setIsDropDownView] = useState()
-    // eslint-disable-next-line no-unused-vars
-    // const [showDropdown, setShowDropdown] = useState(false)
+    const { groupId } = useGroupStore()
+
     const memberData = [
         {
             index: 1,
             name: '회원 명단 업로드',
-            path: `uploadMember`,
+            path: `${groupId}/uploadMember`,
         },
         {
             index: 2,
             name: '회원 목록',
-            path: `showGroupDetails`,
+            path: `${groupId}/showGroupDetails`,
         },
     ]
 
@@ -25,12 +26,12 @@ const Dropdown = () => {
         {
             index: 1,
             name: '이벤트 생성',
-            path: `createEvent`,
+            path: `${groupId}/createEvent`,
         },
         {
             index: 2,
             name: '이벤트 목록',
-            path: `showEventList`,
+            path: `${groupId}/showEventList`,
         },
     ]
 
@@ -38,12 +39,12 @@ const Dropdown = () => {
         {
             index: 1,
             name: '모임 정보 변경',
-            path: `editInfo`,
+            path: `${groupId}/editInfo`,
         },
         {
             index: 2,
             name: '부매니저 설정',
-            path: `setSubMng`,
+            path: `${groupId}/setSubMng`,
         },
     ]
 
@@ -51,17 +52,17 @@ const Dropdown = () => {
         {
             index: 1,
             name: '거래내역 업로드',
-            path: `uploadTransaction`,
+            path: `${groupId}/uploadTransaction`,
         },
         {
             index: 2,
             name: '이벤트별 조회',
-            path: `showEventResult`,
+            path: `${groupId}/showEventResult`,
         },
         {
             index: 3,
             name: '거래내역 분석',
-            path: `showResult`,
+            path: `${groupId}/showResult`,
         },
     ]
 
@@ -186,5 +187,5 @@ const StyledDropdown = styled.div`
 `
 const StyledMenuButton = styled(Button)`
     font-family: 'Dotum Medium';
-    margin: 20px 0 0 0;
+    margin-top: 20px;
 `

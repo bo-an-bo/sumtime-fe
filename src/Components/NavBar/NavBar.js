@@ -7,31 +7,31 @@ import { useUser } from '../../hooks/useUser'
 import LogoutKakao from '../Login/LogoutKakao'
 import SignOutServer from '../Login/SignOutServer'
 import Dropdown from '../SideBar/Dropdown'
-import { useMediaQuery } from 'react-responsive'
+import { useDeviceType } from '../../hooks/useMediaQuery'
 
 const NavBar = () => {
     const user = useUser()
-    const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
     const location = useLocation()
+    const { isMobile } = useDeviceType()
 
-    const pathMatchId = location.pathname.match(/^\/group\/[a-f\d]{24}$/)
+    const pathMatchId = location.pathname.match(/^\/group\/[a-f\d]{24}(\/.*)?$/)
 
-    const items = [
+    let items = [
         {
             key: 'home',
             label: (
-                <Link to="/">
+                <StyledLink to="/">
                     <StyledImg src={whiteLogo} alt="white_logo_img" />
-                </Link>
+                </StyledLink>
             ),
         },
         {
-          key: 'intro',
-          label: <Link to="/guide">소개</Link>
+            key: 'intro',
+            label: <StyledLink to="/guide">소개</StyledLink>,
         },
         {
             key: 'myGroups',
-            label: <Link to="/group">나의 모임</Link>,
+            label: <StyledLink to="/group">나의 모임</StyledLink>,
         },
         {
             key: 'myProfile',
@@ -43,10 +43,14 @@ const NavBar = () => {
         },
     ]
 
+    if (isMobile) {
+        items = items.filter((item) => item.key !== 'intro')
+    }
+
     return (
         <Wrapper>
             {isMobile && pathMatchId && <Dropdown />}
-            <StyledMenu mode="horizontal" items={items}></StyledMenu>
+            <StyledMenu mode="horizontal" items={items} />
         </Wrapper>
     )
 }
@@ -56,33 +60,41 @@ const Wrapper = styled.div`
     width: 100%;
     background-color: #003f98;
 `
+
 const StyledMenu = styled(Menu)`
     width: 100%;
-    height: 90px;
-    background-color: #003f98;
+    height: 80px;
+    background-color: #003f98 !important;
     justify-content: flex-end;
     margin-top: 40px;
-    margin-right: 50px;
-    gap: 40px;
-    @media (max-width: 768px) {
-        gap: 0px;
-        margin-right: 0px;
-    }
+    padding: 0 70px;
+    gap: 70px;
+    display: flex;
 
     .ant-menu-item {
+        padding: 0;
         color: white;
-        font-size: 22px;
-        font-weight: 700;
         font-family: 'Dotum Bold', serif;
-        word-wrap: break-word;
+    }
 
-        @media (max-width: 768px) {
-            font-size: 18px;
-        }
+    @media (max-width: 768px) {
+        gap: 10px;
+        padding: 0 20px;
     }
 `
+
+const StyledLink = styled(Link)`
+    font-size: 22px;
+    font-weight: 700;
+    align-items: center;
+    word-wrap: break-word;
+
+    @media (max-width: 768px) {
+        font-size: 11px;
+    }
+`
+
 const StyledText = styled.div`
-    height: 40px;
     color: white;
     font-size: 22px;
     font-weight: 700;
@@ -90,13 +102,20 @@ const StyledText = styled.div`
     word-wrap: break-word;
 
     @media (max-width: 768px) {
-        font-size: 18px;
+        font-size: 11px;
     }
 `
+
 const StyledImg = styled.img`
     width: 100px;
     height: 40px;
     display: flex;
+
+    @media (max-width: 768px) {
+        width: 70px;
+        height: 30px;
+        margin-top: 5px;
+    }
 `
 
 export default NavBar

@@ -1,17 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { getGroupDetail } from '../../apis/groups'
 import groupbasic from '../../IMG/groupBasic.png'
-// import styled from 'styled-components'
-
+import { useGroupStore } from '../../store/group'
 const GroupMainPage = () => {
-    const [groups, setGroups] = React.useState([])
+    const [groups, setGroups] = useState({})
+    const { setGroupId } = useGroupStore()
     const groupId = window.location.href.split('/')[4]
+
     useEffect(() => {
         getGroupDetail(groupId).then((data) => {
             setGroups(data)
+            setGroupId(groupId)
         })
-    }, [groupId])
+    }, [groupId, setGroupId])
+
     return (
         <div>
             <StyledGroupName>{groups.name}</StyledGroupName>

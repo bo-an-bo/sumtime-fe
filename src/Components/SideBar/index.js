@@ -1,10 +1,10 @@
 import React from 'react'
 import SideBar from './SideBar'
-import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
+import { useDeviceType } from '../../hooks/useMediaQuery'
 
 const SideBarIndex = () => {
-    const isopen = useMediaQuery({ maxWidth: 1180 })
+    const { isMobile } = useDeviceType()
     const memberData = [
         {
             index: 1,
@@ -71,7 +71,7 @@ const SideBarIndex = () => {
     return (
         <div>
             <StyledSideBar>
-                {!isopen ? (
+                {!isMobile ? (
                     <SideBar
                         memberData={memberData}
                         eventData={eventData}

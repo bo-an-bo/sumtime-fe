@@ -97,7 +97,6 @@ export const Wrapper = styled.div`
     align-items: flex-end;
     width: 100%;
     margin: 2%;
-    margin-top: ${(props) => (props.isopen ? '150px' : 'none')};
     height: 500px;
 `
 const FileIconWrapper = styled.div`

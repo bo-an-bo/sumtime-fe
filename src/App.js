@@ -20,14 +20,6 @@ import ShowResult from './Pages/ShowResult'
 import UserGuideline from './Pages/Guide/UserGuideline'
 import { AuthProvider } from './context/AuthContext'
 
-const StyledLayout = styled.div`
-    // background-color: gray;
-    display: flex;
-
-    width: 100%;
-    height: 100%;
-`
-
 function App() {
     return (
         <AuthProvider>
@@ -51,7 +43,6 @@ function GroupRoutes() {
             <StyledLayout>
                 <Routes>
                     <Route path="/" element={<ShowGroupList />} />
-
                     <Route path="/createGroup" element={<CreateGroup />} />
                     <Route path="/:id/*" element={<GroupRoutesWithSidebar />} />
                 </Routes>
@@ -80,5 +71,13 @@ function GroupRoutesWithSidebar() {
         </StyledLayout>
     )
 }
+
+const StyledLayout = styled.div`
+    // background-color: gray;
+    display: flex;
+
+    width: 100%;
+    height: 100%;
+`
 
 export default App

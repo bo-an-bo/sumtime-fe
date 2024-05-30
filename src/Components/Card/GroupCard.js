@@ -40,12 +40,21 @@ const StyledBox = styled.div`
 `
 
 const StyledRow = styled(Row)`
-    width: 100%;
+    width: 90%;
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `
 
 const StyledCard = styled(Card)`
     background-color: #f9fbff;
-    margin-left: 10px;
+    margin-left: 100px;
+
+    @media (max-width: 768px) {
+        margin-left: 0;
+    }
+
     transition-duration: 0.3s, 0.3s;
     border: 2px solid #f0f0f0;
     &:hover {
