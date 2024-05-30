@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import styled from 'styled-components'
 import { useAuth } from '../../context/AuthContext'
 import { loginServer } from '../../apis/auth'
 
@@ -69,20 +68,11 @@ const LoginKakao = () => {
 
     return (
         <>
-            <KakaoButton onClick={kakaoLogin} />
+            <button onClick={kakaoLogin} style={{ background: 'transparent', border: 'none' }}>
+                <img src={'/img/btn_kakao.svg'} alt="Kakao" style={{ width: '200%' }} />
+            </button>
         </>
     )
 }
-
-const KakaoButton = styled.button`
-    background-image: url("/img/kakao_login_medium.png");
-    width: 90px;
-    height: 45px;
-    border: transparent;
-
-    &:hover {
-        opacity: 0.9;
-    }
-`
 
 export default LoginKakao
