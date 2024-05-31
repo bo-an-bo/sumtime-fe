@@ -76,8 +76,8 @@ const EditGroupInfo = () => {
             ) : (
                 <>
                     <StyledShowInfo>
-                        <p>그룹 이름: {groups.name}</p>
-                        <p>그룹 설명: {groups.description}</p>
+                        <StyledParagraph>그룹 이름: {groups.name}</StyledParagraph>
+                        <StyledParagraph>그룹 설명: {groups.description}</StyledParagraph>
                     </StyledShowInfo>
                     <StyledButtonSection>
                         <StyledButton onClick={onClickEdit} editstate={editstate.toString()}>
@@ -186,6 +186,9 @@ const StyledFormItems = styled(Form.Item)`
     }
 `
 
+const StyledParagraph = styled.div`
+    margin-top: 15px;
+`
 const StyledContentBox = styled.div`
     display: flex;
     flex-direction: row;
