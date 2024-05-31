@@ -26,10 +26,6 @@ const NavBar = () => {
             ),
         },
         {
-            key: 'intro',
-            label: <StyledLink to="/guide">소개</StyledLink>,
-        },
-        {
             key: 'myGroups',
             label: <StyledLink to="/group">나의 모임</StyledLink>,
         },
@@ -42,10 +38,6 @@ const NavBar = () => {
             ],
         },
     ]
-
-    if (isMobile) {
-        items = items.filter((item) => item.key !== 'intro')
-    }
 
     return (
         <Wrapper>
