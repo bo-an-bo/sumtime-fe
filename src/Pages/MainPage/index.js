@@ -7,18 +7,25 @@ import GuideUser from '../../Components/Main/GuideUser'
 import GuideEvent from '../../Components/Main/GuideEvent'
 import GuideTransaction from '../../Components/Main/GuideTransaction'
 import GuideMinap from '../../Components/Main/GuideMinap' // eslint-disable-line no-unused-vars
-
+import { motion } from 'framer-motion'
 const MainPage = () => {
     return (
-        <StyledLayoutMain>
-            <GuideMain />
-            <GuideLogin />
-            <GuideGroup />
-            <GuideUser />
-            <GuideEvent />
-            <GuideTransaction />
-            <GuideMinap />
-        </StyledLayoutMain>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.3 }}
+        >
+            <StyledLayoutMain>
+                <GuideMain />
+                <GuideLogin />
+                <GuideGroup />
+                <GuideUser />
+                <GuideEvent />
+                <GuideTransaction />
+                <GuideMinap />
+            </StyledLayoutMain>
+        </motion.div>
     )
 }
 
