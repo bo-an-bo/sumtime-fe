@@ -3,7 +3,7 @@ import CreateEvent from '../../Components/Forms/CreateEvent'
 import { useEffect, useState } from 'react'
 import { getMember } from '../../apis/members'
 import styled from 'styled-components'
-// import Tables from '../../Components/Tables/Tables'
+import { motion } from 'framer-motion'
 
 const CreateEventPage = () => {
     const [members, setMembers] = useState([])
@@ -17,9 +17,17 @@ const CreateEventPage = () => {
     }, [groupId])
 
     return (
-        <StyledLayout>
-            <CreateEvent members={members || []} groupId={groupId} eventId={eventId} setEventId={setEventId} />
-        </StyledLayout>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            style={{ width: '100%' }}
+        >
+            <StyledLayout>
+                <CreateEvent members={members || []} groupId={groupId} eventId={eventId} setEventId={setEventId} />
+            </StyledLayout>
+        </motion.div>
     )
 }
 

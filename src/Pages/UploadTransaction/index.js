@@ -1,23 +1,20 @@
 import React from 'react'
 import UploadTransaction from '../../Components/Upload/UploadTranaction'
-import { useMediaQuery } from 'react-responsive'
-import styled from 'styled-components'
+import { motion } from 'framer-motion'
 
 const UploadTransactions = () => {
-    const isopen = useMediaQuery({ maxWidth: 1180 })
     const groupId = window.location.href.split('/')[4]
     return (
-        <StyledLayout isopen={isopen}>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            style={{ width: '100%', margin: '2%' }}
+        >
             <UploadTransaction groupId={groupId} />
-        </StyledLayout>
+        </motion.div>
     )
 }
-
-const StyledLayout = styled.div`
-    width: 100%;
-    margin-top: ${(props) => (props.isopen ? '150px' : '0')};
-    margin-right: 50px;
-    margin-left: 50px;
-`
 
 export default UploadTransactions

@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { getGroupDetail } from '../../apis/groups'
 import groupbasic from '../../IMG/groupBasic.png'
 import { useGroupStore } from '../../store/group'
+import { motion } from 'framer-motion'
+
 const GroupMainPage = () => {
     const [groups, setGroups] = useState({})
     const { setGroupId } = useGroupStore()
@@ -16,11 +18,16 @@ const GroupMainPage = () => {
     }, [groupId, setGroupId])
 
     return (
-        <div>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.3 }}
+        >
             <StyledGroupName>{groups.name}</StyledGroupName>
             <StyledGroupDesc>{groups.description}</StyledGroupDesc>
             <StyledImg src={groupbasic} alt="groupMainPage" />
-        </div>
+        </motion.div>
     )
 }
 

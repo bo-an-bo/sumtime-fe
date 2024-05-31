@@ -14,8 +14,8 @@ import ShowEventList from './Pages/ShowEventList'
 import UploadMember from './Pages/UploadMember'
 import UploadTransactions from './Pages/UploadTransaction'
 import ShowEventResult from './Pages/ShowEventResult'
-import EditGroupInfo from './Pages/EditGroupInfoPage'
-import SelectMembers from './Pages/CreateEventPage/SelectMembers'
+import EditGroupPage from './Pages/EditGroupPage'
+import SelectMembers from './Components/Tables/SelectMembers'
 import ShowResult from './Pages/ShowResult'
 import UserGuideline from './Pages/Guide/UserGuideline'
 import { AuthProvider } from './context/AuthContext'
@@ -65,7 +65,7 @@ function GroupRoutesWithSidebar() {
                 <Route path="/uploadMember" element={<UploadMember />} />
                 <Route path="/uploadTransaction" element={<UploadTransactions />} />
                 <Route path="/showEventResult" element={<ShowEventResult />} />
-                <Route path="/editInfo" element={<EditGroupInfo />} />
+                <Route path="/editInfo" element={<EditGroupPage />} />
                 <Route path="/showResult" element={<ShowResult />} />
             </Routes>
         </StyledLayout>

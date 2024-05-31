@@ -9,6 +9,7 @@ import LogoutKakao from '../../Components/Login/LogoutKakao'
 import LoginKakao from '../../Components/Login/LoginKakao'
 import { useAuth } from '../../context/AuthContext'
 import { useMediaQuery } from 'react-responsive'
+import { motion } from 'framer-motion'
 
 const MainPage = () => {
     const { user } = useAuth()
@@ -32,55 +33,62 @@ const MainPage = () => {
     }
 
     return (
-        <StyledLayoutMain>
-            {contextHolder}
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.3 }}
+        >
+            <StyledLayoutMain>
+                {contextHolder}
 
-            <LogoContainer>
-                <StyledLogoImg src={LogoColor} alt="logo_white_img" isopen={isopen}></StyledLogoImg>
-                <StyledText isopen={isopen}>모임의 계산을 쉽게</StyledText>
-            </LogoContainer>
+                <LogoContainer>
+                    <StyledLogoImg src={LogoColor} alt="logo_white_img" isopen={isopen}></StyledLogoImg>
+                    <StyledText isopen={isopen}>모임의 계산을 쉽게</StyledText>
+                </LogoContainer>
 
-            <StyledContentSection isopen={isopen}>
-                <StyledTableImg src={exmTab} alt="example_tabel" />
-                <StyldMainText>
-                    <StyledText isopen={isopen}>sumtime과 함께 필요한 데이터를 마음껏 다루어 보세요!</StyledText>
-                    <StyledText style={{ fontSize: '1.2rem' }}>이런 걸 할 수 있어요</StyledText>
-                    <StyledContent>✔️ 모임 회비 안 낸 사람 조회</StyledContent>
-                    <StyledContent>✔️ 간식 행사와 같은 모임 내 이벤트 생성</StyledContent>
-                    <StyledContent>✔️ 쉽고 빠른 회원 조회, 삭제</StyledContent>
-                </StyldMainText>
-            </StyledContentSection>
-            <StyledButtonContainer>
-                {user && (
-                    <StyledContent>
-                        <span
-                            style={{
-                                backgroundColor: '#b9d5ff',
-                                padding: '0px 5px 0px 5px',
-                                margin: '0px 5px 0px 0px',
-                                borderRadius: '10px',
-                            }}
-                        >
-                            {user.nickname}
-                        </span>
-                        님 환영합니다.
-                    </StyledContent>
-                )}
-                {user ? (
-                    <StyledButtonStart onClick={onClickHandler}>sumtime 시작하기</StyledButtonStart>
-                ) : (
-                    <StyledButtonStart onClick={onClickIntroHandler}>sumtime 소개</StyledButtonStart>
-                )}
+                <StyledContentSection isopen={isopen}>
+                    <StyledTableImg src={exmTab} alt="example_tabel" />
+                    <StyldMainText>
+                        <StyledText isopen={isopen}>sumtime과 함께 필요한 데이터를 마음껏 다루어 보세요!</StyledText>
+                        <StyledText style={{ fontSize: '1.2rem' }}>이런 걸 할 수 있어요</StyledText>
+                        <StyledContent>✔️ 모임 회비 안 낸 사람 조회</StyledContent>
+                        <StyledContent>✔️ 간식 행사와 같은 모임 내 이벤트 생성</StyledContent>
+                        <StyledContent>✔️ 쉽고 빠른 회원 조회, 삭제</StyledContent>
+                    </StyldMainText>
+                </StyledContentSection>
+                <StyledButtonContainer>
+                    {user && (
+                        <StyledContent>
+                            <span
+                                style={{
+                                    backgroundColor: '#b9d5ff',
+                                    padding: '0px 5px 0px 5px',
+                                    margin: '0px 5px 0px 0px',
+                                    borderRadius: '10px',
+                                }}
+                            >
+                                {user.nickname}
+                            </span>
+                            님 환영합니다.
+                        </StyledContent>
+                    )}
+                    {user ? (
+                        <StyledButtonStart onClick={onClickHandler}>sumtime 시작하기</StyledButtonStart>
+                    ) : (
+                        <StyledButtonStart onClick={onClickIntroHandler}>sumtime 소개</StyledButtonStart>
+                    )}
 
-                {user ? (
-                    <>
-                        <LogoutKakao />
-                    </>
-                ) : (
-                    <LoginKakao />
-                )}
-            </StyledButtonContainer>
-        </StyledLayoutMain>
+                    {user ? (
+                        <>
+                            <LogoutKakao />
+                        </>
+                    ) : (
+                        <LoginKakao />
+                    )}
+                </StyledButtonContainer>
+            </StyledLayoutMain>
+        </motion.div>
     )
 }
 

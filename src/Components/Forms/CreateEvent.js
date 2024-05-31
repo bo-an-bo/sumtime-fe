@@ -1,14 +1,13 @@
-// import BasicButton from '../Buttons/BasicButton'
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, DatePicker, Form, Input } from 'antd'
 import { postEvent } from '../../apis/event'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { useNavigate } from 'react-router-dom'
 import { useEventStore } from '../../store/event'
+import SelectMembers from '../Tables/SelectMembers'
 
 const CreateEvent = ({ groupId }) => {
-    const { eventId, setEventId } = useEventStore()
+    const { setEventId } = useEventStore()
 
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
@@ -17,10 +16,9 @@ const CreateEvent = ({ groupId }) => {
     const [transactionStartDate, setTransactionStartDate] = useState('')
     const [transactionEndDate, setTransactionEndDate] = useState('')
     const [fee, setFee] = useState(0)
-    // const [value, setValue] = useState(1)
     const [isProcessing, setIsProcessing] = useState(false)
+    const [showSelectMembers, setShowSelectMembers] = useState(false)
 
-    const navigate = useNavigate()
     const eventInfo = {
         name,
         description,
@@ -42,10 +40,8 @@ const CreateEvent = ({ groupId }) => {
         setIsProcessing(true)
         try {
             const data = await postEvent(groupId, eventInfo)
-            console.log('이벤트가 생성되었습니다.', data)
             setEventId(data.eventId)
-            console.log('eventId:', eventId)
-            navigate(`/group/${groupId}/createEvent/selectMembers`)
+            setShowSelectMembers(true)
         } catch (error) {
             console.log('이벤트 생성에 실패했습니다.', error)
         } finally {
@@ -54,14 +50,13 @@ const CreateEvent = ({ groupId }) => {
     }
 
     useEffect(() => {
-        // if (eventId) {
-        //     handleMem(eventId)
-        // }
-    }, [eventId])
-
-    // const onChange = (e) => {
-    //     setValue(e.target.value)
-    // }
+        if (showSelectMembers) {
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth',
+            })
+        }
+    }, [showSelectMembers])
 
     return (
         <StyledForm
@@ -89,7 +84,11 @@ const CreateEvent = ({ groupId }) => {
                         },
                     ]}
                 >
-                    <Input placeholder="ex) 2024년도 신입생 환영회 회비" onChange={(e) => setName(e.target.value)} />
+                    <Input
+                        placeholder="ex) 2024년도 신입생 환영회 회비"
+                        onChange={(e) => setName(e.target.value)}
+                        disabled={showSelectMembers}
+                    />
                 </StyledFormItems>
                 <StyledFormItems
                     label="이벤트 설명"
@@ -104,6 +103,7 @@ const CreateEvent = ({ groupId }) => {
                     <Input
                         placeholder="ex) 2024년도 신입생 환영회 회비"
                         onChange={(e) => setDescription(e.target.value)}
+                        disabled={showSelectMembers}
                     />
                 </StyledFormItems>
                 <StyledFormItems
@@ -122,6 +122,7 @@ const CreateEvent = ({ groupId }) => {
                             setEndDate(dateString[1])
                         }}
                         style={{ width: '100%' }}
+                        disabled={showSelectMembers}
                     />
                 </StyledFormItems>
                 <StyledFormItems
@@ -140,6 +141,7 @@ const CreateEvent = ({ groupId }) => {
                             setTransactionEndDate(dateString[1])
                         }}
                         style={{ width: '100%' }}
+                        disabled={showSelectMembers}
                     />
                 </StyledFormItems>
                 <StyledFormItems
@@ -152,7 +154,12 @@ const CreateEvent = ({ groupId }) => {
                         },
                     ]}
                 >
-                    <Input placeholder="ex) 10000" type="text" onChange={(e) => setFee(e.target.value)} />
+                    <Input
+                        placeholder="ex) 10000"
+                        type="text"
+                        onChange={(e) => setFee(e.target.value)}
+                        disabled={showSelectMembers}
+                    />
                 </StyledFormItems>
             </StyledFormWrapper>
             <StyledButton
@@ -160,10 +167,11 @@ const CreateEvent = ({ groupId }) => {
                 size="mid"
                 htmlType="submit"
                 onClick={handleCreateEvent}
-                disabled={isAnyFieldEmpty()}
+                disabled={isAnyFieldEmpty() || showSelectMembers}
             >
                 다음
             </StyledButton>
+            {showSelectMembers && <SelectMembers />}
         </StyledForm>
     )
 }
@@ -180,20 +188,22 @@ const StyledForm = styled(Form)`
     justify-content: center;
     align-items: center;
     margin-top: 50px;
+    .ant-btn {
+        justify-content: flex-end;
+        margin-top: 20px;
+    }
 `
-// 폼을 감싸는 스타일드 컴포넌트
+
 const StyledFormWrapper = styled.div`
     width: 60%;
     @media (max-width: 768px) {
         width: 90%;
     }
     padding: 10px;
-    margin: 20px;
     border-radius: 10px;
     background-color: rgba(0, 62.67, 151.94, 0.08);
 `
 
-// 타이틀을 감싸는 스타일드 컴포넌트
 const Title = styled.h1`
     margin: 20px 0 10px 20px;
     text-align: left;
@@ -201,7 +211,7 @@ const Title = styled.h1`
     font-family: 'Dotum Bold', 'serif';
     word-wrap: break-word;
 `
-// 폼 아이템을 감싸는 스타일드 컴포넌트
+
 const StyledFormItems = styled(Form.Item)`
     .ant-form-item-label {
         font-size: 24px;
@@ -214,19 +224,15 @@ const StyledFormItems = styled(Form.Item)`
     .ant-picker {
         width: 100%;
         font-size: 14px;
-        // margin-top: 5px;
-        // margin-left: 10px;
         font-family: 'Dotum Light';
     }
 `
 
 const StyledButton = styled(Button)`
-    justify-content: flex-center;
     font-family: 'Dotum Light';
     font-size: 18px;
     height: 40px;
     width: 100px;
     background-color: #003e97;
-    //font-weight: 700;
     color: white;
 `

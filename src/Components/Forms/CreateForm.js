@@ -86,12 +86,7 @@ const CreateForm = () => {
                     </Upload>
                 </StyledFormItems>
             </StyledFormWrapper>
-            <StyledFormItems
-                wrapperCol={{
-                    offset: 11,
-                    span: 13,
-                }}
-            >
+            <StyledFormItems>
                 <StyledButton type="primary" htmlType="submit" disabled={isAnyFieldEmpty()}>
                     완료
                 </StyledButton>

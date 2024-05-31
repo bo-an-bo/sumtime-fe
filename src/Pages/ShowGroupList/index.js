@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'antd'
 import { useMediaQuery } from 'react-responsive'
+import { motion } from 'framer-motion'
 
 const ShowGroupList = () => {
     const navigate = useNavigate()
@@ -14,17 +15,25 @@ const ShowGroupList = () => {
     }
 
     return (
-        <StyledGroupPageLayout>
-            <StyledButtonSection>
-                <StyledButton type="primary" htmlType="submit" onClick={onClickCreateGroup} isMobile={isMobile}>
-                    모임 생성
-                </StyledButton>
-            </StyledButtonSection>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.3 }}
+            style={{ width: '100%' }}
+        >
+            <StyledGroupPageLayout>
+                <StyledButtonSection>
+                    <StyledButton type="primary" htmlType="submit" onClick={onClickCreateGroup} isMobile={isMobile}>
+                        모임 생성
+                    </StyledButton>
+                </StyledButtonSection>
 
-            <StyledGroupListLayout>
-                <GroupCard />
-            </StyledGroupListLayout>
-        </StyledGroupPageLayout>
+                <StyledGroupListLayout>
+                    <GroupCard />
+                </StyledGroupListLayout>
+            </StyledGroupPageLayout>
+        </motion.div>
     )
 }
 

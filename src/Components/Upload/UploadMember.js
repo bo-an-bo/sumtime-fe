@@ -4,7 +4,6 @@ import { InboxOutlined } from '@ant-design/icons'
 import { Upload, Button } from 'antd'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import { useMediaQuery } from 'react-responsive'
 
 const { Dragger } = Upload
 
@@ -12,7 +11,6 @@ const UploadMember = ({ groupId }) => {
     const [file, setFile] = useState(null)
     const [isFileUploaded, setIsFileUploaded] = useState(false)
     const navigate = useNavigate()
-    const isopen = useMediaQuery({ maxWidth: 1180 })
 
     const props = {
         name: 'file',
@@ -33,7 +31,7 @@ const UploadMember = ({ groupId }) => {
     }
 
     return (
-        <Wrapper isopen={isopen}>
+        <Wrapper>
             <StyledButton onClick={handleUpload} type="primary" disabled={!isFileUploaded}>
                 확인
             </StyledButton>
@@ -96,7 +94,6 @@ export const Wrapper = styled.div`
     flex-direction: column;
     align-items: flex-end;
     width: 100%;
-    margin: 2%;
     height: 500px;
 `
 const FileIconWrapper = styled.div`

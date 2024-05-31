@@ -78,7 +78,7 @@ const StyledMenu = styled(Menu)`
     }
 
     @media (max-width: 768px) {
-        gap: 10px;
+        gap: 7px;
         padding: 0 20px;
     }
 `
@@ -90,7 +90,7 @@ const StyledLink = styled(Link)`
     word-wrap: break-word;
 
     @media (max-width: 768px) {
-        font-size: 11px;
+        font-size: 10px;
     }
 `
 
@@ -102,7 +102,7 @@ const StyledText = styled.div`
     word-wrap: break-word;
 
     @media (max-width: 768px) {
-        font-size: 11px;
+        font-size: 10px;
     }
 `
 

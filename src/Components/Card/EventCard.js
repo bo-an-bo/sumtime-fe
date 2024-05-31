@@ -40,7 +40,7 @@ const EventCard = ({ groupId }) => {
                 key: i,
                 label: currentEvent.name || '',
                 children: (
-                    <StyledDescriptions bordered column={2}>
+                    <StyledDescriptions bordered column={{ xs: 1, xl: 2 }}>
                         <Descriptions.Item label="설명">{currentEvent.description || ''}</Descriptions.Item>
                         <Descriptions.Item label="회비">
                             {typeof currentEvent.fee === 'number'
@@ -55,7 +55,6 @@ const EventCard = ({ groupId }) => {
                         </Descriptions.Item>
                     </StyledDescriptions>
                 ),
-
                 Button: (
                     <Popconfirm
                         title="정말 삭제하시겠습니까?"
@@ -78,12 +77,12 @@ const EventCard = ({ groupId }) => {
         <>
             <StyledCollapse accordion bordered={false}>
                 {items.map((item, index) => (
-                    <StyledCollapse.Panel key={index} header={item.label}>
+                    <StyledPanel key={index} header={item.label}>
                         <FlexContainer>
                             {item.children}
                             {item.Button}
                         </FlexContainer>
-                    </StyledCollapse.Panel>
+                    </StyledPanel>
                 ))}
             </StyledCollapse>
         </>
@@ -91,14 +90,21 @@ const EventCard = ({ groupId }) => {
 }
 
 const StyledCollapse = styled(Collapse)`
-    width: 50%;
-    margin-left: 100px;
-    margin-top: 50px;
+    width: 60%;
     padding: 10px;
     background-color: rgba(0, 62.67, 151.94, 0.08);
     overflow: auto;
     max-height: 450px;
     font-family: 'Dotum Bold', serif;
+
+    @media (max-width: 768px) {
+        width: 90%;
+        margin-left: 20px;
+    }
+`
+
+const StyledPanel = styled(Collapse.Panel)`
+    margin-bottom: 10px;
 `
 
 const StyledDescriptions = styled(Descriptions)`
@@ -114,19 +120,33 @@ const StyledDescriptions = styled(Descriptions)`
 
 const FlexContainer = styled.div`
     display: flex;
-    justify-content: space-between; /* 아이템을 양쪽으로 정렬합니다 */
+    flex-direction: column;
+    gap: 10px;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        justify-content: space-between;
+    }
 `
 
 const StyledButton = styled(Button)`
-    width: 80px;
+    width: 100%;
     font-family: 'Dotum Bold', serif;
+
+    @media (min-width: 768px) {
+        width: 80px;
+    }
 `
 
 const ButtonWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 90px;
+    margin-top: 10px;
+
+    @media (min-width: 768px) {
+        margin-top: 90px;
+    }
 `
 
 export default EventCard

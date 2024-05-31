@@ -5,6 +5,8 @@ import { useEffect } from 'react'
 import { useSelectedRows, useDeleteMemberIds } from '../../store/member'
 import AddMemberButton from '../../Components/Buttons/AddMemberButton'
 import DeleteMemberButton from '../../Components/Buttons/DeleteMemberButton'
+import { motion } from 'framer-motion'
+
 const ShowGroupDetails = () => {
     const { selectedRows } = useSelectedRows()
 
@@ -17,13 +19,21 @@ const ShowGroupDetails = () => {
         setDeleteMemberIds(ids)
     }, [selectedRows, setDeleteMemberIds])
     return (
-        <StyledPageLayout>
-            <ButtonWrapper>
-                <AddMemberButton groupId={groupId} />
-                <DeleteMemberButton groupId={groupId} memberIds={deleteMemberIds} />
-            </ButtonWrapper>
-            <MemberList groupId={groupId} />
-        </StyledPageLayout>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            style={{ width: '100%', margin: '3%' }}
+        >
+            <StyledPageLayout>
+                <ButtonWrapper>
+                    <AddMemberButton groupId={groupId} />
+                    <DeleteMemberButton groupId={groupId} memberIds={deleteMemberIds} />
+                </ButtonWrapper>
+                <MemberList groupId={groupId} />
+            </StyledPageLayout>
+        </motion.div>
     )
 }
 
@@ -36,9 +46,8 @@ const StyledPageLayout = styled.div`
 const ButtonWrapper = styled.div`
     display: flex;
     justify-content: flex-end;
-    gap: 5px;
-    // padding: 10px;
     font-family: 'Dotum Light';
-    margin: 0 2% 2% 2%;
+    gap: 10px;
+    margin-bottom: 15px;
 `
 export default ShowGroupDetails
