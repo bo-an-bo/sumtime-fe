@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import { getMember } from '../../apis/members'
-// import { useState } from 'react'
 import { useEffect } from 'react'
-import MemberList from '../../Components/Tables/MemberList'
+import MemberList from './MemberList'
 import { postEventMember } from '../../apis/event'
 import { useTableMemInfo, useEventStore } from '../../store/event'
-// import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import BasicButton from '../../Components/Buttons/BasicButton'
+import BasicButton from '../Buttons/BasicButton'
+import styled from 'styled-components'
 
 const SelectMembers = () => {
     const [members, setMembers] = useState([])
@@ -20,30 +19,36 @@ const SelectMembers = () => {
     useEffect(() => {
         getMember(groupId).then((data) => {
             setMembers(data)
-            console.log(members)
         })
     }, [groupId, members])
     const navigate = useNavigate()
 
-    useEffect(() => {}, [eventId])
-
     const handleMem = async () => {
-        try {
-            await postEventMember(groupId, eventId, memName)
-            console.log('멤버 등록완료', memName)
-            navigate(`/group/${groupId}/showEventList`)
-        } catch (error) {
-            console.log('Failed to add members', error)
-        }
+        await postEventMember(groupId, eventId, memName)
+        navigate(`/group/${groupId}/showEventList`)
     }
 
     return (
-        <div>
-            {/* <Button onClick={handleMem}>멤버 선택 완료</Button> */}
-            <BasicButton text="멤버 선택 완료" onClick={handleMem}></BasicButton>
+        <StyledLayout>
             <MemberList groupId={groupId} />
-        </div>
+            <StyledBasicButton text="멤버 선택 완료" onClick={handleMem}></StyledBasicButton>
+        </StyledLayout>
     )
 }
 
 export default SelectMembers
+
+const StyledLayout = styled.div`
+    width: 62%;
+    @media (max-width: 768px) {
+        width: 90%;
+    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+`
+const StyledBasicButton = styled(BasicButton)`
+    margin-top: 20px;
+`

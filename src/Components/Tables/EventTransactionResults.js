@@ -45,9 +45,10 @@ const EventTransactionResults = ({ groupId, eventId }) => {
             title: '납부 여부',
             dataIndex: 'isPaid',
             key: 'paid',
-            render: isPaid => (
-                <Tag color={isPaid ? 'geekblue' : 'volcano'}
-                     style={{ fontFamily: 'Dotum Medium' }}>{isPaid ? '납부 완료' : '미납'}</Tag>
+            render: (isPaid) => (
+                <Tag color={isPaid ? 'geekblue' : 'volcano'} style={{ fontFamily: 'Dotum Medium' }}>
+                    {isPaid ? '납부 완료' : '미납'}
+                </Tag>
             ),
         },
     ]
@@ -71,7 +72,7 @@ const EventTransactionResults = ({ groupId, eventId }) => {
             setIsButtonClicked(false)
         } else {
             const unpaidKeys = unpaidMembers.map((member) => {
-                const index = members.findIndex(m => m.member._id === member.member._id)
+                const index = members.findIndex((m) => m.member._id === member.member._id)
                 return index.toString()
             })
 
@@ -81,11 +82,12 @@ const EventTransactionResults = ({ groupId, eventId }) => {
         }
     }
 
-
     return (
         <Wrapper>
             <ButtonWrapper>
-                <Button style={{ fontFamily: 'Dotum Bold' }} onClick={handleUnpaidMembers}>미납 회원 선택</Button>
+                <Button style={{ fontFamily: 'Dotum Bold' }} onClick={handleUnpaidMembers}>
+                    미납 회원 선택
+                </Button>
             </ButtonWrapper>
             <StyledTable
                 rowSelection={{
@@ -120,12 +122,16 @@ const Wrapper = styled.div`
     border-radius: 10px;
     background-color: #fff;
     margin-top: 20px;
-    width: 25%;
+    width: 60%;
+
+    @media (max-width: 768px) {
+        width: 90%;
+        padding: 0;
+    }
 `
 const KakaoWrapper = styled.div`
     display: flex;
     justify-content: center;
-
 `
 
 const ButtonWrapper = styled.div`
@@ -141,8 +147,6 @@ const StyledTable = styled(Table)`
 
     .ant-table-body {
         font-family: 'Dotum Medium', sans-serif;
-
-
     }
 
     //

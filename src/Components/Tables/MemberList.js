@@ -92,14 +92,11 @@ const StyledLayout = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    // margin: 2%;
-    // background-color: red;
 `
 const Wrapper = styled.div`
     width: 100%;
     border-radius: 20px;
     // background-color: rgba(0, 62.67, 151.94, 0.04);
-    // margin: 2%;
 `
 
 const StyledTable = styled(Table)`
