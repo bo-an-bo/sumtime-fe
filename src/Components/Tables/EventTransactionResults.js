@@ -121,11 +121,11 @@ const Wrapper = styled.div`
     padding: 20px;
     border-radius: 10px;
     background-color: #fff;
-    margin-top: 20px;
+    margin-top: 38px;
     width: 60%;
 
     @media (max-width: 768px) {
-        width: 90%;
+        width: 100%;
         padding: 0;
     }
 `
@@ -139,8 +139,6 @@ const ButtonWrapper = styled.div`
     justify-content: flex-end;
 `
 const StyledTable = styled(Table)`
-    margin-top: 20px;
-
     .ant-table-thead > tr {
         font-family: 'Dotum Bold', sans-serif;
     }
