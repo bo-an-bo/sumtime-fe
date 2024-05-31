@@ -3,11 +3,9 @@ import styled from 'styled-components'
 import { Menu } from 'antd'
 import { Link } from 'react-router-dom'
 import whiteLogo from '../../IMG/logo_white.svg'
-import { useMediaQuery } from 'react-responsive'
 import Dropdown from './Dropdown'
 // 아예 새롭게 nav bar 구성
 const StyledMenu = styled(Menu)`
-    height: 120px;
     width: 100%;
     background-color: #003f98;
     display: flex;
@@ -28,9 +26,9 @@ const StyledMenu = styled(Menu)`
 const StyledImg = styled.img`
     width: 100px;
     height: 40px;
-    display: flex;
 `
 const StyledLinkBox = styled(Link)`
+    display: flex;
     width: 100px;
 `
 
@@ -38,12 +36,10 @@ const StyledMobiLeNavbar = styled.div`
     position: absolute;
     display: flex;
     width: 100%;
-    height: 120px;
     background-color: #003f98;
 `
 
 const Hamburger = () => {
-    const isopen = useMediaQuery({ maxWidth: 1180 })
     const [nickname, setNickname] = useState('')
 
     useEffect(() => {
@@ -69,16 +65,10 @@ const Hamburger = () => {
     ]
     // if (location.pathname === '/group' || location.pathname === '/') return null
     return (
-        <div>
-            {isopen ? (
-                <StyledMobiLeNavbar>
-                    <Dropdown />
-                    <StyledMenu mode="horizontal" items={items}></StyledMenu>
-                </StyledMobiLeNavbar>
-            ) : (
-                <StyledMenu mode="horizontal" items={items}></StyledMenu>
-            )}
-        </div>
+        <StyledMobiLeNavbar>
+            <Dropdown />
+            <StyledMenu mode="horizontal" items={items}></StyledMenu>
+        </StyledMobiLeNavbar>
 
         // const StyledSideBarBox = styled.div`
         //     display: flex;

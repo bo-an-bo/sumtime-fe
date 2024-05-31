@@ -4,25 +4,36 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'antd'
 import { useMediaQuery } from 'react-responsive'
+import { motion } from 'framer-motion'
 
 const ShowGroupList = () => {
     const navigate = useNavigate()
-    const isopen = useMediaQuery({ maxWidth: 1180 })
+    const isMobile = useMediaQuery({ maxWidth: 768 })
+
     const onClickCreateGroup = () => {
         navigate('/group/createGroup')
     }
-    return (
-        <StyledGroupPageLayout isopen={isopen}>
-            <StyledButtonSection>
-                <StyledButton type="primary" htmlType="submit" onClick={onClickCreateGroup}>
-                    모임 생성
-                </StyledButton>
-            </StyledButtonSection>
 
-            <StyledGroupListLayout>
-                <GroupCard />
-            </StyledGroupListLayout>
-        </StyledGroupPageLayout>
+    return (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.3 }}
+            style={{ width: '100%' }}
+        >
+            <StyledGroupPageLayout>
+                <StyledButtonSection>
+                    <StyledButton type="primary" htmlType="submit" onClick={onClickCreateGroup} isMobile={isMobile}>
+                        모임 생성
+                    </StyledButton>
+                </StyledButtonSection>
+
+                <StyledGroupListLayout>
+                    <GroupCard />
+                </StyledGroupListLayout>
+            </StyledGroupPageLayout>
+        </motion.div>
     )
 }
 
@@ -38,20 +49,24 @@ const StyledGroupPageLayout = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-top: ${(props) => (props.isopen ? '150px' : '')};
 `
 
 const StyledButtonSection = styled.div`
     display: flex;
     justify-content: flex-end;
     margin-right: 155px;
+
+    @media (max-width: 768px) {
+        margin-right: 0;
+    }
+
     padding: 5px;
 `
 
 const StyledButton = styled(Button)`
     margin-top: 20px;
     margin-bottom: 10px;
-    width: 120px;
+    width: ${(props) => (props.isMobile ? '100%' : '120px')};
     height: 40px;
     font-size: 18px;
     font-weight: 500;

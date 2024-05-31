@@ -61,13 +61,15 @@ const EventTransaction = ({ groupId }) => {
                 columns={columns}
                 dataSource={data}
                 pagination={false}
-                scroll={{ x: 300 }}
+                scroll={{ y: 250 }}
                 onRow={(record) => ({
                     onClick: () => handleRowClick(record),
                 })}
                 rowClassName={rowClassName}
             />
-            {selectedEvent && <EventTransactionResults groupId={groupId} eventId={selectedEvent._id} />}
+            <EventWrapper>
+                {selectedEvent && <EventTransactionResults groupId={groupId} eventId={selectedEvent._id} />}
+            </EventWrapper>
         </Wrapper>
     )
 }
@@ -77,10 +79,26 @@ export default EventTransaction
 const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
+    width: 100%;
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+`
+
+const EventWrapper = styled.div`
+    width: 100%;
+    @media (max-width: 768px) {
+        margin-top: 20px;
+    }
 `
 
 const StyledTable = styled(Table)`
     margin-top: 100px;
+    width: 50%;
+    @media (max-width: 768px) {
+        width: 100%;
+        margin-top: 50px;
+    }
 
     tbody tr.selected-row {
         background-color: #f0f0f0;

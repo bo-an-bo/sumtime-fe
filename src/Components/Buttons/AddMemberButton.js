@@ -13,8 +13,13 @@ const StyledAddButton = styled(Button)`
     font-size: 18px;
     width: 100px;
     height: 40px;
-    margin: 10px 10px 0 0;
     background-color: #003f98;
+
+    @media (max-width: 768px) {
+        width: 80px;
+        height: 30px;
+        font-size: 14px;
+    }
 `
 
 const AddMember = ({ groupId }) => {
