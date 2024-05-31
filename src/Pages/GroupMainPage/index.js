@@ -1,23 +1,33 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { getGroupDetail } from '../../apis/groups'
 import groupbasic from '../../IMG/groupBasic.png'
-// import styled from 'styled-components'
+import { useGroupStore } from '../../store/group'
+import { motion } from 'framer-motion'
 
 const GroupMainPage = () => {
-    const [groups, setGroups] = React.useState([])
+    const [groups, setGroups] = useState({})
+    const { setGroupId } = useGroupStore()
     const groupId = window.location.href.split('/')[4]
+
     useEffect(() => {
         getGroupDetail(groupId).then((data) => {
             setGroups(data)
+            setGroupId(groupId)
         })
-    }, [groupId])
+    }, [groupId, setGroupId])
+
     return (
-        <div>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.3 }}
+        >
             <StyledGroupName>{groups.name}</StyledGroupName>
             <StyledGroupDesc>{groups.description}</StyledGroupDesc>
             <StyledImg src={groupbasic} alt="groupMainPage" />
-        </div>
+        </motion.div>
     )
 }
 

@@ -2,15 +2,14 @@ import React from 'react'
 import CreateEvent from '../../Components/Forms/CreateEvent'
 import { useEffect, useState } from 'react'
 import { getMember } from '../../apis/members'
-import { useMediaQuery } from 'react-responsive'
 import styled from 'styled-components'
-// import Tables from '../../Components/Tables/Tables'
+import { motion } from 'framer-motion'
 
 const CreateEventPage = () => {
     const [members, setMembers] = useState([])
     const [eventId, setEventId] = useState([])
     const groupId = window.location.href.split('/')[4]
-    const isopen = useMediaQuery({ maxWidth: 1180 })
+
     useEffect(() => {
         getMember(groupId).then((data) => {
             setMembers(data)
@@ -18,13 +17,21 @@ const CreateEventPage = () => {
     }, [groupId])
 
     return (
-        <StyledLayout isopen={isopen}>
-            <CreateEvent members={members || []} groupId={groupId} eventId={eventId} setEventId={setEventId} />
-        </StyledLayout>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            style={{ width: '100%' }}
+        >
+            <StyledLayout>
+                <CreateEvent members={members || []} groupId={groupId} eventId={eventId} setEventId={setEventId} />
+            </StyledLayout>
+        </motion.div>
     )
 }
 
 const StyledLayout = styled.div`
-    margin-top: ${(props) => (props.isopen ? '150px' : '0')};
+    width: 100%;
 `
 export default CreateEventPage
