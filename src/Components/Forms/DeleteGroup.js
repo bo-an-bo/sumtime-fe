@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Button, Popconfirm } from 'antd'
+import { Button, Modal } from 'antd' // Modal 추가
 import { deleteGroup } from '../../apis/groups'
 import { useNavigate } from 'react-router-dom'
 
 const DeleteGroup = () => {
     const navigate = useNavigate()
     const groupId = window.location.href.split('/')[4]
+
+    // 모달 상태 추가
+    const [isModalVisible, setIsModalVisible] = useState(false)
 
     const handleDeleteGroup = async () => {
         try {
@@ -25,16 +28,18 @@ const DeleteGroup = () => {
                 <StyledParagraph>모임 삭제: 현재 모임을 삭제하시겠습니까?</StyledParagraph>
             </StyledShowInfo>
             <StyledButtonSection>
-                <Popconfirm
+                <StyledButton onClick={() => setIsModalVisible(true)}>삭제</StyledButton>
+                <Modal
                     title="정말 삭제하시겠습니까?"
-                    onConfirm={handleDeleteGroup}
+                    visible={isModalVisible}
+                    onCancel={() => setIsModalVisible(false)}
+                    onOk={handleDeleteGroup}
                     okText="삭제"
-                    cancelText="아니요"
+                    cancelText="취소"
+                    okButtonProps={{ style: { backgroundColor: '#ff4d4f', borderColor: '#ff4d4f' } }} // 확인 버튼 스타일 변경
                 >
-                    <StyledButton type="primary" danger>
-                        네, 삭제할게요
-                    </StyledButton>
-                </Popconfirm>
+                    <p>모임을 삭제하시겠습니까?</p>
+                </Modal>
             </StyledButtonSection>
         </StyledBox>
     )
