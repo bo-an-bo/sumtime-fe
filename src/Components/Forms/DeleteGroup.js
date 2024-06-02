@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+
+import React from 'react'
 import styled from 'styled-components'
-import { Button, Modal } from 'antd' // Modal 추가
+import { Button, Popconfirm } from 'antd'
 import { deleteGroup } from '../../apis/groups'
 import { useNavigate } from 'react-router-dom'
 
@@ -40,6 +41,7 @@ const DeleteGroup = () => {
                 >
                     <p>모임을 삭제하시겠습니까?</p>
                 </Modal>
+
             </StyledButtonSection>
         </StyledBox>
     )
