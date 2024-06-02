@@ -1,7 +1,6 @@
-
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Button, Popconfirm } from 'antd'
+import { Button, Modal } from 'antd' // Modal 추가
 import { deleteGroup } from '../../apis/groups'
 import { useNavigate } from 'react-router-dom'
 
@@ -9,7 +8,6 @@ const DeleteGroup = () => {
     const navigate = useNavigate()
     const groupId = window.location.href.split('/')[4]
 
-    // 모달 상태 추가
     const [isModalVisible, setIsModalVisible] = useState(false)
 
     const handleDeleteGroup = async () => {
@@ -41,7 +39,6 @@ const DeleteGroup = () => {
                 >
                     <p>모임을 삭제하시겠습니까?</p>
                 </Modal>
-
             </StyledButtonSection>
         </StyledBox>
     )
