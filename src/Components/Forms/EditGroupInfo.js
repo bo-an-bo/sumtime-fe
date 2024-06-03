@@ -96,14 +96,14 @@ const StyledBox = styled.div`
     background-color: rgba(0, 62.67, 151.94, 0.08);
     border-radius: 10px;
     width: 70%;
-    height: 250px;
+    height: auto;
     margin: 30px auto;
     padding: 20px;
     font-family: 'Dotum Bold';
 
     @media (max-width: 768px) {
         width: 90%;
-        margin-top: 80px;
+        margin-top: 60px;
         height: auto;
     }
 `

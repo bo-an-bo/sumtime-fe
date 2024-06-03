@@ -1,5 +1,6 @@
 import React from 'react'
 import EditGroupInfo from '../../Components/Forms/EditGroupInfo'
+import DeleteGroup from '../../Components/Forms/DeleteGroup'
 import { motion } from 'framer-motion'
 const EditGroupPage = () => {
     return (
@@ -11,6 +12,7 @@ const EditGroupPage = () => {
             style={{ width: '100%' }}
         >
             <EditGroupInfo />
+            <DeleteGroup />
         </motion.div>
     )
 }

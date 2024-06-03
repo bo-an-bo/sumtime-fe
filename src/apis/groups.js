@@ -25,3 +25,8 @@ export const patchGroup = async (groupInfo) => {
     })
     return response.data
 }
+
+export const deleteGroup = async (groupId) => {
+    const response = await authAPI.delete(`/group/${groupId}`)
+    return response.data
+}
