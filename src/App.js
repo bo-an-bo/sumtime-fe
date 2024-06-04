@@ -15,6 +15,7 @@ import UploadMember from './Pages/UploadMember'
 import UploadTransactions from './Pages/UploadTransaction'
 import ShowEventResult from './Pages/ShowEventResult'
 import EditGroupPage from './Pages/EditGroupPage'
+import SetSubMng from './Pages/SetSubMng'
 import SelectMembers from './Components/Tables/SelectMembers'
 import ShowResult from './Pages/ShowResult'
 import UserGuideline from './Pages/Guide/UserGuideline'
@@ -66,6 +67,7 @@ function GroupRoutesWithSidebar() {
                 <Route path="/uploadTransaction" element={<UploadTransactions />} />
                 <Route path="/showEventResult" element={<ShowEventResult />} />
                 <Route path="/editInfo" element={<EditGroupPage />} />
+                <Route path="/setSubMng" element={<SetSubMng />} />
                 <Route path="/showResult" element={<ShowResult />} />
             </Routes>
         </StyledLayout>
