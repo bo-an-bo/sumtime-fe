@@ -1,4 +1,4 @@
-import { Menu } from 'antd'
+import { Button, Menu } from 'antd'
 import { Link, useLocation } from 'react-router-dom'
 import React from 'react'
 import styled from 'styled-components'
@@ -33,6 +33,17 @@ const NavBar = () => {
             key: 'myProfile',
             label: <StyledText>{user ? user.nickname : '로그인 필요'}</StyledText>,
             children: [
+                {
+                    label: (
+                        <Button
+                            type="link"
+                            style={{ padding: '0', height: 'auto', lineHeight: 'inherit', fontFamily: 'Dotum Bold' }}
+                        >
+                            <Link to="/group/mypage">내 정보</Link>
+                        </Button>
+                    ),
+                    key: 'profile:1',
+                },
                 { label: <LogoutKakao />, key: 'setting:1' },
                 { label: <SignOutServer />, key: 'setting:2' },
             ],
@@ -80,7 +91,8 @@ const StyledLink = styled(Link)`
     font-weight: 700;
     align-items: center;
     word-wrap: break-word;
-
+    line-height: inherit;
+    font-family: 'Dotum Bold', serif;
     @media (max-width: 768px) {
         font-size: 10px;
     }

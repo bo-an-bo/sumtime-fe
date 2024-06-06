@@ -1,33 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { getMember } from '../../apis/members'
-import { getGroupDetail } from '../../apis/groups'
 import { Table } from 'antd'
 import styled from 'styled-components'
 
 const SelectManager = ({ groupId }) => {
     const [members, setMembers] = useState([])
     const [memberKeys, setMemberKeys] = useState([])
-    const [owner, setOwner] = useState('')
-    const [editors, setEditors] = useState([])
-    const [viewers, setViewers] = useState([])
 
     useEffect(() => {
         getMember(groupId).then((data) => {
             setMembers(data.members)
         })
     }, [groupId])
-
-    useEffect(() => {
-        getGroupDetail(groupId).then((data) => {
-            setOwner(data.auth.owner)
-            setEditors(data.auth.editors)
-            setViewers(data.auth.viewers)
-        })
-    }, [groupId])
-
-    console.log('owner', owner)
-    console.log('editor', editors)
-    console.log('viewer', viewers)
 
     useEffect(() => {
         const keys = Object.keys(members[0]?.memberInfo || {})
@@ -43,14 +27,14 @@ const SelectManager = ({ groupId }) => {
             title: '이름',
             dataIndex: 'name',
         },
-        {
-            title: '역할',
-            dataIndex: 'role',
-        },
         ...memberKeys.map((key) => ({
             title: key,
             dataIndex: key,
         })),
+        {
+            title: '역할',
+            dataIndex: 'role',
+        },
     ]
 
     const data = []
