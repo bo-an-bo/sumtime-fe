@@ -10,7 +10,6 @@ const UploadTransaction = ({ groupId }) => {
     const [file, setFile] = useState(null)
     const [password, setPassword] = useState('')
     const [isFileUploaded, setIsFileUploaded] = useState(false)
-    const [isPasswordFilled, setIsPasswordFilled] = useState(false)
 
     const props = {
         name: 'file',
@@ -35,7 +34,7 @@ const UploadTransaction = ({ groupId }) => {
             <StyledButton
                 onClick={handleUpload}
                 type="primary"
-                disabled={!isFileUploaded || !isPasswordFilled}
+                disabled={!isFileUploaded}
                 style={{ fontFamily: 'Dotum Light', height: '40px', fontSize: '18px', width: '80px' }}
             >
                 확인
@@ -72,7 +71,6 @@ const UploadTransaction = ({ groupId }) => {
                 value={password}
                 onChange={(e) => {
                     setPassword(e.target.value)
-                    setIsPasswordFilled(e.target.value.length > 0)
                 }}
             />
         </Wrapper>
