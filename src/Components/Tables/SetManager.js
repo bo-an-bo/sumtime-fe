@@ -103,7 +103,7 @@ const SelectManager = ({ groupId }) => {
             title: '권한 설정',
             render: () => (
                 <div>
-                    <Button type="primary" onClick={() => showModal(Role.EDITOR)} style={{ marginRight: '8px' }}>
+                    <Button type="primary" onClick={() => showModal(Role.EDITOR)}>
                         Editor
                     </Button>
                     <Button onClick={() => showModal(Role.VIEWER)}>Viewer</Button>
@@ -123,7 +123,7 @@ const SelectManager = ({ groupId }) => {
     return (
         <StyledLayout>
             <Wrapper>
-                <StyledTable columns={columns} dataSource={data} pagination={false} scroll={{ y: 450 }} />
+                <StyledTable columns={columns} dataSource={data} pagination={false} scroll={{ x: 800, y: 450 }} />
                 <Modal
                     title="유저 ID 입력"
                     open={isModalVisible}
@@ -156,6 +156,11 @@ const Wrapper = styled.div`
 `
 
 const StyledTable = styled(Table)`
+    .ant-table {
+        width: 100%;
+        overflow-x: auto;
+    }
+
     .ant-table-thead > tr > th {
         border-bottom: 2px solid #d9d9d9;
         font-size: 16px;
@@ -175,5 +180,13 @@ const StyledTable = styled(Table)`
 
     .ant-table-tbody > tr:last-child > td {
         border-bottom: none;
+    }
+
+    @media (max-width: 768px) {
+        .ant-table {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+        }
     }
 `

@@ -7,25 +7,30 @@ const SetSubMng = () => {
     const groupId = window.location.href.split('/')[4]
 
     return (
-        <motion.div
+        <StyledMotionDiv
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            style={{ width: '100%', margin: '3%' }}
         >
             <StyledPageLayout>
                 <SelectManager groupId={groupId} />
             </StyledPageLayout>
-        </motion.div>
+        </StyledMotionDiv>
     )
 }
 
 export default SetSubMng
 
+const StyledMotionDiv = styled(motion.div)`
+    width: 100%;
+    margin: 4%;
+    @media (max-width: 768px) {
+        margin: 0%;
+        margin-top: 30px;
+    }
+`
+
 const StyledPageLayout = styled.div`
     width: 100%;
-    margin: 2%;
-    @media (max-width: 768px) {
-        margin-top: 30px;
 `

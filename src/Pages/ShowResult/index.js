@@ -4,6 +4,7 @@ import { getMember } from '../../apis/members'
 import { getEvent } from '../../apis/event'
 import { getTransactions } from '../../apis/tranaction'
 import TotalChart from '../../Components/Chart/TotalChart'
+import styled from 'styled-components'
 
 const ShowResult = () => {
     const groupId = window.location.href.split('/')[4]
@@ -80,15 +81,23 @@ const ShowResult = () => {
     // console.log('groupname', groupMemberName)
 
     return (
-        <div style={{ marginLeft: '50px' }}>
+        <Wrapper>
             <TotalChart
                 groupMemberName={groupMemberName}
                 eventId={eventId}
                 eventName={eventName}
                 eventTransactions={eventTransactions}
             />
-        </div>
+        </Wrapper>
     )
 }
 
 export default ShowResult
+
+const Wrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+`

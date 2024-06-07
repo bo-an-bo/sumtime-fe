@@ -29,14 +29,11 @@ const AddMember = ({ groupId }) => {
     const [propNames, setPropNames] = useState([])
     const [name, setName] = useState('')
 
-    console.log('propNames:', propNames)
-
     useEffect(() => {
         const fetchMemberData = async () => {
             try {
                 const data = await getMember(groupId)
                 const memberInfo = data.memberInfo || {}
-                console.log('memberInfo:', memberInfo)
                 const initialFormData = {}
                 const propNamesArray = [...memberInfo]
                 propNamesArray.forEach((propName) => {
@@ -62,8 +59,6 @@ const AddMember = ({ groupId }) => {
             [propName]: e.target.value,
         })
     }
-
-    console.log('formData:', formData)
 
     const handleAddMember = async () => {
         setLoading(true)
