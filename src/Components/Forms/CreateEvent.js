@@ -5,10 +5,10 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useEventStore } from '../../store/event'
 import SelectMembers from '../Tables/SelectMembers'
+import { useDeviceType } from '../../hooks/useMediaQuery'
 
 const CreateEvent = ({ groupId }) => {
     const { setEventId } = useEventStore()
-
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [startDate, setStartDate] = useState('')
@@ -18,6 +18,7 @@ const CreateEvent = ({ groupId }) => {
     const [fee, setFee] = useState(0)
     const [isProcessing, setIsProcessing] = useState(false)
     const [showSelectMembers, setShowSelectMembers] = useState(false)
+    const { isMobile } = useDeviceType()
 
     const eventInfo = {
         name,
@@ -106,44 +107,124 @@ const CreateEvent = ({ groupId }) => {
                         disabled={showSelectMembers}
                     />
                 </StyledFormItems>
-                <StyledFormItems
-                    label="이벤트 기한"
-                    name="date"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your event date!',
-                        },
-                    ]}
-                >
-                    <DatePicker.RangePicker
-                        onChange={(date, dateString) => {
-                            setStartDate(dateString[0])
-                            setEndDate(dateString[1])
-                        }}
-                        style={{ width: '100%' }}
-                        disabled={showSelectMembers}
-                    />
-                </StyledFormItems>
-                <StyledFormItems
-                    label="회비 납부 기한"
-                    name="payDate"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your pay date!',
-                        },
-                    ]}
-                >
-                    <DatePicker.RangePicker
-                        onChange={(date, dateString) => {
-                            setTransactionStartDate(dateString[0])
-                            setTransactionEndDate(dateString[1])
-                        }}
-                        style={{ width: '100%' }}
-                        disabled={showSelectMembers}
-                    />
-                </StyledFormItems>
+                {!isMobile && (
+                    <Wrapper>
+                        <StyledFormItems
+                            label="이벤트 기한"
+                            name="date"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your event date!',
+                                },
+                            ]}
+                        >
+                            <DatePicker.RangePicker
+                                onChange={(date, dateString) => {
+                                    setStartDate(dateString[0])
+                                    setEndDate(dateString[1])
+                                }}
+                                style={{ width: '100%' }}
+                                disabled={showSelectMembers}
+                            />
+                        </StyledFormItems>
+                        <StyledFormItems
+                            label="회비 납부 기한"
+                            name="payDate"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your pay date!',
+                                },
+                            ]}
+                        >
+                            <DatePicker.RangePicker
+                                onChange={(date, dateString) => {
+                                    setTransactionStartDate(dateString[0])
+                                    setTransactionEndDate(dateString[1])
+                                }}
+                                style={{ width: '100%' }}
+                                disabled={showSelectMembers}
+                            />
+                        </StyledFormItems>
+                    </Wrapper>
+                )}
+                {isMobile && (
+                    <Wrapper>
+                        <StyledFormItems
+                            label="이벤트 시작"
+                            name="dateStart"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your event date!',
+                                },
+                            ]}
+                        >
+                            <DatePicker
+                                onChange={(date, dateString) => {
+                                    setStartDate(dateString)
+                                }}
+                                style={{ width: '100%' }}
+                                disabled={showSelectMembers}
+                            />
+                        </StyledFormItems>
+                        <StyledFormItems
+                            label="이벤트 마감"
+                            name="dateEnd"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your event date!',
+                                },
+                            ]}
+                        >
+                            <DatePicker
+                                onChange={(date, dateString) => {
+                                    setEndDate(dateString)
+                                }}
+                                style={{ width: '100%' }}
+                                disabled={showSelectMembers}
+                            />
+                        </StyledFormItems>
+                        <StyledFormItems
+                            label="회비 납부 시작"
+                            name="payDateStart"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your pay date!',
+                                },
+                            ]}
+                        >
+                            <DatePicker
+                                onChange={(date, dateString) => {
+                                    setTransactionStartDate(dateString)
+                                }}
+                                style={{ width: '100%' }}
+                                disabled={showSelectMembers}
+                            />
+                        </StyledFormItems>
+                        <StyledFormItems
+                            label="회비 납부 마감"
+                            name="payDateEnd"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your pay date!',
+                                },
+                            ]}
+                        >
+                            <DatePicker
+                                onChange={(date, dateString) => {
+                                    setTransactionEndDate(dateString)
+                                }}
+                                style={{ width: '100%' }}
+                                disabled={showSelectMembers}
+                            />
+                        </StyledFormItems>
+                    </Wrapper>
+                )}
                 <StyledFormItems
                     label="이벤트 회비"
                     name="fee"
@@ -228,6 +309,9 @@ const StyledFormItems = styled(Form.Item)`
     }
 `
 
+const Wrapper = styled.div`
+    width: 100%;
+`
 const StyledButton = styled(Button)`
     font-family: 'Dotum Light';
     font-size: 18px;
@@ -235,4 +319,5 @@ const StyledButton = styled(Button)`
     width: 100px;
     background-color: #003e97;
     color: white;
+    margin-bottom: 20px;
 `

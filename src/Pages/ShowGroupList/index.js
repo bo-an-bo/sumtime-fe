@@ -3,12 +3,10 @@ import GroupCard from '../../Components/Card/GroupCard'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'antd'
-import { useMediaQuery } from 'react-responsive'
 import { motion } from 'framer-motion'
 
 const ShowGroupList = () => {
     const navigate = useNavigate()
-    const isMobile = useMediaQuery({ maxWidth: 768 })
 
     const onClickCreateGroup = () => {
         navigate('/group/createGroup')
@@ -24,7 +22,7 @@ const ShowGroupList = () => {
         >
             <StyledGroupPageLayout>
                 <StyledButtonSection>
-                    <StyledButton type="primary" htmlType="submit" onClick={onClickCreateGroup} isMobile={isMobile}>
+                    <StyledButton type="primary" htmlType="submit" onClick={onClickCreateGroup}>
                         모임 생성
                     </StyledButton>
                 </StyledButtonSection>
@@ -66,7 +64,7 @@ const StyledButtonSection = styled.div`
 const StyledButton = styled(Button)`
     margin-top: 20px;
     margin-bottom: 10px;
-    width: ${(props) => (props.isMobile ? '100%' : '120px')};
+    width: 100px;
     height: 40px;
     font-size: 18px;
     font-weight: 500;

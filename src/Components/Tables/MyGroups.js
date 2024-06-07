@@ -72,7 +72,7 @@ const MyGroups = ({ userId }) => {
                         columns={columns}
                         dataSource={items[index].children}
                         pagination={false}
-                        scroll={{ y: 450 }}
+                        scroll={{ y: 200 }}
                     />
                 ),
             }))}

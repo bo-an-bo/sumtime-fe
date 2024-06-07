@@ -30,7 +30,7 @@ const DeleteGroup = () => {
                 <StyledButton onClick={() => setIsModalVisible(true)}>삭제</StyledButton>
                 <Modal
                     title="정말 삭제하시겠습니까?"
-                    visible={isModalVisible}
+                    open={isModalVisible}
                     onCancel={() => setIsModalVisible(false)}
                     onOk={handleDeleteGroup}
                     okText="삭제"
@@ -52,7 +52,7 @@ const StyledBox = styled.div`
     width: 70%;
     height: auto;
     margin: 30px auto;
-    padding: 20px;
+    padding: 10px;
     font-family: 'Dotum Bold';
 
     @media (max-width: 768px) {

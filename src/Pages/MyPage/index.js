@@ -43,7 +43,7 @@ const StyledLayout = styled.div`
 
 const Container = styled.div`
     width: 100%;
-    margin-top: 40px;
+    margin: 20px 0;
     display: flex;
     justify-content: center;
     align-items: center;

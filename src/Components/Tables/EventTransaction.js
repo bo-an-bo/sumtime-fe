@@ -29,11 +29,13 @@ const EventTransaction = ({ groupId }) => {
             title: '순',
             dataIndex: 'index',
             key: 'index',
+            width: 50,
         },
         {
             title: '이벤트명',
             dataIndex: 'name',
             key: 'name',
+            width: 100,
         },
         // 필요한 경우 더 많은 컬럼 추가
     ]

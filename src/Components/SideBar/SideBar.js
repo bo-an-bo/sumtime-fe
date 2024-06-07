@@ -56,52 +56,50 @@ const SideBar = ({ memberData, eventData, settingData, transactionData }) => {
 
     return (
         <StyledSideBarBox>
-            <p>
-                <ul>
-                    <StyledLI>
-                        <StyledTitle>회원</StyledTitle>
-                        {memberData.map((data) => (
-                            <StyledItem key={data.index}>
-                                <StyledNavLink to={data.path} className="nav-link">
-                                    &nbsp;{data.name}
-                                </StyledNavLink>
-                            </StyledItem>
-                        ))}
-                    </StyledLI>
-                    <StyledLI>
-                        <StyledTitle>이벤트</StyledTitle>
-                        {eventData.map((data) => (
-                            <StyledItem key={data.index}>
-                                <StyledNavLink to={data.path} className="nav-link">
-                                    &nbsp;{data.name}
-                                </StyledNavLink>
-                            </StyledItem>
-                        ))}
-                    </StyledLI>
-                    <StyledLI>
-                        <StyledTitle>설정</StyledTitle>
+            <ul>
+                <StyledLI>
+                    <StyledTitle>회원</StyledTitle>
+                    {memberData.map((data) => (
+                        <StyledItem key={data.index}>
+                            <StyledNavLink to={data.path} className="nav-link">
+                                &nbsp;{data.name}
+                            </StyledNavLink>
+                        </StyledItem>
+                    ))}
+                </StyledLI>
+                <StyledLI>
+                    <StyledTitle>이벤트</StyledTitle>
+                    {eventData.map((data) => (
+                        <StyledItem key={data.index}>
+                            <StyledNavLink to={data.path} className="nav-link">
+                                &nbsp;{data.name}
+                            </StyledNavLink>
+                        </StyledItem>
+                    ))}
+                </StyledLI>
+                <StyledLI>
+                    <StyledTitle>설정</StyledTitle>
 
-                        {settingData.map((data) => (
-                            <StyledItem key={data.index}>
-                                <StyledNavLink to={data.path} className="nav-link">
-                                    &nbsp;{data.name}
-                                </StyledNavLink>
-                            </StyledItem>
-                        ))}
-                    </StyledLI>
-                    <StyledLI>
-                        <StyledTitle>거래내역</StyledTitle>
+                    {settingData.map((data) => (
+                        <StyledItem key={data.index}>
+                            <StyledNavLink to={data.path} className="nav-link">
+                                &nbsp;{data.name}
+                            </StyledNavLink>
+                        </StyledItem>
+                    ))}
+                </StyledLI>
+                <StyledLI>
+                    <StyledTitle>거래내역</StyledTitle>
 
-                        {transactionData.map((data) => (
-                            <StyledItem key={data.index}>
-                                <StyledNavLink to={data.path} className="nav-link">
-                                    &nbsp;{data.name}
-                                </StyledNavLink>
-                            </StyledItem>
-                        ))}
-                    </StyledLI>
-                </ul>
-            </p>
+                    {transactionData.map((data) => (
+                        <StyledItem key={data.index}>
+                            <StyledNavLink to={data.path} className="nav-link">
+                                &nbsp;{data.name}
+                            </StyledNavLink>
+                        </StyledItem>
+                    ))}
+                </StyledLI>
+            </ul>
         </StyledSideBarBox>
     )
 }

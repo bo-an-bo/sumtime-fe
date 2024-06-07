@@ -81,8 +81,8 @@ const StyledMenu = styled(Menu)`
     }
 
     @media (max-width: 768px) {
-        gap: 7px;
-        padding: 0 20px;
+        gap: 3px;
+        padding: 0 5px;
     }
 `
 
@@ -94,7 +94,7 @@ const StyledLink = styled(Link)`
     line-height: inherit;
     font-family: 'Dotum Bold', serif;
     @media (max-width: 768px) {
-        font-size: 10px;
+        font-size: 16px;
     }
 `
 
@@ -106,7 +106,7 @@ const StyledText = styled.div`
     word-wrap: break-word;
 
     @media (max-width: 768px) {
-        font-size: 10px;
+        font-size: 16px;
     }
 `
 
@@ -116,8 +116,8 @@ const StyledImg = styled.img`
     display: flex;
 
     @media (max-width: 768px) {
-        width: 70px;
-        height: 30px;
+        width: 80px;
+        height: 35px;
         margin-top: 5px;
     }
 `

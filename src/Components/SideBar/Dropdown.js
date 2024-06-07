@@ -69,15 +69,15 @@ const Dropdown = () => {
     const handleClickContainer = () => {
         setIsDropDownView(!isDropdownView)
     }
-    // const handleKeyPress = (event) => {
-    //     if (event.key === 'Enter' || event.key === ' ') {
-    //         setIsDropDownView((prev) => !prev)
-    //     }
-    // }
+
     const handleBlurContainer = () => {
         setTimeout(() => {
             setIsDropDownView(!isDropdownView)
         }, 200)
+    }
+
+    const handleItemClick = () => {
+        setIsDropDownView(false) // 메뉴 닫기
     }
 
     return (
@@ -89,7 +89,7 @@ const Dropdown = () => {
                         <StyledTitle>회원</StyledTitle>
                         {memberData.map((data) => (
                             <StyledItem key={data.index}>
-                                <StyledNavLink to={data.path} className="nav-link">
+                                <StyledNavLink to={data.path} className="nav-link" onClick={handleItemClick}>
                                     &nbsp;{data.name}
                                 </StyledNavLink>
                             </StyledItem>
@@ -99,7 +99,7 @@ const Dropdown = () => {
                         <StyledTitle>이벤트</StyledTitle>
                         {eventData.map((data) => (
                             <StyledItem key={data.index}>
-                                <StyledNavLink to={data.path} className="nav-link">
+                                <StyledNavLink to={data.path} className="nav-link" onClick={handleItemClick}>
                                     &nbsp;{data.name}
                                 </StyledNavLink>
                             </StyledItem>
@@ -110,7 +110,7 @@ const Dropdown = () => {
 
                         {settingData.map((data) => (
                             <StyledItem key={data.index}>
-                                <StyledNavLink to={data.path} className="nav-link">
+                                <StyledNavLink to={data.path} className="nav-link" onClick={handleItemClick}>
                                     &nbsp;{data.name}
                                 </StyledNavLink>
                             </StyledItem>
@@ -121,7 +121,7 @@ const Dropdown = () => {
 
                         {transactionData.map((data) => (
                             <StyledItem key={data.index}>
-                                <StyledNavLink to={data.path} className="nav-link">
+                                <StyledNavLink to={data.path} className="nav-link" onClick={handleItemClick}>
                                     &nbsp;{data.name}
                                 </StyledNavLink>
                             </StyledItem>
@@ -170,7 +170,7 @@ const StyledNavLink = styled(NavLink)`
     }
 `
 const StyledHam = styled.div`
-    position: relative;
+    position: absolute;
     display: flex;
     flex-direction: column;
     padding: 30px;
