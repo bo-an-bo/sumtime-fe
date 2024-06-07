@@ -170,7 +170,7 @@ const StyledNavLink = styled(NavLink)`
     }
 `
 const StyledHam = styled.div`
-    position: relative;
+    position: absolute;
     display: flex;
     flex-direction: column;
     padding: 30px;
