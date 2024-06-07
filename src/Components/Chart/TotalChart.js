@@ -34,9 +34,9 @@ const TotalChart = ({ groupMemberName, eventName, eventTransactions }) => {
     const isopen = useMediaQuery({ maxWidth: 1180 })
 
     useEffect(() => {
-        console.log('groupMemberName:', groupMemberName)
-        console.log('eventName:', eventName)
-        console.log('eventTransactions:', eventTransactions)
+        // console.log('groupMemberName:', groupMemberName)
+        // console.log('eventName:', eventName)
+        // console.log('eventTransactions:', eventTransactions)
         if (!Array.isArray(groupMemberName) || !Array.isArray(eventName) || typeof eventTransactions !== 'object') {
             console.error('잘못된 형식의 데이터입니다.')
             return

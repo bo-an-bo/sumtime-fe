@@ -4,7 +4,6 @@ import { getMember } from '../../apis/members'
 import { getEvent } from '../../apis/event'
 import { getTransactions } from '../../apis/tranaction'
 import TotalChart from '../../Components/Chart/TotalChart'
-import styled from 'styled-components'
 
 const ShowResult = () => {
     const groupId = window.location.href.split('/')[4]
@@ -52,7 +51,6 @@ const ShowResult = () => {
                         if (event && event._id) {
                             const transactions = await getTransactions(groupId, event._id)
                             transactionsByEvent[event._id] = transactions
-                            console.log('transac:', transactions)
                         } else {
                             console.error('이벤트 아이디가 없습니다.', event)
                         }
@@ -81,23 +79,15 @@ const ShowResult = () => {
     // console.log('groupname', groupMemberName)
 
     return (
-        <Wrapper>
+        <div style={{ marginLeft: '50px' }}>
             <TotalChart
                 groupMemberName={groupMemberName}
                 eventId={eventId}
                 eventName={eventName}
                 eventTransactions={eventTransactions}
             />
-        </Wrapper>
+        </div>
     )
 }
 
 export default ShowResult
-
-const Wrapper = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-`

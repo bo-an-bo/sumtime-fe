@@ -18,7 +18,6 @@ import EditGroupPage from './Pages/EditGroupPage'
 import SetSubMng from './Pages/SetSubMng'
 import SelectMembers from './Components/Tables/SelectMembers'
 import ShowResult from './Pages/ShowResult'
-import UserGuideline from './Pages/Guide/UserGuideline'
 import { AuthProvider } from './context/AuthContext'
 import MyPage from './Pages/MyPage'
 
@@ -29,7 +28,6 @@ function App() {
                 <div className="App">
                     <Routes>
                         <Route path="/" element={<MainPage />} />
-                        <Route path="/guide" element={<UserGuideline />} />
                         <Route path="/group/*" element={<GroupRoutes />} />
                     </Routes>
                 </div>
