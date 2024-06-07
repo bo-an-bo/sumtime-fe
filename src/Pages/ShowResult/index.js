@@ -5,6 +5,7 @@ import { getEvent } from '../../apis/event'
 import { getTransactions } from '../../apis/tranaction'
 import TotalChart from '../../Components/Chart/TotalChart'
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
 
 const ShowResult = () => {
     const groupId = window.location.href.split('/')[4]
@@ -81,14 +82,22 @@ const ShowResult = () => {
     // console.log('groupname', groupMemberName)
 
     return (
-        <Wrapper>
-            <TotalChart
-                groupMemberName={groupMemberName}
-                eventId={eventId}
-                eventName={eventName}
-                eventTransactions={eventTransactions}
-            />
-        </Wrapper>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            style={{ width: '100%' }}
+        >
+            <Wrapper>
+                <TotalChart
+                    groupMemberName={groupMemberName}
+                    eventId={eventId}
+                    eventName={eventName}
+                    eventTransactions={eventTransactions}
+                />
+            </Wrapper>
+        </motion.div>
     )
 }
 
@@ -98,7 +107,6 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-
     @media (max-width: 768px) {
         width: 100%;
         height: 100%;

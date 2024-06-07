@@ -98,7 +98,7 @@ const StyledBox = styled.div`
     width: 70%;
     height: auto;
     margin: 30px auto;
-    padding: 20px;
+    padding: 10px;
     font-family: 'Dotum Bold';
 
     @media (max-width: 768px) {

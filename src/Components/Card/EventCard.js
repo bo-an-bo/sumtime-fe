@@ -99,7 +99,6 @@ const StyledCollapse = styled(Collapse)`
 
     @media (max-width: 768px) {
         width: 90%;
-        margin-left: 20px;
     }
 `
 
