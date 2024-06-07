@@ -319,4 +319,5 @@ const StyledButton = styled(Button)`
     width: 100px;
     background-color: #003e97;
     color: white;
+    margin-bottom: 20px;
 `
