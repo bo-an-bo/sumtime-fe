@@ -15,10 +15,12 @@ import UploadMember from './Pages/UploadMember'
 import UploadTransactions from './Pages/UploadTransaction'
 import ShowEventResult from './Pages/ShowEventResult'
 import EditGroupPage from './Pages/EditGroupPage'
+import SetSubMng from './Pages/SetSubMng'
 import SelectMembers from './Components/Tables/SelectMembers'
 import ShowResult from './Pages/ShowResult'
 import UserGuideline from './Pages/Guide/UserGuideline'
 import { AuthProvider } from './context/AuthContext'
+import MyPage from './Pages/MyPage'
 
 function App() {
     return (
@@ -43,6 +45,7 @@ function GroupRoutes() {
             <StyledLayout>
                 <Routes>
                     <Route path="/" element={<ShowGroupList />} />
+                    <Route path="/mypage" element={<MyPage />} />
                     <Route path="/createGroup" element={<CreateGroup />} />
                     <Route path="/:id/*" element={<GroupRoutesWithSidebar />} />
                 </Routes>
@@ -66,6 +69,7 @@ function GroupRoutesWithSidebar() {
                 <Route path="/uploadTransaction" element={<UploadTransactions />} />
                 <Route path="/showEventResult" element={<ShowEventResult />} />
                 <Route path="/editInfo" element={<EditGroupPage />} />
+                <Route path="/setSubMng" element={<SetSubMng />} />
                 <Route path="/showResult" element={<ShowResult />} />
             </Routes>
         </StyledLayout>
@@ -73,9 +77,7 @@ function GroupRoutesWithSidebar() {
 }
 
 const StyledLayout = styled.div`
-    // background-color: gray;
     display: flex;
-
     width: 100%;
     height: 100%;
 `

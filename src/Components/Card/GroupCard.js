@@ -41,7 +41,6 @@ const StyledBox = styled.div`
 
 const StyledRow = styled(Row)`
     width: 90%;
-
     @media (max-width: 768px) {
         width: 100%;
     }
@@ -52,7 +51,7 @@ const StyledCard = styled(Card)`
     margin-left: 100px;
 
     @media (max-width: 768px) {
-        margin-left: 0;
+        margin-left: 11px;
     }
 
     transition-duration: 0.3s, 0.3s;

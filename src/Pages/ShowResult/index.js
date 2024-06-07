@@ -32,18 +32,9 @@ const ShowResult = () => {
 
     useEffect(() => {
         // Fetch group events and update state
-        getEvent(groupId)
-            .then((events) => {
-                // Check if events is null
-                if (events === null) {
-                    console.error('그룹 이벤트가 없습니다.')
-                    return
-                }
-                setGroupEvents(events)
-            })
-            .catch((error) => {
-                console.error('Error fetching group events:', error)
-            })
+        getEvent(groupId).then((events) => {
+            setGroupEvents(events.filter((event) => event !== null))
+        })
     }, [groupId])
 
     useEffect(() => {
@@ -60,6 +51,7 @@ const ShowResult = () => {
                         if (event && event._id) {
                             const transactions = await getTransactions(groupId, event._id)
                             transactionsByEvent[event._id] = transactions
+                            console.log('transac:', transactions)
                         } else {
                             console.error('이벤트 아이디가 없습니다.', event)
                         }

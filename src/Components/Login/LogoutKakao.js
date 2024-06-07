@@ -20,13 +20,20 @@ const LogoutKakao = () => {
         navigate('/')
     }
 
-    return <Button type="link" onClick={kakaoLogout}
-                   style={{
-                       padding: '0',
-                       height: 'auto',
-                       lineHeight: 'inherit',
-                       fontFamily: 'Dotum Bold',
-                   }}>로그아웃</Button>
+    return (
+        <Button
+            type="link"
+            onClick={kakaoLogout}
+            style={{
+                padding: '0',
+                height: 'auto',
+                lineHeight: 'inherit',
+                fontFamily: 'Dotum Bold',
+            }}
+        >
+            로그아웃
+        </Button>
+    )
 }
 
 export default LogoutKakao
