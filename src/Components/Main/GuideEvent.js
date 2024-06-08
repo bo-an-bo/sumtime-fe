@@ -20,10 +20,9 @@ const Main = () => {
                 <VerticalSection>
                     <DescriptionSection>
                         <TitleText><StyleNum>1</StyleNum>생성</TitleText>
-                        <Text>기본 정보를 입력하고, 모임에 참여하는 회원을 선택해주세요</Text>
+                        <Text>이벤트에 대한 기본 정보를 입력하고, 모임에 참여하는 회원을 선택해주세요</Text>
                         <VerticalImage src="img/main/5event-create.png" alt="Description of Image 1" />
 
-                        <VerticalImage src="img/main/6event-create.png" alt="Description of Image 1" />
 
                     </DescriptionSection>
                     <Divider type="vertical" style={{ height: '100%' }} />

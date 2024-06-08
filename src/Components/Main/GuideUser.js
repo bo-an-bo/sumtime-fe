@@ -30,7 +30,7 @@ const Main = () => {
                         <TitleText>
                             <StyleNum>2</StyleNum>조회
                         </TitleText>
-                        <Text>엑셀 형식의 회원 명단을 업로드해요</Text>
+                        <Text>회원 명단은 <span style={{ fontWeight: 800 }}>회원 목록</span> 탭에서 확인할 수 있어요</Text>
                         <VerticalImage src="img/main/4get.png" alt="Description of Image 1" />
                     </DescriptionSection>
                 </VerticalSection>
