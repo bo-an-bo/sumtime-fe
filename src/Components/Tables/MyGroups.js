@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getGroups } from '../../apis/groups'
-import { Tabs, Table } from 'antd'
+import { Table, Tabs } from 'antd'
 import styled from 'styled-components'
 
 const MyGroups = ({ userId }) => {
@@ -84,17 +84,21 @@ export default MyGroups
 
 // 탭의 스타일 정의
 const CustomTabs = styled(Tabs)`
+    align-items: center;
+
     .ant-tabs-nav {
         font-weight: bold;
         height: 50px;
     }
+
     .ant-tabs-tab {
         margin: 0;
         padding: 0 20px;
     }
+
     background: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 340px;
+    width: 40vh;
 `

@@ -28,6 +28,9 @@ const StyledPageLayout = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 100px;
+    margin-top: 60px;
+    max-height: 70vh; // Set the maximum height you want
+
+    overflow-y: auto; // Enable vertical scrolling
 `
 export default ShowEventList

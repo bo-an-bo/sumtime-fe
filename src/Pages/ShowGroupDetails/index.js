@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import MemberList from '../../Components/Tables/MemberList'
 import styled from 'styled-components'
-import { useSelectedRows, useDeleteMemberIds } from '../../store/member'
+import { useDeleteMemberIds, useSelectedRows } from '../../store/member'
 import AddMemberButton from '../../Components/Buttons/AddMemberButton'
 import DeleteMemberButton from '../../Components/Buttons/DeleteMemberButton'
 import { motion } from 'framer-motion'
@@ -53,6 +53,7 @@ const ButtonWrapper = styled.div`
     font-family: 'Dotum Light';
     gap: 10px;
     margin-bottom: 15px;
+    margin-right: 5%;
 `
 
 export default ShowGroupDetails
