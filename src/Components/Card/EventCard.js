@@ -40,7 +40,7 @@ const EventCard = ({ groupId }) => {
                 key: i,
                 label: currentEvent.name || '',
                 children: (
-                    <StyledDescriptions bordered column={2}>
+                    <StyledDescriptions bordered column={{ xs: 1, xl: 2 }}>
                         <Descriptions.Item label="설명">{currentEvent.description || ''}</Descriptions.Item>
                         <Descriptions.Item label="회비">
                             {typeof currentEvent.fee === 'number'
@@ -51,7 +51,8 @@ const EventCard = ({ groupId }) => {
                             {formatDate(currentEvent.startDate) || ''} ~ {formatDate(currentEvent.endDate) || ''}
                         </Descriptions.Item>
                         <Descriptions.Item label="입금 기간">
-                            {formatDate(currentEvent.transactionStartDate) || ''} ~ {formatDate(currentEvent.transactionEndDate) || ''}
+                            {formatDate(currentEvent.transactionStartDate) || ''} ~{' '}
+                            {formatDate(currentEvent.transactionEndDate) || ''}
                         </Descriptions.Item>
                     </StyledDescriptions>
                 ),
@@ -90,7 +91,6 @@ const EventCard = ({ groupId }) => {
 }
 
 const StyledCollapse = styled(Collapse)`
-
     width: 80%;
     padding: 10px;
     background-color: rgba(0, 62.67, 151.94, 0.08);
@@ -140,9 +140,7 @@ const FlexContainer = styled.div`
     }
 `
 
-
 const StyledButton = styled(Button)`
-
     width: 100%;
     font-family: 'Dotum Bold', serif;
 
@@ -155,7 +153,6 @@ const ButtonWrapper = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 10px;
-
 `
 
 export default EventCard
