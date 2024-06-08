@@ -85,14 +85,31 @@ const MemberList = ({ groupId }) => {
 }
 
 const StyledLayout = styled.div`
+
+    justify-content: center;
+    align-items: center;
     width: 100%;
     display: flex;
     flex-direction: column;
 `
 const Wrapper = styled.div`
-    width: 100%;
+    width: 90%;
+    @media (max-width: 1200px) {
+        width: 90%;
+        padding: 8px;
+    }
+
+    @media (max-width: 768px) {
+        width: 95%;
+        padding: 6px;
+    }
+
+    @media (max-width: 480px) {
+        width: 100%;
+        padding: 4px;
+    }
     border-radius: 20px;
-    // background-color: rgba(0, 62.67, 151.94, 0.04);
+    background-color: rgba(0, 62.67, 151.94, 0.04);
 `
 
 const StyledTable = styled(Table)`
@@ -100,6 +117,7 @@ const StyledTable = styled(Table)`
         width: 100%;
         overflow-x: auto;
     }
+
     .ant-table-thead > tr > th {
         border-bottom: 2px solid #d9d9d9;
         font-size: 16px;

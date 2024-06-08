@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, DatePicker, Form, Input } from 'antd'
 import { postEvent } from '../../apis/event'
 import PropTypes from 'prop-types'
@@ -269,6 +269,7 @@ const StyledForm = styled(Form)`
     justify-content: center;
     align-items: center;
     margin-top: 50px;
+
     .ant-btn {
         justify-content: flex-end;
         margin-top: 20px;
@@ -276,13 +277,25 @@ const StyledForm = styled(Form)`
 `
 
 const StyledFormWrapper = styled.div`
-    width: 60%;
-    @media (max-width: 768px) {
-        width: 90%;
-    }
+
     padding: 10px;
     border-radius: 10px;
     background-color: rgba(0, 62.67, 151.94, 0.08);
+    width: 70%;
+    @media (max-width: 1200px) {
+        width: 90%;
+        padding: 8px;
+    }
+
+    @media (max-width: 768px) {
+        width: 95%;
+        padding: 6px;
+    }
+
+    @media (max-width: 480px) {
+        width: 100%;
+        padding: 4px;
+    }
 `
 
 const Title = styled.h1`
