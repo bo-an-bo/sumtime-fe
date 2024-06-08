@@ -123,20 +123,6 @@ const StyledDescriptions = styled(Descriptions)`
     }
 `
 
-<<<<<<< HEAD
-const FlexContainer = styled.div`
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-
-    @media (min-width: 768px) {
-        flex-direction: row;
-        justify-content: space-between;
-    }
-`
-
-=======
->>>>>>> 13ac72e73e70c9cc661c00513a6809f839d16875
 const StyledButton = styled(Button)`
     width: 100%;
     font-family: 'Dotum Bold', serif;
