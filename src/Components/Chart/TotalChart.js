@@ -8,35 +8,39 @@ import * as XLSX from 'xlsx'
 import { saveAs } from 'file-saver'
 import { Button } from 'antd'
 
-const StyledDiv = styled('div')(({ isopen }) => ({
-    width: '100%',
-    marginTop: isopen ? '150px' : '10px',
-    '& .paid': {
-        paddingLeft: '10px',
-        backgroundColor: '#003F98',
-        color: '#fff',
-        border: '1px solid #fff',
-        borderRadius: '2px',
-        fontFamily: 'Dotum Bold',
-    },
-    '& .unpaid': {
-        paddingLeft: '10px',
-        backgroundColor: '#FF5B14',
-        border: '1px solid #fff',
-        color: '#fff',
-        fontFamily: 'Dotum Light',
-    },
-    '& .noRecord': {
-        paddingLeft: '10px',
-        backgroundColor: '#B4B4B4',
-        border: '1px solid #fff',
-        color: '#fff',
-        fontFamily: 'Dotum Bold',
-    },
-    '& .MuiDataGrid-cell, & .MuiDataGrid-columnHeader': {
-        fontFamily: 'Dotum Medium',
-    },
-}))
+const StyledDiv = styled.div`
+    width: 100%;
+    margin-top: 50px;
+    @media (max-width: 768px) {
+        margin-top: 20px;
+    }
+    & .paid {
+        padding-left: 10px;
+        background-color: #003f98;
+        color: #fff;
+        border: 1px solid #fff;
+        border-radius: 2px;
+        font-family: 'Dotum Bold';
+    }
+    & .unpaid {
+        padding-left: 10px;
+        background-color: #ff5b14;
+        border: 1px solid #fff;
+        color: #fff;
+        font-family: 'Dotum Light';
+    }
+    & .noRecord {
+        padding-left: 10px;
+        background-color: #b4b4b4;
+        border: 1px solid #fff;
+        color: #fff;
+        font-family: 'Dotum Bold';
+    }
+    & .MuiDataGrid-cell,
+    & .MuiDataGrid-columnHeader {
+        font-family: 'Dotum Medium';
+    }
+`
 
 const TotalChart = ({ groupMemberName, eventName, eventTransactions }) => {
     const [rows, setRows] = useState([])
