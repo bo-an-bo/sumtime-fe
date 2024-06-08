@@ -30,7 +30,7 @@ const StyledCard = styled.div`
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 80vw;
+    width: 300px;
 `
 
 const UserName = styled.h2`
