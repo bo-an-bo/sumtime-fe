@@ -1,7 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { useAuth } from '../../context/AuthContext'
-import { useMediaQuery } from 'react-responsive'
 import { useNavigate } from 'react-router-dom'
 import LoginKakao from '../Login/LoginKakao'
 import { Button } from 'antd'
@@ -32,7 +31,6 @@ const ScrollDownArrow = styled.div`
 
 const Main1 = () => {
     const { user } = useAuth()
-    const isopen = useMediaQuery({ maxWidth: 768 })
     const navigate = useNavigate()
 
     const onClickHandler = () => {
@@ -44,9 +42,8 @@ const Main1 = () => {
             <MainSection>
                 <HeaderContainer>
                     <LogoContainer>
-                        <StyledLogoImg src={'/img/sumtime_white.svg'} alt="logo_white_img"
-                                       isopen={isopen}></StyledLogoImg>
-                        <StyledText isopen={isopen}>모임의 계산을 쉽게</StyledText>
+                        <StyledLogoImg src={'/img/sumtime_white.svg'} alt="logo_white_img"></StyledLogoImg>
+                        <StyledText>모임의 계산을 쉽게</StyledText>
                     </LogoContainer>
                     <StyledButtonContainer>
                         {user ? (
@@ -74,18 +71,18 @@ const Main1 = () => {
                     </StyledButtonContainer>
                 </HeaderContainer>
 
-                <MainTitleText
-                >
-                    sumtime에 오신 것을 환영합니다<br />
+                <MainTitleText>
+                    sumtime에 오신 것을 환영합니다
+                    <br />
                     저희 서비스를 이렇게 사용하실 수 있어요
                 </MainTitleText>
 
-                <StyledContentSection isopen={isopen}>
+                <StyledContentSection>
                     <StyledImgContainer>
                         <StyledTableImg src={'img/main/member_table.png'} alt="example_tabel" />
                     </StyledImgContainer>
                     <StyldMainText>
-                        <StyledContent style={{ fontFamily: 'Dotum Bold', fontSize: '1.1rem' }} isopen={isopen}>
+                        <StyledContent style={{ fontFamily: 'Dotum Bold', fontSize: '1.1rem' }}>
                             sumtime과 함께 필요한 데이터를 마음껏 다루어 보세요!
                         </StyledContent>
                         <StyledContent style={{ fontFamily: 'Dotum Bold', fontSize: '1rem' }}>
@@ -107,7 +104,6 @@ const Main1 = () => {
 export default Main1
 
 const MainTitleText = styled(TitleText)`
-
     text-align: left;
     font-size: 1.5rem;
     justify-content: left;
@@ -118,7 +114,6 @@ const MainTitleText = styled(TitleText)`
         font-size: 1.1rem;
         padding-right: 30%;
         padding-left: 3%;
-
     }
 `
 

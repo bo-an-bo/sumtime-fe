@@ -28,6 +28,7 @@ const AddMember = ({ groupId }) => {
     const [formData, setFormData] = useState({})
     const [propNames, setPropNames] = useState([])
     const [name, setName] = useState('')
+    const [isConfirmationModalVisible, setIsConfirmationModalVisible] = useState(false)
 
     useEffect(() => {
         const fetchMemberData = async () => {
@@ -65,7 +66,11 @@ const AddMember = ({ groupId }) => {
         await addMember(groupId, name, formData)
         setLoading(false)
         setIsModalOpen(false)
-        alert('회원 추가가 완료되었습니다.')
+        setIsConfirmationModalVisible(true)
+    }
+
+    const handleConfirmationOk = () => {
+        setIsConfirmationModalVisible(false)
         window.location.reload()
     }
 
@@ -91,6 +96,18 @@ const AddMember = ({ groupId }) => {
                         onChange={(e) => handleInputChange(e, propName)}
                     />
                 ))}
+            </Modal>
+            <Modal
+                title="알림"
+                open={isConfirmationModalVisible}
+                onOk={handleConfirmationOk}
+                footer={[
+                    <Button key="ok" type="primary" onClick={handleConfirmationOk}>
+                        확인
+                    </Button>,
+                ]}
+            >
+                <p>회원 추가가 완료되었습니다.</p>
             </Modal>
         </>
     )
