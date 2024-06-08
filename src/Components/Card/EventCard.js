@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Collapse, Descriptions, Button, Popconfirm } from 'antd'
-import { getEvent, deleteEvent } from '../../apis/event'
+import { Button, Collapse, Descriptions, Popconfirm } from 'antd'
+import { deleteEvent, getEvent } from '../../apis/event'
 import styled from 'styled-components'
 
 const EventCard = ({ groupId }) => {
@@ -40,18 +40,18 @@ const EventCard = ({ groupId }) => {
                 key: i,
                 label: currentEvent.name || '',
                 children: (
-                    <StyledDescriptions bordered column={{ xs: 1, xl: 2 }}>
+                    <StyledDescriptions bordered column={2}>
                         <Descriptions.Item label="설명">{currentEvent.description || ''}</Descriptions.Item>
                         <Descriptions.Item label="회비">
                             {typeof currentEvent.fee === 'number'
                                 ? currentEvent.fee.toLocaleString() + '원'
                                 : currentEvent.fee || ''}
                         </Descriptions.Item>
-                        <Descriptions.Item label="이벤트 기한">
-                            {formatDate(currentEvent.endDate) || ''}
+                        <Descriptions.Item label="이벤트 기간">
+                            {formatDate(currentEvent.startDate) || ''} ~ {formatDate(currentEvent.endDate) || ''}
                         </Descriptions.Item>
-                        <Descriptions.Item label="결제기한">
-                            {formatDate(currentEvent.transactionEndDate) || ''}
+                        <Descriptions.Item label="입금 기간">
+                            {formatDate(currentEvent.transactionStartDate) || ''} ~ {formatDate(currentEvent.transactionEndDate) || ''}
                         </Descriptions.Item>
                     </StyledDescriptions>
                 ),
@@ -75,7 +75,7 @@ const EventCard = ({ groupId }) => {
 
     return (
         <>
-            <StyledCollapse accordion bordered={false}>
+            <StyledCollapse bordered={false}>
                 {items.map((item, index) => (
                     <StyledPanel key={index} header={item.label}>
                         <FlexContainer>
@@ -90,25 +90,36 @@ const EventCard = ({ groupId }) => {
 }
 
 const StyledCollapse = styled(Collapse)`
-    width: 60%;
+    width: 80%;
     padding: 10px;
     background-color: rgba(0, 62.67, 151.94, 0.08);
     overflow: auto;
-    max-height: 450px;
     font-family: 'Dotum Bold', serif;
+    max-height: 80vh;
+
+    @media (max-width: 1200px) {
+        width: 90%;
+        padding: 8px;
+    }
 
     @media (max-width: 768px) {
-        width: 90%;
+        width: 95%;
+        padding: 6px;
+    }
+
+    @media (max-width: 480px) {
+        width: 100%;
+        padding: 4px;
     }
 `
 
 const StyledPanel = styled(Collapse.Panel)`
-    margin-bottom: 10px;
+    //margin-bottom: 10px;
 `
 
 const StyledDescriptions = styled(Descriptions)`
     .ant-descriptions-item-label {
-        width: 100px;
+        width: auto;
         font-family: 'Dotum Bold', serif;
     }
 
@@ -118,9 +129,9 @@ const StyledDescriptions = styled(Descriptions)`
 `
 
 const FlexContainer = styled.div`
-    display: flex;
-    flex-direction: column;
     gap: 10px;
+    align-items: center;
+    justify-content: center;
 
     @media (min-width: 768px) {
         flex-direction: row;
@@ -128,7 +139,9 @@ const FlexContainer = styled.div`
     }
 `
 
+
 const StyledButton = styled(Button)`
+
     width: 100%;
     font-family: 'Dotum Bold', serif;
 
@@ -136,16 +149,12 @@ const StyledButton = styled(Button)`
         width: 80px;
     }
 `
-
 const ButtonWrapper = styled.div`
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
     margin-top: 10px;
 
-    @media (min-width: 768px) {
-        margin-top: 90px;
-    }
 `
 
 export default EventCard
