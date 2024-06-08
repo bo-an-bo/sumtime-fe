@@ -45,7 +45,6 @@ const StyledMotionDiv = styled(motion.div)`
 
 const StyledPageLayout = styled.div`
     width: 100%;
-
 `
 
 const ButtonWrapper = styled.div`
@@ -54,7 +53,7 @@ const ButtonWrapper = styled.div`
     font-family: 'Dotum Light';
     gap: 10px;
     margin-bottom: 15px;
-    padding-right: 5%;
+    margin-right: 5%;
 `
 
 export default ShowGroupDetails

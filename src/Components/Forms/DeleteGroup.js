@@ -7,17 +7,25 @@ import { useNavigate } from 'react-router-dom'
 const DeleteGroup = () => {
     const navigate = useNavigate()
     const groupId = window.location.href.split('/')[4]
-
     const [isModalVisible, setIsModalVisible] = useState(false)
+    const [isDeleting, setIsDeleting] = useState(false)
+    const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
 
-    const handleDeleteGroup = async () => {
-        try {
-            await deleteGroup(groupId)
-            alert('그룹이 삭제되었습니다.')
-            navigate('/group')
-        } catch (error) {
-            alert('그룹 삭제에 실패했습니다...')
-        }
+    const handleDeleteGroup = () => {
+        setIsDeleting(true)
+        setIsDeleting(false)
+        setIsModalVisible(false)
+        setIsDeleteModalVisible(true)
+    }
+
+    const showDeleteConfirm = () => {
+        setIsModalVisible(true)
+    }
+
+    const handleConfirmationOk = async () => {
+        await deleteGroup(groupId)
+        navigate('/group')
+        setIsDeleteModalVisible(false)
     }
 
     return (
@@ -27,17 +35,30 @@ const DeleteGroup = () => {
                 <StyledParagraph>모임 삭제: 현재 모임을 삭제하시겠습니까?</StyledParagraph>
             </StyledShowInfo>
             <StyledButtonSection>
-                <StyledButton onClick={() => setIsModalVisible(true)}>삭제</StyledButton>
+                <StyledButton onClick={showDeleteConfirm}>모임 삭제</StyledButton>
                 <Modal
                     title="정말 삭제하시겠습니까?"
                     open={isModalVisible}
-                    onCancel={() => setIsModalVisible(false)}
                     onOk={handleDeleteGroup}
+                    onCancel={() => setIsModalVisible(false)}
+                    confirmLoading={isDeleting}
                     okText="삭제"
                     cancelText="취소"
                     okButtonProps={{ style: { backgroundColor: '#ff4d4f', borderColor: '#ff4d4f' } }} // 확인 버튼 스타일 변경
                 >
                     <p>모임을 삭제하시겠습니까?</p>
+                </Modal>
+                <Modal
+                    title="알림"
+                    open={isDeleteModalVisible}
+                    onCancel={handleConfirmationOk}
+                    footer={[
+                        <Button key="ok" type="primary" onClick={handleConfirmationOk}>
+                            확인
+                        </Button>,
+                    ]}
+                >
+                    <p>모임 삭제가 완료되었습니다.</p>
                 </Modal>
             </StyledButtonSection>
         </StyledBox>

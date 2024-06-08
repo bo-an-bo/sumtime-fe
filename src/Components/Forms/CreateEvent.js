@@ -277,7 +277,6 @@ const StyledForm = styled(Form)`
 `
 
 const StyledFormWrapper = styled.div`
-
     padding: 10px;
     border-radius: 10px;
     background-color: rgba(0, 62.67, 151.94, 0.08);
@@ -293,7 +292,7 @@ const StyledFormWrapper = styled.div`
     }
 
     @media (max-width: 480px) {
-        width: 100%;
+        width: 93%;
         padding: 4px;
     }
 `
