@@ -55,11 +55,11 @@ const EditGroupInfo = () => {
                 <StyledForm>
                     <StyledContentBox>
                         <StyledFormItems name="이름" label="그룹 이름" />
-                        <StyledInput value={group.name} onChange={onChangeName} />
+                        <StyledInput placeholder={group.name} onChange={onChangeName} />
                     </StyledContentBox>
                     <StyledContentBox>
                         <StyledFormItems name="설명" label="그룹 설명" />
-                        <StyledInput value={group.description} onChange={(e) => setNewDesc(e.target.value)} />
+                        <StyledInput placeholder={group.description} onChange={(e) => setNewDesc(e.target.value)} />
                     </StyledContentBox>
                     <StyledButtonSection>
                         <StyledButton onClick={handleChangeGroupInfo} variant="confirm">
@@ -83,7 +83,7 @@ const EditGroupInfo = () => {
             )}
             <Modal
                 title="수정 완료"
-                visible={isModalVisible}
+                open={isModalVisible}
                 onOk={handleModalOk}
                 footer={[
                     <Button key="ok" type="primary" onClick={handleModalOk}>

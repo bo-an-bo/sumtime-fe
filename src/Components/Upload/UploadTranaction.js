@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { createTransaction } from '../../apis/tranaction'
 import { InboxOutlined, LockOutlined } from '@ant-design/icons'
 import { Upload, Button, Input, Modal } from 'antd'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const { Dragger } = Upload
@@ -11,6 +12,8 @@ const UploadTransaction = ({ groupId }) => {
     const [password, setPassword] = useState('')
     const [isFileUploaded, setIsFileUploaded] = useState(false)
     const [isModalVisible, setIsModalVisible] = useState(false)
+
+    const navigate = useNavigate()
 
     const props = {
         name: 'file',
@@ -26,7 +29,7 @@ const UploadTransaction = ({ groupId }) => {
 
     const handleOk = () => {
         setIsModalVisible(false)
-        window.location.reload()
+        navigate(`/group/${groupId}/showEventResult`)
     }
 
     const handleUpload = async () => {
