@@ -50,12 +50,12 @@ const MyGroups = ({ userId }) => {
         },
         {
             key: 'editor',
-            label: '편집자',
+            label: '편집 모임',
             children: editorGroups.map((groupName, index) => ({ key: index, groupName })),
         },
         {
             key: 'viewer',
-            label: '조회자',
+            label: '방문 모임',
             children: viewerGroups.map((groupName, index) => ({ key: index, groupName })),
         },
     ]
@@ -100,5 +100,5 @@ const CustomTabs = styled(Tabs)`
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 40vh;
+    width: 350px;
 `

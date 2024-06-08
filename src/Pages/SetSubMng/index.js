@@ -27,7 +27,7 @@ const StyledMotionDiv = styled(motion.div)`
     margin: 4%;
     @media (max-width: 768px) {
         margin: 0%;
-        margin-top: 30px;
+        margin-top: 50px;
     }
 `
 

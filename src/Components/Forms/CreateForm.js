@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { Form, Input, Button, Upload } from 'antd'
+import { Form, Input, Button, Upload, Modal } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
 import { createGroup } from '../../apis/groups'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-// 파일 업로드 시 실행되는 함수
+
 const normFile = (e) => {
     if (Array.isArray(e)) {
         return e
@@ -17,10 +17,24 @@ const CreateForm = () => {
     const [description, setDescription] = useState('')
     const [file, setFile] = useState(null)
     const [isProcessing, setIsProcessing] = useState(false)
+    const [isModalVisible, setIsModalVisible] = useState(false)
+    const [modalContent, setModalContent] = useState('')
     const navigate = useNavigate()
 
     const isAnyFieldEmpty = () => {
         return !name || !description
+    }
+
+    const showModal = (content) => {
+        setModalContent(content)
+        setIsModalVisible(true)
+    }
+
+    const handleOk = () => {
+        setIsModalVisible(false)
+        if (modalContent === '모임이 생성되었습니다.') {
+            navigate('/group')
+        }
     }
 
     const handleCreateGroup = async () => {
@@ -34,10 +48,9 @@ const CreateForm = () => {
             formData.append('description', description)
             formData.append('memberFile', file)
             await createGroup(formData)
-            alert('모임이 생성되었습니다.')
-            navigate('/group')
+            showModal('모임이 생성되었습니다.')
         } catch (error) {
-            alert('모임 생성에 실패했습니다.')
+            showModal('모임 생성에 실패했습니다.')
         } finally {
             setIsProcessing(false)
         }
@@ -91,6 +104,18 @@ const CreateForm = () => {
                     완료
                 </StyledButton>
             </StyledFormItems>
+            <Modal
+                title="알림"
+                open={isModalVisible}
+                onOk={handleOk}
+                footer={[
+                    <Button key="ok" type="primary" onClick={handleOk}>
+                        확인
+                    </Button>,
+                ]}
+            >
+                <p>{modalContent}</p>
+            </Modal>
         </StyledForm>
     )
 }
@@ -105,7 +130,6 @@ const StyledForm = styled(Form)`
     align-items: center;
     margin-top: 50px;
 `
-// 폼을 감싸는 스타일드 컴포넌트
 const StyledFormWrapper = styled.div`
     width: 60%;
     @media (max-width: 768px) {
@@ -125,7 +149,6 @@ const StyledButton = styled(Button)`
     background-color: #003e97;
 `
 
-// 타이틀을 감싸는 스타일드 컴포넌트
 const Title = styled.h1`
     margin: 10px 40px;
     @media (max-width: 768px) {
@@ -137,7 +160,6 @@ const Title = styled.h1`
     word-wrap: break-word;
     font-family: 'Dotum Bold';
 `
-// 폼 아이템을 감싸는 스타일드 컴포넌트
 const StyledFormItems = styled(Form.Item)`
     .ant-form-item-label {
         @media (max-width: 768px) {

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { getGroupDetail, patchGroup } from '../../apis/groups'
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, Modal } from 'antd'
 
 const EditGroupInfo = () => {
-    const [editstate, setEditState] = useState(false)
-    const [groups, setGroups] = useState([])
+    const [editState, setEditState] = useState(false)
+    const [group, setGroup] = useState({})
     const [newName, setNewName] = useState('')
     const [newDesc, setNewDesc] = useState('')
     const [isProcessing, setIsProcessing] = useState(false)
+    const [isModalVisible, setIsModalVisible] = useState(false)
     const groupId = window.location.href.split('/')[4]
 
     const handleChangeGroupInfo = async () => {
@@ -19,9 +20,9 @@ const EditGroupInfo = () => {
         try {
             setEditState(false)
             await patchGroup({ groupId, name: newName, description: newDesc })
-            alert('수정이 완료되었습니다.')
+            setIsModalVisible(true)
             const updatedGroup = await getGroupDetail(groupId)
-            setGroups(updatedGroup)
+            setGroup(updatedGroup)
         } catch (error) {
             alert('수정 실패했습니다...')
         } finally {
@@ -31,7 +32,7 @@ const EditGroupInfo = () => {
 
     useEffect(() => {
         getGroupDetail(groupId).then((data) => {
-            setGroups(data)
+            setGroup(data)
         })
     }, [groupId])
 
@@ -43,32 +44,28 @@ const EditGroupInfo = () => {
         setNewName(e.target.value)
     }
 
+    const handleModalOk = () => {
+        setIsModalVisible(false)
+    }
+
     return (
         <StyledBox>
             <StyledEditTitle>모임 기본 정보 수정</StyledEditTitle>
-            {editstate ? (
+            {editState ? (
                 <StyledForm>
                     <StyledContentBox>
                         <StyledFormItems name="이름" label="그룹 이름" />
-                        <StyledInput placeholder={groups.name} onChange={onChangeName} />
+                        <StyledInput placeholder={group.name} onChange={onChangeName} />
                     </StyledContentBox>
                     <StyledContentBox>
                         <StyledFormItems name="설명" label="그룹 설명" />
-                        <StyledInput placeholder={groups.description} onChange={(e) => setNewDesc(e.target.value)} />
+                        <StyledInput placeholder={group.description} onChange={(e) => setNewDesc(e.target.value)} />
                     </StyledContentBox>
                     <StyledButtonSection>
-                        <StyledButton
-                            onClick={handleChangeGroupInfo}
-                            editstate={editstate.toString()}
-                            variant="confirm"
-                        >
+                        <StyledButton onClick={handleChangeGroupInfo} variant="confirm">
                             확인
                         </StyledButton>
-                        <StyledButton
-                            onClick={() => setEditState(false)}
-                            editstate={editstate.toString()}
-                            variant="cancel"
-                        >
+                        <StyledButton onClick={() => setEditState(false)} variant="cancel">
                             취소
                         </StyledButton>
                     </StyledButtonSection>
@@ -76,16 +73,26 @@ const EditGroupInfo = () => {
             ) : (
                 <>
                     <StyledShowInfo>
-                        <StyledParagraph>그룹 이름: {groups.name}</StyledParagraph>
-                        <StyledParagraph>그룹 설명: {groups.description}</StyledParagraph>
+                        <StyledParagraph>그룹 이름: {group.name}</StyledParagraph>
+                        <StyledParagraph>그룹 설명: {group.description}</StyledParagraph>
                     </StyledShowInfo>
                     <StyledButtonSection>
-                        <StyledButton onClick={onClickEdit} editstate={editstate.toString()}>
-                            수정
-                        </StyledButton>
+                        <StyledButton onClick={onClickEdit}>수정</StyledButton>
                     </StyledButtonSection>
                 </>
             )}
+            <Modal
+                title="수정 완료"
+                open={isModalVisible}
+                onOk={handleModalOk}
+                footer={[
+                    <Button key="ok" type="primary" onClick={handleModalOk}>
+                        확인
+                    </Button>,
+                ]}
+            >
+                <p>수정이 완료되었습니다.</p>
+            </Modal>
         </StyledBox>
     )
 }

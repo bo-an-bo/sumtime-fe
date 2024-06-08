@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { createTransaction } from '../../apis/tranaction'
 import { InboxOutlined, LockOutlined } from '@ant-design/icons'
-import { Upload, Button, Input } from 'antd'
+import { Upload, Button, Input, Modal } from 'antd'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const { Dragger } = Upload
@@ -10,6 +11,9 @@ const UploadTransaction = ({ groupId }) => {
     const [file, setFile] = useState(null)
     const [password, setPassword] = useState('')
     const [isFileUploaded, setIsFileUploaded] = useState(false)
+    const [isModalVisible, setIsModalVisible] = useState(false)
+
+    const navigate = useNavigate()
 
     const props = {
         name: 'file',
@@ -23,10 +27,14 @@ const UploadTransaction = ({ groupId }) => {
         },
     }
 
+    const handleOk = () => {
+        setIsModalVisible(false)
+        navigate(`/group/${groupId}/showEventResult`)
+    }
+
     const handleUpload = async () => {
         await createTransaction(groupId, password, file)
-        alert('파일이 업로드되었습니다.')
-        window.location.reload()
+        setIsModalVisible(true)
     }
 
     return (
@@ -73,6 +81,18 @@ const UploadTransaction = ({ groupId }) => {
                     setPassword(e.target.value)
                 }}
             />
+            <Modal
+                title="알림"
+                open={isModalVisible}
+                onOk={handleOk}
+                footer={[
+                    <Button key="ok" type="primary" onClick={handleOk}>
+                        확인
+                    </Button>,
+                ]}
+            >
+                <p>파일이 업로드되었습니다.</p>
+            </Modal>
         </Wrapper>
     )
 }

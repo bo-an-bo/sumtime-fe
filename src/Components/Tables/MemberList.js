@@ -85,7 +85,6 @@ const MemberList = ({ groupId }) => {
 }
 
 const StyledLayout = styled.div`
-
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -106,7 +105,7 @@ const Wrapper = styled.div`
 
     @media (max-width: 480px) {
         width: 100%;
-        padding: 4px;
+        padding: 0px;
     }
     border-radius: 20px;
     background-color: rgba(0, 62.67, 151.94, 0.04);
@@ -117,7 +116,6 @@ const StyledTable = styled(Table)`
         width: 100%;
         overflow-x: auto;
     }
-
     .ant-table-thead > tr > th {
         border-bottom: 2px solid #d9d9d9;
         font-size: 16px;
