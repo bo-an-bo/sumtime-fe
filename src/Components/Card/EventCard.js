@@ -90,6 +90,7 @@ const EventCard = ({ groupId }) => {
 }
 
 const StyledCollapse = styled(Collapse)`
+
     width: 80%;
     padding: 10px;
     background-color: rgba(0, 62.67, 151.94, 0.08);
