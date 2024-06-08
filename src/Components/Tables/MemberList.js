@@ -105,7 +105,7 @@ const Wrapper = styled.div`
 
     @media (max-width: 480px) {
         width: 100%;
-        padding: 4px;
+        padding: 0px;
     }
     border-radius: 20px;
     background-color: rgba(0, 62.67, 151.94, 0.04);
