@@ -43,7 +43,7 @@ const StyledLayout = styled.div`
     align-items: center;
     justify-content: center;
     margin: 20px;
-    width: 70%;
+    width: 80%;
     @media (max-width: 1200px) {
         width: 90%;
         padding: 8px;

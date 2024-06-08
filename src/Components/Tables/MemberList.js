@@ -116,7 +116,7 @@ const StyledTable = styled(Table)`
         width: 100%;
         overflow-x: auto;
     }
-    <<<<<<< HEAD =======>>>>>>>dev .ant-table-thead > tr > th {
+    .ant-table-thead > tr > th {
         border-bottom: 2px solid #d9d9d9;
         font-size: 16px;
         // font-weight: 700;
