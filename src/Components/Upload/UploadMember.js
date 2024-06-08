@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { uploadMember } from '../../apis/members'
 import { InboxOutlined } from '@ant-design/icons'
-import { Upload, Button } from 'antd'
+import { Upload, Button, Modal } from 'antd'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
@@ -10,6 +10,7 @@ const { Dragger } = Upload
 const UploadMember = ({ groupId }) => {
     const [file, setFile] = useState(null)
     const [isFileUploaded, setIsFileUploaded] = useState(false)
+    const [isModalVisible, setIsModalVisible] = useState(false)
     const navigate = useNavigate()
 
     const props = {
@@ -24,10 +25,14 @@ const UploadMember = ({ groupId }) => {
         },
     }
 
+    const handleOk = () => {
+        setIsModalVisible(false)
+        navigate(`/group/${groupId}/showGroupDetails`)
+    }
+
     const handleUpload = async () => {
         await uploadMember(groupId, file)
-        alert('파일이 업로드되었습니다.')
-        navigate(`/group/${groupId}/showGroupDetails`)
+        setIsModalVisible(true)
     }
 
     return (
@@ -56,6 +61,19 @@ const UploadMember = ({ groupId }) => {
                     </div>
                 )}
             </StyledDragger>
+
+            <Modal
+                title="알림"
+                open={isModalVisible}
+                onOk={handleOk}
+                footer={[
+                    <Button key="ok" type="primary" onClick={handleOk}>
+                        확인
+                    </Button>,
+                ]}
+            >
+                <p>파일이 업로드되었습니다.</p>
+            </Modal>
         </Wrapper>
     )
 }
