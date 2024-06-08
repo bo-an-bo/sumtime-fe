@@ -36,14 +36,15 @@ export const Image = styled.img`
     align-self: center;
     margin-bottom: 20px;
     box-shadow: 0 0 3vh rgba(0, 0, 0, 0.3);
-    border-radius: 3vh;
+    border-radius: 1.2vh;
     width: fit-content;
 
     @media (max-width: 768px) {
-        height: 30vh;
         border-radius: 1.5vh;
         align-items: center;
         justify-content: center;
+        max-width: 100%; /* Ensures the image does not exceed the container width */
+        height: auto; /* Maintains the aspect ratio */
     }
 `
 
@@ -116,9 +117,10 @@ export const VerticalImage = styled.img`
     margin-bottom: 20px;
     gap: 10px;
     box-shadow: 0 0 3vh rgba(0, 0, 0, 0.3);
-    border-radius: 3vh;
+    border-radius: 1.2vh;
     @media (max-width: 768px) {
-        height: 20vh;
+        height: auto;
+        width: 100%; /* Ensures the image does not exceed the container width */
         border-radius: 1.5vh;
     }
 `

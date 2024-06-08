@@ -112,10 +112,12 @@ const MainTitleText = styled(TitleText)`
     font-size: 1.5rem;
     justify-content: left;
     padding-right: 40%;
+    padding-left: 3%;
 
     @media (max-width: 768px) {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         padding-right: 30%;
+        padding-left: 3%;
 
     }
 `
