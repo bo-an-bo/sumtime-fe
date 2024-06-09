@@ -9,6 +9,8 @@ const LogoutKakao = () => {
     const navigate = useNavigate()
     const Kakao = window.Kakao || {}
     const kakaoLogout = () => {
+        console.log('Logged out')
+
         if (Kakao && Kakao.Auth) {
             Kakao.Auth.logout(() => {
                 localStorage.clear()
@@ -16,6 +18,10 @@ const LogoutKakao = () => {
 
                 console.log('Logged out successfully')
             })
+        }
+        if (localStorage.getItem('kakaoToken')) {
+            localStorage.clear()
+            setUser(null)
         }
         navigate('/')
     }
