@@ -3,11 +3,11 @@ import { NavLink } from 'react-router-dom'
 import { Button } from 'antd'
 // import { useIsDropdownView } from '../../store/StoreNavbar'
 import { useState } from 'react'
-import { useGroupStore } from '../../store/group'
 
 const Dropdown = () => {
     const [isDropdownView, setIsDropDownView] = useState()
-    const { groupId } = useGroupStore()
+
+    const groupId = window.location.href.split('/')[4]
 
     const memberData = [
         {
