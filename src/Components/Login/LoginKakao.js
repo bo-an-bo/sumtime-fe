@@ -13,9 +13,6 @@ const LoginKakao = () => {
         }
     }, [Kakao])
 
-    useEffect(() => {
-        initKakao()
-    }, [initKakao])
 
     const serverLogin = async () => {
         const jwt = await loginServer()
@@ -29,6 +26,7 @@ const LoginKakao = () => {
                 success(res) {
                     Kakao.Auth.setAccessToken(res.access_token)
                     console.log('카카오 로그인 성공')
+                    localStorage.setItem('kakaoToken', res.access_token)
 
                     Kakao.API.request({
                         url: '/v2/user/me',
@@ -51,9 +49,15 @@ const LoginKakao = () => {
             })
         }
     }
+
+    useEffect(() => {
+        initKakao()
+    }, [initKakao])
+
     useEffect(() => {
         if (Kakao && Kakao.Auth) {
-            setIsLogin(!!Kakao.Auth.getAccessToken())
+            setIsLogin(localStorage.getItem('kakakoToken'))
+
         }
     }, [Kakao])
 
