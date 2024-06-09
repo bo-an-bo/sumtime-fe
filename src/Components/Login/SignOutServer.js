@@ -11,8 +11,8 @@ const SignOutServer = () => {
     const serverSignout = async () => {
         try {
             setUser(null)
-            localStorage.clear()
             await signOutServer()
+            localStorage.clear()
         } catch (error) {
             console.error('Server signout error:', error.response ? error.response.data : error.message)
         }

@@ -1,14 +1,11 @@
 import { kakaoAPI } from './index'
 
-const Kakao = window.Kakao
-
-
 export const getKakaoFriends = async () => {
     try {
 
         return (await kakaoAPI.get('/friends', {
             headers: {
-                'Authorization': `Bearer ${Kakao.Auth.getAccessToken()}`,
+                'Authorization': `Bearer ${localStorage.getItem('kakaoToken')}`,
             },
         })).data
     } catch (error) {
@@ -29,7 +26,7 @@ export const sendKakaoMessage = async (receiverUuids, template_args) => {
             {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': `Bearer ${Kakao.Auth.getAccessToken()}`,
+                    'Authorization': `Bearer ${localStorage.getItem('kakaoToken')}`,
                 },
             },
         )
