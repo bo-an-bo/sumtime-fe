@@ -13,15 +13,16 @@ const LogoutKakao = () => {
 
         if (Kakao && Kakao.Auth) {
             Kakao.Auth.logout(() => {
-                localStorage.clear()
                 setUser(null)
+                localStorage.clear()
 
                 console.log('Logged out successfully')
             })
         }
         if (localStorage.getItem('kakaoToken')) {
-            localStorage.clear()
             setUser(null)
+            localStorage.clear()
+
         }
         navigate('/')
     }
